@@ -8,8 +8,8 @@ function validate($data)
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     require_once "./database.php";
-    $tid = $_GET['tid'];
-    $sql="DELETE FROM task WHERE taskid='$tid'";
+    $rid = $_GET['rid'];
+    $sql="DELETE FROM request WHERE requestID='$rid'";
     $conn->query($sql);
-    header("location: ./index.php?page=task");
+    header("location: ./index.php?page=request");
 }

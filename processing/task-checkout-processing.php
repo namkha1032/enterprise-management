@@ -9,10 +9,9 @@ function validate($data)
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     require_once "./database.php";
     $tid = $_GET['tid'];
-    $sql="UPDATE task SET status = 'finished' WHERE taskid='$tid'";
+    $sql="UPDATE task SET status = 'completed' WHERE taskID='$tid'";
     $conn->query($sql);
-    $today = date('Y-m-d');
-    $sql="UPDATE task SET checkoutdate = '$today' WHERE taskid='$tid'";
+    $sql="UPDATE task SET checkoutDate = NOW() WHERE taskID='$tid'";
     $conn->query($sql);
     header("location: ./index.php?page=task");
 }

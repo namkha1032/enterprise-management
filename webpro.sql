@@ -7,9 +7,6 @@
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,7 +17,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `webpro`
 --
-
+CREATE DATABASE webpro;
+USE webpro;
 -- --------------------------------------------------------
 
 --
@@ -32,34 +30,66 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `department` (
-  `departmentid` int(255) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`departmentid`)
+  `departID` varchar(255),
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`departID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
+CREATE TABLE department_seq(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+);
 
+DELIMITER $$
+
+CREATE TRIGGER generate_departID
+BEFORE INSERT ON `department`
+FOR EACH ROW
+BEGIN
+  INSERT INTO department_seq VALUES (NULL);
+  SET NEW.departID = CONCAT('DE', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;
 --
 -- Table structure for table `user`
 --
+CREATE TABLE `account` (
+  `username` varchar(255),
+  `password` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `user` (
-  `userid` int(255) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `level` varchar(255) NOT NULL,
+CREATE TABLE `employee` (
+  `employeeID` varchar(255),
+  `username` varchar(255),
   `name` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `phone` int(255) DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `startdate` date NOT NULL DEFAULT current_timestamp(),
-  `salary` int(255) NOT NULL DEFAULT 1000,
-  `departmentid` int(255) NOT NULL,
-  PRIMARY KEY (`userid`),
-  FOREIGN KEY (`departmentid`) REFERENCES `department` (`departmentid`)
+  `nationality` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `salary` int(255) DEFAULT 1000,
+  `startDate` date DEFAULT NOW(),
+  `departID` varchar(255),
+  PRIMARY KEY (`employeeID`),
+  FOREIGN KEY (`username`) REFERENCES `account` (`username`) ON DELETE CASCADE,
+  FOREIGN KEY (`departID`) REFERENCES `department` (`departID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE employee_seq(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+);
 
+DELIMITER $$
+
+CREATE TRIGGER generate_employeeID
+BEFORE INSERT ON `employee`
+FOR EACH ROW
+BEGIN
+  INSERT INTO employee_seq VALUES (NULL);
+  SET NEW.employeeID = CONCAT('EM', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;
 -- --------------------------------------------------------
 
 --
@@ -68,17 +98,47 @@ CREATE TABLE `user` (
 
 
 CREATE TABLE `request` (
-  `requestid` int(255) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `userid` int(255) NOT NULL,
-  `departmentid` int(255) NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'pending',
-  `datesent` date NOT NULL DEFAULT current_timestamp(),
-  `datedecided` date NOT NULL,
-  PRIMARY KEY (`requestid`),
-  FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
-  FOREIGN KEY (`departmentid`) REFERENCES `department` (`departmentid`)
+  `requestID` varchar(255),
+  `type` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'pending',
+  `datesent` date DEFAULT NOW(),
+  `datedecided` date DEFAULT NULL,
+  `officerID` varchar(255) DEFAULT NULL,
+  `headID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`requestID`),
+  FOREIGN KEY (`officerID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE,
+  FOREIGN KEY (`headID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE request_seq(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+);
+DELIMITER $$
+CREATE TRIGGER generate_requestID
+BEFORE INSERT ON `request`
+FOR EACH ROW
+BEGIN
+  INSERT INTO request_seq VALUES (NULL);
+  SET NEW.requestID = CONCAT('REQ', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;
+
+CREATE TABLE `request_absence` (
+  `absenceID` varchar(255),
+  `date_start_absence` date DEFAULT NULL,
+  `date_end_absence` date DEFAULT NULL,
+  PRIMARY KEY (`absenceID`),
+  FOREIGN KEY (`absenceID`) REFERENCES `request` (`requestID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `request_salary` (
+  `salaryID` varchar(255),
+  `amount` int(255) DEFAULT NULL,
+  PRIMARY KEY (`salaryID`),
+  FOREIGN KEY (`salaryID`) REFERENCES `request` (`requestID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -86,24 +146,58 @@ CREATE TABLE `request` (
 --
 -- Table structure for table `task`
 --
-
-
-
 CREATE TABLE `task` (
-  `taskid` int(255) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `userid` int(255) NOT NULL,
-  `departmentid` int(255) NOT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'unfinished',
-  `assigneddate` date NOT NULL DEFAULT current_timestamp(),
-  `deadline` date NOT NULL,
-  `checkoutdate` date NOT NULL,
-  PRIMARY KEY (`taskid`),
-  FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
-  FOREIGN KEY (`departmentid`) REFERENCES `department` (`departmentid`)
+  `taskID` varchar(255),
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'assigned',
+  `assignedDate` date DEFAULT NOW(),
+  `deadline` date DEFAULT NULL,
+  `checkinDate` date DEFAULT NULL,
+  `checkoutDate` date DEFAULT NULL,
+  `officerID` varchar(255) DEFAULT NULL,
+  `headID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`taskID`),
+  FOREIGN KEY (`officerID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE,
+  FOREIGN KEY (`headID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE task_seq(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+);
+DELIMITER $$
+CREATE TRIGGER generate_taskID
+BEFORE INSERT ON `task`
+FOR EACH ROW
+BEGIN
+  INSERT INTO task_seq VALUES (NULL);
+  SET NEW.taskID = CONCAT('TAS', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;
 
+-- Table noti
+CREATE TABLE `announce` (
+  `announceID` varchar(255),
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `announceDate` date DEFAULT NOW(),
+  `headID` varchar(255) DEFAULT NULL,
+  `departID` varchar(255),
+  PRIMARY KEY (`announceID`),
+  FOREIGN KEY (`headID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE,
+  FOREIGN KEY (`departID`) REFERENCES `department` (`departID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE announce_seq(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+);
+DELIMITER $$
+CREATE TRIGGER generate_annouceID
+BEFORE INSERT ON `announce`
+FOR EACH ROW
+BEGIN
+  INSERT INTO announce_seq VALUES (NULL);
+  SET NEW.announceID = CONCAT('AN', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;
 -- Insert department
 INSERT INTO `department` (`name`) VALUES
 ('Admin'),
@@ -112,48 +206,83 @@ INSERT INTO `department` (`name`) VALUES
 ('Kumo'),
 ('Iwa'),
 ('Kiri');
--- --------------------------------------------------------
--- Insert admin and head user
-INSERT INTO `user` (`username`, `password`, `level`, `name`, `gender`, `dob`, `phone`, `address`, `salary`, `departmentid`) VALUES
-('admin', 'admin', 'admin', 'Admin', 'other', '2002-10-10', '0900000000','admin','1000',1),
-('hokage', 'hokage', 'head','Hokage', 'female', '2002-10-10', '0900000000','langla','1000',2),
-('kazekage', 'kazekage', 'head','Kazekage', 'male', '2002-10-10', '0900000000','langcat','1000',3),
-('raikage', 'raikage', 'head','Raikage', 'male', '2002-10-10', '0900000000','langmay','1000',4),
-('mizukage', 'mizukage', 'head', 'Mizukage', 'female', '2002-10-10', '0900000000','langsuongmu','1000',5),
-('tsuchikage', 'tsuchikage', 'head','Tsuchikage', 'male', '2002-10-10', '0900000000','langda','1000',6);
+-- -- --------------------------------------------------------
+-- Insert admin and head account
+INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('admin', 'admin', 'admin'),
+('hokage', 'hokage', 'head'),
+('kazekage', 'kazekage', 'head'),
+('raikage', 'raikage', 'head'),
+('mizukage', 'mizukage', 'head'),
+('tsuchikage', 'tsuchikage', 'head');
+
+-- Insert head employee
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
+('admin', 'admin', 'male', '2002-10-10', 'vnese', 'admin', '090000000','1000','2020-01-01','DE0001'),
+('hokage', 'Hokage', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
+('kazekage', 'Kazekage', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003'),
+('raikage', 'Raikage', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004'),
+('mizukage', 'Mizukage', 'female', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005'),
+('tsuchikage', 'Tsuchikage', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006');
+
+-- Insert Konoha officer account
+INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('naruto', 'naruto', 'officer'),
+('sasuke', 'sasuke', 'officer'),
+('sakura', 'sakura', 'officer'),
+('kakashi', 'kakashi', 'officer');
+
+-- Insert Konoha officer employee
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
+('naruto', 'Uzumaki Naruto', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
+('sasuke', 'Uchiha Sasuke', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
+('sakura', 'Haruno Sakura', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
+('kakashi', 'Hatake Kakashi', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002');
+
+-- Insert Suna officer account
+INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('gaara', 'gaara', 'officer'),
+('temari', 'temari', 'officer'),
+('kankuro', 'kankuro', 'officer');
+
+-- Insert Suna officer employee
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
+('gaara', 'Gaara', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003'),
+('temari', 'Temari', 'female', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003'),
+('kankuro', 'Kankuru', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003');
+
+-- Insert Kumo officer account
+INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('raikagea', 'raikagea', 'officer'),
+('killerb', 'killerb', 'officer');
+
+-- Insert Kumo officer employee
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
+('raikagea', 'Raikage A', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004'),
+('killerb', 'Killer B', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004');
+
+-- Insert Kiri officer account
+INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('mei', 'mei', 'officer'),
+('chojuro', 'chojuro', 'officer');
+
+-- Insert Kiri officer employee
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
+('mei', 'Mei', 'female', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005'),
+('chojuro', 'Chojuro', 'male', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005');
+
+-- Insert Kiri officer account
+INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('onoki', 'onoki', 'officer'),
+('kurotsuchi', 'kurotsuchi', 'officer');
+
+-- Insert Kiri officer employee
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
+('onoki', 'Onoki', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006'),
+('kurotsuchi', 'Kurotsuchi', 'female', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006');
 
 
--- Insert Konoha officer user
-INSERT INTO `user` (`username`, `password`, `level`, `name`, `gender`, `dob`, `phone`, `address`, `salary`, `departmentid`) VALUES
-('naruto', 'naruto', 'officer', 'Uzumaki Naruto', 'male', '2002-10-10', '0900000000','langla','1000',2),
-('sasuke', 'sasuke', 'officer', 'Uchiha Sasuke', 'male', '2002-10-10', '0900000000','langla','1000',2),
-('sakura', 'sakura', 'officer', 'Haruno Sakura', 'female', '2002-10-10', '0900000000','langla','1000',2),
-('kakashi', 'kakashi', 'officer', 'Hatake Kakashi', 'male', '2002-10-10', '0900000000','langla','1000',2);
 
--- Insert Suna officer user
-INSERT INTO `user` (`username`, `password`, `level`, `name`, `gender`, `dob`, `phone`, `address`, `salary`, `departmentid`) VALUES
-('gaara', 'gaara', 'officer', 'Gaara', 'male', '2002-10-10', '0900000000','langcat','1000',3),
-('temari', 'temari', 'officer', 'Temari', 'female', '2002-10-10', '0900000000','langcat','1000',3),
-('kankuro', 'kankuro', 'officer', 'Kankuro', 'male', '2002-10-10', '0900000000','langcat','1000',3);
-
--- Insert Kumo officer user
-INSERT INTO `user` (`username`, `password`, `level`, `name`, `gender`, `dob`, `phone`, `address`, `salary`, `departmentid`) VALUES
-('raikagea', 'raikagea', 'officer', 'Raikage A', 'male', '2002-10-10', '0900000000','langmay','1000',4),
-('killerb', 'killerb', 'officer', 'Killer B', 'male', '2002-10-10', '0900000000','langmay','1000',4);
-
--- Insert Kiri officer user
-INSERT INTO `user` (`username`, `password`, `level`, `name`, `gender`, `dob`, `phone`, `address`, `salary`, `departmentid`) VALUES
-('mei', 'mei', 'officer', 'Mei', 'female', '2002-10-10', '0900000000','langsuongmu','1000',5),
-('chojuro ', 'chojuro ', 'officer', 'Chojuro', 'male', '2002-10-10', '0900000000','langsuongmu','1000',5);
-
--- Insert Iwa officer user
-INSERT INTO `user` (`username`, `password`, `level`, `name`, `gender`, `dob`, `phone`, `address`, `salary`, `departmentid`) VALUES
-('onoki', 'onoki', 'officer', 'Onoki', 'male', '2002-10-10', '0900000000','langda','1000',6),
-('kurotsuchi ', 'kurotsuchi ', 'officer', 'Kurotsuchi', 'female', '2002-10-10', '0900000000','langda','1000',6),
-('deidara', 'deidara', 'officer', 'Deidara', 'male', '2002-10-10', '0900000000','langda','1000',6);
-
-
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+-- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+-- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

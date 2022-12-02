@@ -8,12 +8,41 @@ if (!isset($_SESSION['username'])) {
 ?>
     <?php
     require_once "./database.php";
-    $deid = $_SESSION['department'];
-    for ($i = 0; $i <= 1; $i++) {
-        $status = $i == 0 ? "unfinished" : "finished";
-        $tit = $i == 0 ? "Unfinished tasks" : "Finished Task";
-        $sql = "SELECT * FROM task WHERE departmentid = '$deid' AND status = '$status'";
+    $deid = $_SESSION['departID'];
+    for ($i = 0; $i <= 3; $i++) {
+        if ($i == 0) {
+            $status = "assigned";
+            $tit = "Assigned Tasks";
+        }
+        if ($i == 1) {
+            $status = "in progress";
+            $tit = "In Progress";
+        }
+        if ($i == 2) {
+            $status = "completed";
+            $tit = "Completed Tasks";
+        }
+        if ($i == 3) {
+            $status = "overdue";
+            $tit = "Overdue Tasks";
+        }
+
+        $sql = "UPDATE task SET status = 'overdue' WHERE deadline<NOW()";
+        $conn->query($sql);
+        $sql = "SELECT * FROM task 
+        INNER JOIN employee ON task.officerID = employee.employeeID WHERE employee.departID = '$deid' AND task.status = '$status'";
         $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        
+        $sql = "SELECT * FROM employee
+        INNER JOIN account ON employee.username = account.username WHERE departID = '$deid'";
+        $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        // foreach ($taskArray as $task) {
+        //     if (date("Y-m-d") > $task['deadline']) {
+        //         $tid = $task['taskID'];
+        //         $sql = "UPDATE task SET status = 'overdue' WHERE taskID='$tid'";
+        //         $conn->query($sql);
+        //     }
+        // }
     ?>
         <h2><?= $tit ?></h2>
         <table class="table table-hover datatable">
@@ -24,39 +53,40 @@ if (!isset($_SESSION['username'])) {
                     <th>Officer</th>
                     <th>Assigned Date</th>
                     <th>Deadline</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 foreach ($taskArray as $task) {
-                    $userid = $task['userid'];
-                    $sql = "SELECT * FROM user WHERE userid = '$userid'";
-                    $userArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                    if ($_SESSION['username'] != $userArray[0]['username'] && $_SESSION['level'] == "officer")
+                    $emID = $task['officerID'];
+                    if ($_SESSION['username'] != $task['username'] && $_SESSION['role'] == "officer")
                         continue;
-                    $userName = $userArray[0]['name'];
                 ?>
-                    <?php $tid = $task['taskid'] ?>
+                    <?php $tid = $task['taskID'] ?>
                     <tr>
-                        <td><?= $task['taskid'] ?></td>
+                        <td><?= $task['taskID'] ?></td>
                         <td><?= $task['title'] ?></td>
-                        <td><?= $userName ?></td>
-                        <td><?= $task['assigneddate'] ?></td>
+                        <td><?= $task['name'] ?></td>
+                        <td><?= $task['assignedDate'] ?></td>
                         <td><?= $task['deadline'] ?></td>
+                        <td><?= $task['status'] ?></td>
                         <td>
-                            <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskid'] ?>">
+                            <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                                 View
                             </button>
-                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskid'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['level'] != 'head' || $task['status'] == "finished") echo "hidden" ?>>
+                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" 
+                            <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                                 Update
                             </button>
-                            <a href="./index.php?page=finish-task-processing&tid=<?= $task['taskid'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['level'] != 'head') echo "hidden" ?>>
+                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
                                 Delete
                             </a>
                         </td>
                     </tr>
-                    <div class="modal fade" id="viewTask<?= $task['taskid'] ?>" tabindex="-1" aria-hidden="true">
+                    <!-- Modal for viewing task -->
+                    <div class="modal fade" id="viewTask<?= $task['taskID'] ?>" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -64,97 +94,81 @@ if (!isset($_SESSION['username'])) {
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <?php
-                                    $tid = $task['taskid'];
-                                    $sql = "SELECT * FROM task WHERE taskid = '$tid'";
-                                    $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                    $taskk = $taskArray[0];
-                                    $uid = $task['userid'];
-                                    $sql = "SELECT * FROM user WHERE userid = '$uid'";
-                                    $userArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                    $userr = $userArray[0];
-                                    ?>
                                     <dl class="row mt-2">
                                         <dt class="col-sm-4">Task ID</dt>
-                                        <dd class="col-sm-8"><?= $taskk['taskid'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['taskID'] ?></dd>
 
                                         <dt class="col-sm-4">Title</dt>
-                                        <dd class="col-sm-8"><?= $taskk['title'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['title'] ?></dd>
 
                                         <dt class="col-sm-4">Description</dt>
-                                        <dd class="col-sm-8"><?= $taskk['description'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['description'] ?></dd>
 
                                         <dt class="col-sm-4">Officer ID</dt>
-                                        <dd class="col-sm-8"><?= $taskk['userid'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['officerID'] ?></dd>
 
                                         <dt class="col-sm-4">Officer Name</dt>
-                                        <dd class="col-sm-8"><?= $userr['name'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['name'] ?></dd>
 
                                         <dt class="col-sm-4">Status</dt>
-                                        <dd class="col-sm-8"><?= $taskk['status'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['status'] ?></dd>
 
                                         <dt class="col-sm-4">Assigned date</dt>
-                                        <dd class="col-sm-8"><?= $taskk['assigneddate'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['assignedDate'] ?></dd>
 
                                         <dt class="col-sm-4">Deadline</dt>
-                                        <dd class="col-sm-8"><?= $taskk['deadline'] ?></dd>
+                                        <dd class="col-sm-8"><?= $task['deadline'] ?></dd>
 
-                                        <dt class="col-sm-4">Finished date</dt>
-                                        <dd class="col-sm-8"><?= $taskk['checkoutdate'] ?></dd>
+                                        <dt class="col-sm-4">Check in date</dt>
+                                        <dd class="col-sm-8"><?= $task['checkinDate'] ?></dd>
+
+                                        <dt class="col-sm-4">Check out date</dt>
+                                        <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
                                     </dl>
                                 </div>
-                                <div class="modal-footer" <?php if ($_SESSION['level'] == 'head' || $taskk['status'] == "finished") echo "hidden" ?>>
-                                    <a href="./index.php?page=finish-task-processing&tid=<?= $taskk['taskid'] ?>" class="btn btn-primary">
-                                        Finish
+                                <div class="modal-footer" <?php if ($_SESSION['role'] == 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
+                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "in progress") echo "hidden" ?>>
+                                        Check in
+                                    </a>
+                                    <a href="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "assigned") echo "hidden" ?>>
+                                        Check out
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade" id="updateTask<?= $task['taskid'] ?>" tabindex="-1" aria-hidden="true">
+                    <!-- Modal for updating task -->
+                    <div class="modal fade" id="updateTask<?= $task['taskID'] ?>" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5">Task info</h1>
+                                    <h1 class="modal-title fs-5">Update Task</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <?php
-                                $tid = $task['taskid'];
-                                $sql = "SELECT * FROM task WHERE taskid = '$tid'";
-                                $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                $taskk = $taskArray[0];
-                                $uid = $task['userid'];
-                                $sql = "SELECT * FROM user WHERE userid = '$uid'";
-                                $userArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                $userr = $userArray[0];
-                                ?>
-
-                                <form action="./index.php?page=update-task-processing&tid=<?= $task['taskid'] ?>" method="POST">
+                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
                                     <div class="modal-body">
                                         <label for="title">Title</label>
-                                        <input id="title" name="title" value="<?= $taskk['title'] ?>">
+                                        <input id="title" name="title" value="<?= $task['title'] ?>">
                                         <br>
                                         <label for="description">Description</label>
-                                        <textarea id="description" name="description"><?= $taskk['description'] ?></textarea>
+                                        <textarea id="description" name="description"><?= $task['description'] ?></textarea>
                                         <br>
-                                        <label for="userid">Choose user:</label>
+                                        <label for="officerID">Choose officer:</label>
 
-                                        <select name="userid" id="userid" value="<?= $userr['name'] ?>">
+                                        <select name="officerID" id="officerID" value="<?= $task['name'] ?>">
                                             <?php
-                                            $sql = "SELECT * FROM user WHERE departmentid = '$deid'";
-                                            $userArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                            foreach ($userArray as $userr) {
-                                                if ($userr['level'] == 'head')
+                                            foreach ($emArray as $em) {
+                                                if ($em['role'] == 'head')
                                                     continue;
                                             ?>
-                                                <option value="<?= $userr['userid'] ?>"><?= $userr['name'] ?></option>
+                                                <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
                                             <?php
                                             }
                                             ?>
                                         </select>
                                         <br>
                                         <label for="deadline">Deadline</label>
-                                        <input id="deadline" name="deadline" type="date" value="<?= $taskk['deadline'] ?>">
+                                        <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>">
 
                                     </div>
                                     <div class="modal-footer">
@@ -167,11 +181,49 @@ if (!isset($_SESSION['username'])) {
             </tbody>
         </table>
     <?php } ?>
-    <a href = "./index.php?page=user" type="button" class="btn btn-primary"  <?php if ($_SESSION['level'] != 'head') echo "hidden" ?>>
+    <button data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
         Assign task
     </button>
+    <div class="modal fade" id="assignTask" tabindex="-1" aria-hidden="true">
+        
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Assign task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="./index.php?page=task-assign-processing" method="POST">
+                    <div class="modal-body">
+                        <label for="title">Title</label>
+                        <input id="title" name="title">
+                        <br>
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description"></textarea>
+                        <br>
+                        <label for="deadline">Deadline</label>
+                        <input id="deadline" name="deadline" type="date">
+                        <br>
+                        <label for="officerID">Choose employee:</label>
+                        <select name="officerID" id="officerID">
+                            <?php
+                            foreach ($emArray as $em) {
+                                if ($em['role'] == 'head')
+                                    continue;
+                            ?>
+                                <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    
 
 <?php
     require "./components/foot.php";

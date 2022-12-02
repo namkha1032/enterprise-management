@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "./components/head.php";
 ?>
 
@@ -11,8 +12,10 @@ require "./components/head.php";
         <input id="password" type="password" name="password" placeholder="Password" required><br>
 
         <button type="submit" name="submit">Login</button>
-
     </form>
     <?php
+    if (isset($_SESSION['loginerror'])){
+        echo $_SESSION['loginerror'];
+    }
     require "./components/foot.php";
     ?>

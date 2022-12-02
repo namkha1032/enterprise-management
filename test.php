@@ -1,5 +1,8 @@
 <?php 
-        echo "<pre>";
-        print_r($departmentArray);
-        echo "</pre>";
+        if ('2022-11-15' < date("Y-m-d")){
+            echo "overdue";
+        }
+        if ('2022-11-15' > date("Y-m-d")){
+            echo "stillgood";
+        }
     ?>
