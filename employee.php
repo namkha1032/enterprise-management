@@ -17,7 +17,7 @@ if (!isset($_SESSION['username'])) {
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo" srcset="" /></a>
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" style = "width: 80px; height: 80px;"/></a>
                         </div>
                         <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -48,369 +48,30 @@ if (!isset($_SESSION['username'])) {
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item">
-                            <a href="index.html" class="sidebar-link">
+                            <a href="./index.php?page=employee" <?php if ($_SESSION['role'] == 'officer') echo "hidden" ?> class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-stack"></i>
-                                <span>Components</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="component-alert.html">Alert</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-badge.html">Badge</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-breadcrumb.html">Breadcrumb</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-button.html">Button</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-card.html">Card</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-carousel.html">Carousel</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-collapse.html">Collapse</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-dropdown.html">Dropdown</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-list-group.html">List Group</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-modal.html">Modal</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-navs.html">Navs</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-pagination.html">Pagination</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-progress.html">Progress</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-spinner.html">Spinner</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-toasts.html">Toasts</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="component-tooltip.html">Tooltip</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-collection-fill"></i>
-                                <span>Extra Components</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="extra-component-avatar.html">Avatar</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="extra-component-sweetalert.html">Sweet Alert</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="extra-component-toastify.html">Toastify</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="extra-component-rating.html">Rating</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="extra-component-divider.html">Divider</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item active has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Layouts</span>
-                            </a>
-                            <ul class="submenu active">
-                                <li class="submenu-item">
-                                    <a href="layout-default.html">Default Layout</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="layout-vertical-1-column.html">1 Column</a>
-                                </li>
-                                <li class="submenu-item active">
-                                    <a href="layout-vertical-navbar.html">Vertical Navbar</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="layout-rtl.html">RTL Layout</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="layout-horizontal.html">Horizontal Menu</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Forms &amp; Tables</li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>Form Elements</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="form-element-input.html">Input</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-element-input-group.html">Input Group</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-element-select.html">Select</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-element-radio.html">Radio</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-element-checkbox.html">Checkbox</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-element-textarea.html">Textarea</a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li class="sidebar-item">
-                            <a href="form-layout.html" class="sidebar-link">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Form Layout</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-journal-check"></i>
-                                <span>Form Validation</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="form-validation-parsley.html">Parsley</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-pen-fill"></i>
-                                <span>Form Editor</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="form-editor-quill.html">Quill</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-editor-ckeditor.html">CKEditor</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-editor-summernote.html">Summernote</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="form-editor-tinymce.html">TinyMCE</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="table.html" class="sidebar-link">
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Table</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Datatables</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="table-datatable.html">Datatable</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="table-datatable-jquery.html">Datatable (jQuery)</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Extra UI</li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-pentagon-fill"></i>
-                                <span>Widgets</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="ui-widgets-chatbox.html">Chatbox</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="ui-widgets-pricing.html">Pricing</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="ui-widgets-todolist.html">To-do List</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-egg-fill"></i>
-                                <span>Icons</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="ui-icons-bootstrap-icons.html">Bootstrap Icons </a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="ui-icons-fontawesome.html">Fontawesome</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="ui-icons-dripicons.html">Dripicons</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-bar-chart-fill"></i>
-                                <span>Charts</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="ui-chart-chartjs.html">ChartJS</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="ui-chart-apexcharts.html">Apexcharts</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="ui-file-uploader.html" class="sidebar-link">
-                                <i class="bi bi-cloud-arrow-up-fill"></i>
-                                <span>File Uploader</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-map-fill"></i>
-                                <span>Maps</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="ui-map-google-map.html">Google Map</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="ui-map-jsvectormap.html">JS Vector Map</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Pages</li>
-
-                        <li class="sidebar-item">
-                            <a href="application-email.html" class="sidebar-link">
-                                <i class="bi bi-envelope-fill"></i>
-                                <span>Email Application</span>
+                            <a href="./index.php?page=task" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Task manager</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="application-chat.html" class="sidebar-link">
-                                <i class="bi bi-chat-dots-fill"></i>
-                                <span>Chat Application</span>
+                            <a href="./index.php?page=announce" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Announcement manager</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="application-gallery.html" class="sidebar-link">
-                                <i class="bi bi-image-fill"></i>
-                                <span>Photo Gallery</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="application-checkout.html" class="sidebar-link">
-                                <i class="bi bi-basket-fill"></i>
-                                <span>Checkout Page</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-person-badge-fill"></i>
-                                <span>Authentication</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="auth-login.html">Login</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="auth-register.html">Register</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="auth-forgot-password.html">Forgot Password</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-x-octagon-fill"></i>
-                                <span>Errors</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item">
-                                    <a href="error-403.html">403</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="error-404.html">404</a>
-                                </li>
-                                <li class="submenu-item">
-                                    <a href="error-500.html">500</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Raise Support</li>
-
-                        <li class="sidebar-item">
-                            <a href="https://zuramai.github.io/mazer/docs" class="sidebar-link">
-                                <i class="bi bi-life-preserver"></i>
-                                <span>Documentation</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="https://github.com/zuramai/mazer/blob/main/CONTRIBUTING.md" class="sidebar-link">
-                                <i class="bi bi-puzzle"></i>
-                                <span>Contribute</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="https://github.com/zuramai/mazer#donation" class="sidebar-link">
-                                <i class="bi bi-cash"></i>
-                                <span>Donate</span>
+                            <a href="./index.php?page=request" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Request manager</span>
                             </a>
                         </li>
                     </ul>
@@ -506,20 +167,15 @@ if (!isset($_SESSION['username'])) {
                                         <h6 class="dropdown-header">Hello, John!</h6>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                                        <a class="dropdown-item" href="./index.php?page=profile&employeeID=<?= $_SESSION['employeeID'] ?>"
+                                        ><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i> Settings</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i> Wallet</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider" />
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                                        <a class="dropdown-item" href="./index.php?page=logout"><i class="icon-mid bi bi-box-arrow-left me-2"></i>
                                             Logout</a>
                                     </li>
                                 </ul>
@@ -534,9 +190,6 @@ if (!isset($_SESSION['username'])) {
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Vertical Layout with Navbar</h3>
-                                <p class="text-subtitle text-muted">
-                                    Navbar will appear on the top of the page.
-                                </p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -569,22 +222,17 @@ if (!isset($_SESSION['username'])) {
                                     <h4 class="card-title">Department: <?= $department['name'] ?></h4>
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-hover datatable">
+                                    <table class="table table-hover datatable" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Employee ID</th>
                                                 <th>Username</th>
                                                 <th <?php if ($_SESSION['role'] != 'admin') echo "hidden" ?>>Password</th>
-                                                <th>role</th>
+                                                <th>Role</th>
                                                 <th>Name</th>
                                                 <th>Gender</th>
-                                                <th>Date of birth</th>
-                                                <th>Nationality</th>
                                                 <th>Address</th>
                                                 <th>Phone</th>
-                                                <th>Salary</th>
-                                                <th>Start date</th>
-                                                <th>Department</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -598,13 +246,8 @@ if (!isset($_SESSION['username'])) {
                                                     <td><?= $em['role'] ?></td>
                                                     <td><?= $em['name'] ?></td>
                                                     <td><?= $em['gender'] ?></td>
-                                                    <td><?= $em['dob'] ?></td>
-                                                    <td><?= $em['nationality'] ?></td>
                                                     <td><?= $em['address'] ?></td>
                                                     <td><?= $em['phone'] ?></td>
-                                                    <td><?= $em['salary'] ?></td>
-                                                    <td><?= $em['startDate'] ?></td>
-                                                    <td><?= $department['name'] ?></td>
                                                     <td>
                                                         <a href="./index.php?page=profile&employeeID=<?= $em['employeeID'] ?>" class="btn btn-sm rounded-pill btn-outline-success">
                                                             View
@@ -754,14 +397,7 @@ if (!isset($_SESSION['username'])) {
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>2021 &copy; Mazer</p>
-                        </div>
-                        <div class="float-end">
-                            <p>
-                                Crafted with
-                                <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                                by <a href="https://ahmadsaugi.com">Saugi</a>
-                            </p>
+                            <p>2022 &copy; Group 2 CC01</p>
                         </div>
                     </div>
                 </footer>

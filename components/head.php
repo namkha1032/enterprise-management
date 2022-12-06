@@ -24,19 +24,3 @@
 </head>
 
 <body>
-    <?php
-    if (isset($_SESSION['username'])) {
-    ?>
-        <nav>
-            <a href="./index.php?page=employee" <?php if ($_SESSION['role'] == 'officer') echo "hidden" ?>>
-                Employee</a>
-            <a href="./index.php?page=task" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
-                Task</a>
-            <a href="./index.php?page=request" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
-                Request</a>
-            <a href="./index.php?page=profile&employeeID=<?= $_SESSION['employeeID'] ?>" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
-                Profile</a>
-            <a href="./index.php?page=logout">Log out</a>
-            <span>Hello <?= $_SESSION['name'] ?></span>
-        </nav>
-    <?php } ?>

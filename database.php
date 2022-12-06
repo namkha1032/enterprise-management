@@ -1,6 +1,6 @@
 <?php  
 // Database configuration  
-$serverName = "localhost:3306";
+$serverName = "localhost:3307";
 $user = 'root';
 $pass = '';
 $dbName = 'webpro';
