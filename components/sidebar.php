@@ -35,31 +35,32 @@
 
                 <li class="sidebar-item">
                     <a href="./index.php?page=employee" <?php if ($_SESSION['role'] == 'officer') echo "hidden" ?> class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
+                        <i class="bi bi-house-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a href="./index.php?page=task" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
+                        <i class="bi bi-clipboard-check-fill"></i>
                         <span>Task manager</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="./index.php?page=announce" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Announcement manager</span>
+                    <a href="./index.php?page=request" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
+                        <i class="bi bi-pencil-fill"></i>
+                        <span>Request manager</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="./index.php?page=request" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Request manager</span>
+                    <a href="./index.php?page=announce" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?> class="sidebar-link">
+                        <i class="bi bi-megaphone-fill"></i>
+                        <span>Announcement manager</span>
                     </a>
                 </li>
+
             </ul>
         </div>
     </div>
