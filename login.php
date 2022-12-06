@@ -45,7 +45,7 @@ require "./components/head.php";
         </div>
       </div>
       <div class="col-lg-7 d-none d-lg-block">
-        <div id="auth-right"></div>
+        <div id="auth-right" style=" display: flex; justify-content: center; align-items:center;"><img src="assets/images/bg/login_theme.jpg" alt="login theme" style="width: 450px; height: 400px;"></div>
       </div>
     </div>
   </div>
