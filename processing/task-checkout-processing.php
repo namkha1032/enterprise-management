@@ -25,7 +25,7 @@ if ($uploadOk == 0) {
 }
 require_once "./database.php";
 $tid = $_GET['tid'];
-$sql = "UPDATE task SET status = 'completed' WHERE taskID='$tid'";
+$sql = "UPDATE task SET status = 'pending' WHERE taskID='$tid'";
 $conn->query($sql);
 $sql = "UPDATE task SET checkoutDate = NOW() WHERE taskID='$tid'";
 $conn->query($sql);

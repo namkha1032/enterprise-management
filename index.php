@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])){
 else{
     if (isset($_GET['page'])){
         $pageName = strtolower($_GET['page']);
-        if ($pageName=="task-assign-processing" || $pageName=="task-checkin-processing" || $pageName=="task-checkout-processing" || $pageName=="task-delete-processing" || $pageName=="task-update-processing"){
+        if ($pageName=="task-assign-processing" || $pageName=="task-check-processing" || $pageName=="task-checkin-processing" || $pageName=="task-checkout-processing" || $pageName=="task-delete-processing" || $pageName=="task-update-processing"){
             require "./processing/${pageName}.php";
         }
         elseif ($pageName=="request-send-processing" || $pageName=="request-rep-processing" || $pageName=="request-delete-processing" || $pageName=="request-update-processing"){

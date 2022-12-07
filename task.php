@@ -42,7 +42,7 @@ if (!isset($_SESSION['username'])) {
       </div>
       <section class="section">
         <?php
-        for ($i = 0; $i <= 3; $i++) {
+        for ($i = 0; $i <= 4; $i++) {
           if ($i == 0) {
             $status = "assigned";
             $tit = "Assigned Tasks";
@@ -52,10 +52,14 @@ if (!isset($_SESSION['username'])) {
             $tit = "In Progress";
           }
           if ($i == 2) {
+            $status = "pending";
+            $tit = "Pending";
+          }
+          if ($i == 3) {
             $status = "completed";
             $tit = "Completed Tasks";
           }
-          if ($i == 3) {
+          if ($i == 4) {
             $status = "overdue";
             $tit = "Overdue Tasks";
           }
@@ -159,15 +163,20 @@ if (!isset($_SESSION['username'])) {
                             </dl>
                             
                           </div>
-                          <div class="modal-footer" <?php if ($_SESSION['role'] == 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                            <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "in progress") echo "hidden" ?>>
+                          <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
+                            <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
                               Check in
                             </a>
                             <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                              <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] == "assigned") echo "hidden" ?> required>
-                              <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] == "assigned") echo "hidden" ?>>Check out</button>
+                              <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
+                              <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
                             </form>
-
+                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                              Reject
+                            </a>
+                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                              Approve
+                            </a>
                           </div>
                         </div>
                       </div>
