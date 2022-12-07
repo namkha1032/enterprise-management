@@ -52,19 +52,14 @@ if (!isset($_SESSION['username'])) {
               <h4 class="card-title">Department: <?= $department['name'] ?></h4>
             </div>
             <div class="card-body">
-              <table class="table table-hover datatable">
+              <table class="table table-hover datatable" style="width:100%;">
                 <thead>
                   <tr>
                     <th>Employee ID</th>
-                    <th>Username</th>
-                    <th <?php if ($_SESSION['role'] != 'admin') echo "hidden" ?>>Password</th>
-                    <th>role</th>
+                    <th>Role</th>
                     <th>Name</th>
                     <th>Gender</th>
-                    <th>Date of birth</th>
                     <th>Nationality</th>
-                    <th>Address</th>
-                    <th>Phone</th>
                     <th>Salary</th>
                     <th>Start date</th>
                     <th>Department</th>
@@ -76,28 +71,26 @@ if (!isset($_SESSION['username'])) {
                   ?>
                     <tr>
                       <td><?= $em['employeeID'] ?></td>
-                      <td><?= $em['username'] ?></td>
-                      <td <?php if ($_SESSION['role'] != 'admin') echo "hidden" ?>><?= $em['password'] ?></td>
                       <td><?= $em['role'] ?></td>
                       <td><?= $em['name'] ?></td>
                       <td><?= $em['gender'] ?></td>
-                      <td><?= $em['dob'] ?></td>
                       <td><?= $em['nationality'] ?></td>
-                      <td><?= $em['address'] ?></td>
-                      <td><?= $em['phone'] ?></td>
                       <td><?= $em['salary'] ?></td>
-                      <td><?= $em['startDate'] ?></td>
+                      <td><?= date_format(date_create($em['startDate']), "d/m/Y") ?></td>
                       <td><?= $department['name'] ?></td>
                       <td>
                         <a href="./index.php?page=profile&employeeID=<?= $em['employeeID'] ?>" class="btn btn-sm rounded-pill btn-outline-success">
                           View
+                        </a>
+                        <a href="index.php?page=employee-sethead-processing&username=<?= $em['username'] ?>&depart=<?= $em['departID'] ?>" class="btn btn-sm rounded-pill btn-outline-primary" <?php if ($_SESSION['role'] != 'admin' || $em['role'] == 'head') echo "hidden" ?>>
+                          Set head
                         </a>
                         <a href="./index.php?page=employee-delete-processing&username=<?= $em['username'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'admin' || $em['role'] == 'head') echo "hidden" ?>>
                           Delete
                         </a>
                       </td>
                     </tr>
-                    <div class="modal fade" id="viewEmployee<?= $em['employeeID'] ?>" tabindex="-1" aria-hidden="true">
+                    <!-- <div class="modal fade" id="viewEmployee<?= $em['employeeID'] ?>" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -145,10 +138,9 @@ if (!isset($_SESSION['username'])) {
                               Set head
                             </a>
                           </div>
-
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   <?php } ?>
                 </tbody>
               </table>
@@ -168,72 +160,72 @@ if (!isset($_SESSION['username'])) {
     </footer>
   </div>
   <div class="modal fade" id="insertEmployee" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5">Add new employee</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="./index.php?page=employee-insert-processing" method="POST">
-                    <div class="modal-body">
-                        <label for="name">Name</label><span class="text-danger">*</span>
-                        <input type="text" id="name" name="name" placeholder="Name..." required>
-                        <br>
-                        <label for="username">username</label><span class="text-danger">*</span>
-                        <input type="text" id="username" name="username" placeholder="username..." required>
-                        <br>
-                        <label for="password">password</label><span class="text-danger">*</span>
-                        <input type="text" id="password" name="password" placeholder="password..." required>
-                        <br>
-
-                        <label for="role">Role</label><span class="text-danger">*</span>
-                        <select name="role" id="role" required>
-                            <option value="officer">Officer</option>
-                            <option value="head">Head</option>
-                        </select>
-                        <br>
-                        <label for="departID">Department</label><span class="text-danger">*</span>
-                        <select name="departID" id="departID" required>
-                            <?php
-                            foreach ($departmentArray as $depart) {
-                                if ($depart['name'] == 'Admin')
-                                    continue;
-                            ?>
-                                <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                        <br>
-                        <label for="gender">Gender</label>
-                        <select name="gender" id="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <br>
-                        <label for="dob">Date of birth</label>
-                        <input type="date" name="dob" id="dob">
-                        <br>
-                        <label for="nationality">Nationality</label>
-                        <input type="text" name="nationality" id="nationality">
-                        <br>
-                        <label for="address">Address</label>
-                        <textarea name="address" id="address"></textarea>
-                        <br>
-                        <label for="phone">Phone</label>
-                        <input type="text" name="phone" id="phone">
-                        <br>
-                        <label for="salary">Salary</label>
-                        <input type="number" name="salary" id="salary">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Insert</button>
-                    </div>
-                </form>
-            </div>
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Add new employee</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form action="./index.php?page=employee-insert-processing" method="POST">
+          <div class="modal-body">
+            <label for="name">Name</label><span class="text-danger">*</span>
+            <input type="text" id="name" name="name" placeholder="Name..." required>
+            <br>
+            <label for="username">username</label><span class="text-danger">*</span>
+            <input type="text" id="username" name="username" placeholder="username..." required>
+            <br>
+            <label for="password">password</label><span class="text-danger">*</span>
+            <input type="text" id="password" name="password" placeholder="password..." required>
+            <br>
+
+            <label for="role">Role</label><span class="text-danger">*</span>
+            <select name="role" id="role" required>
+              <option value="officer">Officer</option>
+              <option value="head">Head</option>
+            </select>
+            <br>
+            <label for="departID">Department</label><span class="text-danger">*</span>
+            <select name="departID" id="departID" required>
+              <?php
+              foreach ($departmentArray as $depart) {
+                if ($depart['name'] == 'Admin')
+                  continue;
+              ?>
+                <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <br>
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <br>
+            <label for="dob">Date of birth</label>
+            <input type="date" name="dob" id="dob">
+            <br>
+            <label for="nationality">Nationality</label>
+            <input type="text" name="nationality" id="nationality">
+            <br>
+            <label for="address">Address</label>
+            <textarea name="address" id="address"></textarea>
+            <br>
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone">
+            <br>
+            <label for="salary">Salary</label>
+            <input type="number" name="salary" id="salary">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Insert</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
 <?php
   require "./components/foot.php";

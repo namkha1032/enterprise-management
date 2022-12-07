@@ -7,7 +7,7 @@ session_start();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Mazer Admin Dashboard</title>
+  <title>Login page</title>
   <link rel="stylesheet" href="assets/css/main/app.css" />
   <link rel="stylesheet" href="assets/css/pages/auth.css" />
   <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon" />
@@ -20,12 +20,9 @@ session_start();
       <div class="col-lg-5 col-12">
         <div id="auth-left">
           <div class="auth-logo">
-            <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo" /></a>
+            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" style="width:100px; height:100px;" /></a>
           </div>
-          <h1 class="auth-title">Log in.</h1>
-          <p class="auth-subtitle mb-5">
-            Log in with your data that you entered during registration.
-          </p>
+          <h1 class="auth-title" style="margin-top: -80px;">Log in.</h1>
 
           <form action="./processing/login-processing.php" method="POST">
             <div class="form-group position-relative has-icon-left mb-4">
@@ -47,7 +44,7 @@ session_start();
         </div>
       </div>
       <div class="col-lg-7 d-none d-lg-block">
-        <div id="auth-right"></div>
+        <div id="auth-right" style=" display: flex; justify-content: center; align-items:center;"><img src="assets/images/bg/login_theme.jpg" alt="login theme" style="width: 450px; height: 400px;"></div>
       </div>
     </div>
   </div>
