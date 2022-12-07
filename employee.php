@@ -4,13 +4,13 @@ if (!isset($_SESSION['username'])) {
   exit();
 } else {
   // Page
-  require "./components/head.php";
   require_once "./database.php";
+  require "./components/head.php";
   $deid = $_SESSION['departID'];
   $sql = "SELECT * FROM department";
   $departmentArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
 ?>
-  
+
   <div id="main-content">
     <div class="page-heading">
       <div class="page-title">
@@ -51,17 +51,14 @@ if (!isset($_SESSION['username'])) {
             <div class="card-header">
               <h4 class="card-title">Department: <?= $department['name'] ?></h4>
             </div>
-            <div class="card-body">
-              <table class="table table-hover datatable" style="width:100%;">
+            <div class="card-body" style="width:100%">
+              <table class="table table-hover datatable">
                 <thead>
                   <tr>
                     <th>Employee ID</th>
                     <th>Role</th>
                     <th>Name</th>
-                    <th>Gender</th>
-                    <th>Nationality</th>
                     <th>Salary</th>
-                    <th>Start date</th>
                     <th>Department</th>
                     <th>Action</th>
                   </tr>
@@ -72,11 +69,12 @@ if (!isset($_SESSION['username'])) {
                     <tr>
                       <td><?= $em['employeeID'] ?></td>
                       <td><?= $em['role'] ?></td>
-                      <td><?= $em['name'] ?></td>
-                      <td><?= $em['gender'] ?></td>
-                      <td><?= $em['nationality'] ?></td>
+                      <td>
+                        <div class="avatar me-3">
+                          <img src="<?= $em['avatar'] ?>" style="object-fit: cover;" alt="" srcset="" />
+                        </div><?= $em['name'] ?>
+                      </td>
                       <td><?= $em['salary'] ?></td>
-                      <td><?= date_format(date_create($em['startDate']), "d/m/Y") ?></td>
                       <td><?= $department['name'] ?></td>
                       <td>
                         <a href="./index.php?page=profile&employeeID=<?= $em['employeeID'] ?>" class="btn btn-sm rounded-pill btn-outline-success">

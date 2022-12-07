@@ -4,8 +4,8 @@ if (!isset($_SESSION['username'])) {
   exit();
 } else {
   // Page
-  require "./components/head.php";
   require_once "./database.php";
+  require "./components/head.php";
   $deid = $_SESSION['departID'];
 ?>
   <!-- ///////////////////////////////////////////////////////// -->
@@ -21,12 +21,15 @@ if (!isset($_SESSION['username'])) {
       <div class="page-title">
         <div class="row">
           <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Task Assignment Section</h3>
+            <h3 style="display:inline" class="me-4">Task Assignment Section</h3>
             <!-- <p class="text-subtitle text-muted">
               Navbar will appear on the top of the page.
             </p> -->
+            <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary mb-2" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+              Assign task
+            </button>
           </div>
-          <div class="col-12 col-md-6 order-md-2 order-first">
+          <!-- <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -37,8 +40,9 @@ if (!isset($_SESSION['username'])) {
                 </li>
               </ol>
             </nav>
-          </div>
+          </div> -->
         </div>
+
       </div>
       <section class="section">
         <?php
@@ -159,9 +163,9 @@ if (!isset($_SESSION['username'])) {
                               <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
 
                               <dt class="col-sm-4">Submit file</dt>
-                              <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?=$task['submitFile']?>"><?=str_replace("../files_submit/", "", $task['submitFile'])?></a></dd>
+                              <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
                             </dl>
-                            
+
                           </div>
                           <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                             <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
@@ -234,9 +238,7 @@ if (!isset($_SESSION['username'])) {
     <footer>
       <div class="footer clearfix mb-0 text-muted">
 
-        <button data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
-          Assign task
-        </button>
+
       </div>
     </footer>
   </div>
@@ -250,27 +252,33 @@ if (!isset($_SESSION['username'])) {
         </div>
         <form action="./index.php?page=task-assign-processing" method="POST">
           <div class="modal-body">
-            <label for="title">Title</label>
-            <input id="title" name="title" required>
-            <br>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" required></textarea>
-            <br>
-            <label for="deadline">Deadline</label>
-            <input id="deadline" name="deadline" type="date" required>
-            <br>
-            <label for="officerID">Choose employee:</label>
-            <select name="officerID" id="officerID" required>
-              <?php
-              foreach ($emArray as $em) {
-                if ($em['role'] == 'head')
-                  continue;
-              ?>
-                <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
-              <?php
-              }
-              ?>
-            </select>
+            <dl class="row mt-2">
+              <dt class="col-sm-4"><label for="title">Title</label></dt>
+              <dd class="col-sm-8"><input id="title" name="title" required></dd>
+
+              <dt class="col-sm-4"><label for="description">Description</label></dt>
+              <dd class="col-sm-8"><textarea id="description" name="description" required></textarea></dd>
+
+              <dt class="col-sm-4"><label for="deadline">Deadline</label></dt>
+              <dd class="col-sm-8"><input id="deadline" name="deadline" type="date" required></dd>
+
+
+              <dt class="col-sm-4"><label for="officerID">Choose employee:</label></dt>
+              <dd class="col-sm-8"><select name="officerID" id="officerID" required>
+                  <?php
+                  foreach ($emArray as $em) {
+                    if ($em['role'] == 'head')
+                      continue;
+                  ?>
+                    <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+              </dd>
+            </dl>
+
+
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save changes</button>

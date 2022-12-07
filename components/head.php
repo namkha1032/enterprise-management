@@ -72,8 +72,8 @@
               </a>
             </li>
 
-            <li class="sidebar-item" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
-              <a href="./index.php?page=employee" class="sidebar-link">
+            <li class="sidebar-item <?php if ($_GET['page'] == 'announce') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
+              <a href="./index.php?page=announce" class="sidebar-link">
                 <i class="bi bi-megaphone-fill"></i>
                 <span>Announcement</span>
               </a>
@@ -115,39 +115,74 @@
                     <li class="dropdown-header">
                       <h6>Notifications</h6>
                     </li>
-                    <li class="dropdown-item notification-item">
-                      <a class="d-flex align-items-center" href="#">
-                        <div class="notification-icon bg-primary">
-                          <i class="bi bi-cart-check"></i>
-                        </div>
-                        <div class="notification-text ms-4">
-                          <p class="notification-title font-bold">
-                            Successfully check out
-                          </p>
-                          <p class="notification-subtitle font-thin text-sm">
-                            Order ID #256
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li class="dropdown-item notification-item">
-                      <a class="d-flex align-items-center" href="#">
-                        <div class="notification-icon bg-success">
-                          <i class="bi bi-file-earmark-check"></i>
-                        </div>
-                        <div class="notification-text ms-4">
-                          <p class="notification-title font-bold">
-                            Homework submitted
-                          </p>
-                          <p class="notification-subtitle font-thin text-sm">
-                            Algebra math homework
-                          </p>
-                        </div>
-                      </a>
-                    </li>
+                    <?php
+                    $deid = $_SESSION['departID'];
+                    $sql = "SELECT * FROM announce
+                            JOIN employee ON announce.headID = employee.employeeID
+                            WHERE announce.departID='$deid'";
+                    $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+                    $sql = "SELECT * FROM department WHERE departID='$deid'";
+                    $departName = $conn->query($sql)->fetch_all(MYSQLI_ASSOC)[0]['name'];
+                    ?>
+                    <div style="height: 300px;overflow-y: scroll;">
+                      <?php
+                      foreach ($anArray as $an) {
+                      ?>
+
+                        <li class="dropdown-item notification-item">
+                          <a class="d-flex align-items-center" role="button">
+                            <div class="notification-icon bg-primary">
+                              <i class="bi bi-cart-check"></i>
+                            </div>
+                            <div class="notification-text ms-4">
+                              <p class="notification-title font-bold">
+                                <?= $an['title'] ?>
+                              </p>
+                              <p class="notification-subtitle font-thin text-sm" style="white-space: nowrap; width: 300px; overflow: hidden;text-overflow: ellipsis;">
+                                <?= $an['description'] ?>
+                              </p>
+                            </div>
+                          </a>
+                        </li>
+
+                        <!-- <div class="modal fade" id="viewAn<?= $an['announceID'] ?>" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5">Announcement info</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <dl class="row mt-2">
+                                  <dt class="col-sm-4">Announcement ID</dt>
+                                  <dd class="col-sm-8"><?= $an['announceID'] ?></dd>
+
+                                  <dt class="col-sm-4">Title</dt>
+                                  <dd class="col-sm-8"><?= $an['title'] ?></dd>
+
+                                  <dt class="col-sm-4">Description</dt>
+                                  <dd class="col-sm-8"><?= $an['description'] ?></dd>
+
+                                  <dt class="col-sm-4">Officer ID</dt>
+                                  <dd class="col-sm-8"><?= $an['headID'] ?></dd>
+
+                                  <dt class="col-sm-4">Announce date</dt>
+                                  <dd class="col-sm-8"><?= $an['announceDate'] ?></dd>
+
+                                  <dt class="col-sm-4">Announce file</dt>
+                                  <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $an['announceFile'] ?>"><?= str_replace("../files_announce/", "", $an['announceFile']) ?></a></dd>
+
+
+                                </dl>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+                      <?php } ?>
+                    </div>
                     <li>
                       <p class="text-center py-2 mb-0">
-                        <a href="#">See all notification</a>
+                        <a href="./index.php?page=announce">See all notification</a>
                       </p>
                     </li>
                   </ul>
@@ -157,22 +192,22 @@
                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="user-menu d-flex">
                     <div class="user-name text-end me-3">
-                      <h6 class="mb-0 text-gray-600"><?=$_SESSION['name']?></h6>
-                      <p class="mb-0 text-sm text-gray-600"><?=$_SESSION['role']?></p>
+                      <h6 class="mb-0 text-gray-600"><?= $_SESSION['name'] ?></h6>
+                      <p class="mb-0 text-sm text-gray-600"><?= $_SESSION['role'] ?></p>
                     </div>
                     <div class="user-img d-flex align-items-center">
                       <div class="avatar avatar-md">
-                        <img src="assets/images/faces/1.jpg" />
+                        <img src="<?=$_SESSION['avatar']?>" style="object-fit: cover;" />
                       </div>
                     </div>
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem">
                   <li>
-                    <h6 class="dropdown-header">Hello, John!</h6>
+                    <h6 class="dropdown-header">Hello, <?=$_SESSION['name']?>!</h6>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                    <a class="dropdown-item" href="./index.php?page=profile&employeeID=<?= $_SESSION['employeeID'] ?>"><i class="icon-mid bi bi-person me-2"></i> My
                       Profile</a>
                   </li>
                   <li>
@@ -188,3 +223,10 @@
           </div>
         </nav>
       </header>
+      <?php
+      ?>
+      <!-- Modal for viewing announce -->
+
+      <?php
+
+      ?>

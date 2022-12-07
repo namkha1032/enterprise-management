@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['employeeID'] = $loginuser['employeeID'];
         $_SESSION['name'] = $loginuser['name'];
         $_SESSION['departID'] = $loginuser["departID"];
+        $_SESSION['avatar'] = $loginuser['avatar'];
         if ($loginuser['role'] != "officer")
             header('location: ../index.php?page=employee');
         else

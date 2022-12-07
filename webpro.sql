@@ -71,6 +71,7 @@ CREATE TABLE `employee` (
   `salary` int(255) DEFAULT 1000,
   `startDate` date DEFAULT NOW(),
   `departID` varchar(255),
+  `avatar` varchar(255),
   PRIMARY KEY (`employeeID`),
   FOREIGN KEY (`username`) REFERENCES `account` (`username`) ON DELETE CASCADE,
   FOREIGN KEY (`departID`) REFERENCES `department` (`departID`) ON DELETE CASCADE
@@ -183,6 +184,7 @@ CREATE TABLE `announce` (
   `announceDate` date DEFAULT NOW(),
   `headID` varchar(255) DEFAULT NULL,
   `departID` varchar(255),
+  `announceFile` varchar(255),
   PRIMARY KEY (`announceID`),
   FOREIGN KEY (`headID`) REFERENCES `employee` (`employeeID`) ON DELETE CASCADE,
   FOREIGN KEY (`departID`) REFERENCES `department` (`departID`) ON DELETE CASCADE
@@ -218,13 +220,13 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 ('tsuchikage', 'tsuchikage', 'head');
 
 -- Insert head employee
-INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
-('admin', 'admin', 'male', '2002-10-10', 'vnese', 'admin', '090000000','1000','2020-01-01','DE0001'),
-('hokage', 'Hokage', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
-('kazekage', 'Kazekage', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003'),
-('raikage', 'Raikage', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004'),
-('mizukage', 'Mizukage', 'female', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005'),
-('tsuchikage', 'Tsuchikage', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006');
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('admin', 'admin', 'male', '2002-10-10', 'vnese', 'admin', '090000000','1000','2020-01-01','DE0001','https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Chapeau_Hiruzen_Sarutobi.svg/1575px-Chapeau_Hiruzen_Sarutobi.svg.png'),
+('hokage', 'Hokage', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002','https://pbs.twimg.com/media/EkUBRodXcAEILDa.jpg'),
+('kazekage', 'Kazekage', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003','https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Kazekage_hat_%28Naruto%2C_manga%29.svg/1200px-Kazekage_hat_%28Naruto%2C_manga%29.svg.png'),
+('raikage', 'Raikage', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004','https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Raikage_hat_%28Naruto%2C_manga%29.svg/1200px-Raikage_hat_%28Naruto%2C_manga%29.svg.png'),
+('mizukage', 'Mizukage', 'female', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005','https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Mizukage_hat_%28Naruto%2C_manga%29.svg/1575px-Mizukage_hat_%28Naruto%2C_manga%29.svg.png'),
+('tsuchikage', 'Tsuchikage', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006','https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Tsuchikage_hat_%28Naruto%2C_manga%29.svg/1575px-Tsuchikage_hat_%28Naruto%2C_manga%29.svg.png');
 
 -- Insert Konoha officer account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
@@ -234,11 +236,11 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 ('kakashi', 'kakashi', 'officer');
 
 -- Insert Konoha officer employee
-INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
-('naruto', 'Uzumaki Naruto', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
-('sasuke', 'Uchiha Sasuke', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
-('sakura', 'Haruno Sakura', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002'),
-('kakashi', 'Hatake Kakashi', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002');
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('naruto', 'Uzumaki Naruto', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002', 'https://staticg.sportskeeda.com/editor/2022/08/53e15-16596004347246.png'),
+('sasuke', 'Uchiha Sasuke', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002', 'https://i.pinimg.com/originals/05/2a/23/052a23ab1c6742fe4b13fd751c2ed425.png'),
+('sakura', 'Haruno Sakura', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002', 'https://manga-kun.com/wp-content/uploads/2020/11/Sakura.png'),
+('kakashi', 'Hatake Kakashi', 'male', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002', 'https://i.pinimg.com/originals/38/b1/71/38b171304731a9cc8a8f25f7b40c2a7a.jpg');
 
 -- Insert Suna officer account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
@@ -247,10 +249,10 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 ('kankuro', 'kankuro', 'officer');
 
 -- Insert Suna officer employee
-INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
-('gaara', 'Gaara', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003'),
-('temari', 'Temari', 'female', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003'),
-('kankuro', 'Kankuru', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003');
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('gaara', 'Gaara', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003', 'https://staticg.sportskeeda.com/editor/2022/07/7ffdc-16590925062039.png'),
+('temari', 'Temari', 'female', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003', 'https://static.fandomspot.com/images/03/29080/00-featured-naruto-shippuden-temari-screenshot.jpg'),
+('kankuro', 'Kankuru', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003', 'https://i.pinimg.com/564x/8e/b4/9d/8eb49dc673861fac1dcb7d4bf3c81a39.jpg');
 
 -- Insert Kumo officer account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
@@ -258,9 +260,9 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 ('killerb', 'killerb', 'officer');
 
 -- Insert Kumo officer employee
-INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
-('raikagea', 'Raikage A', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004'),
-('killerb', 'Killer B', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004');
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('raikagea', 'Raikage A', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004', 'https://genk.mediacdn.vn/2019/10/22/photo-1-15717315890591912656601.jpg'),
+('killerb', 'Killer B', 'male', '2002-10-10', 'vnese','langmay',  '0900000000','1000','2020-01-01', 'DE0004', 'https://www.animesoulking.com/wp-content/uploads/2021/04/naruto-killer-bee-740x414.jpg');
 
 -- Insert Kiri officer account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
@@ -268,9 +270,9 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 ('chojuro', 'chojuro', 'officer');
 
 -- Insert Kiri officer employee
-INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
-('mei', 'Mei', 'female', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005'),
-('chojuro', 'Chojuro', 'male', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005');
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('mei', 'Mei', 'female', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005', 'https://i0.wp.com/rei.animecharactersdatabase.com/uploads/chars/12602-485632184.png'),
+('chojuro', 'Chojuro', 'male', '2002-10-10', 'vnese','langsuongmu',  '0900000000','1000','2020-01-01', 'DE0005', 'https://i.pinimg.com/originals/77/6f/ec/776fec89e78e790b8ce11ea60cbafc62.png');
 
 -- Insert Kiri officer account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
@@ -278,9 +280,9 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 ('kurotsuchi', 'kurotsuchi', 'officer');
 
 -- Insert Kiri officer employee
-INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`) VALUES
-('onoki', 'Onoki', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006'),
-('kurotsuchi', 'Kurotsuchi', 'female', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006');
+INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('onoki', 'Onoki', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006', 'https://staticg.sportskeeda.com/editor/2022/09/08997-16625499011834.png'),
+('kurotsuchi', 'Kurotsuchi', 'female', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006', 'https://staticg.sportskeeda.com/editor/2022/09/b511d-16632473097456.png');
 
 
 

@@ -4,8 +4,8 @@ if (!isset($_SESSION['username'])) {
   exit();
 } else {
   // Page
-  require "./components/head.php";
   require_once "./database.php";
+  require "./components/head.php";
   $deid = $_SESSION['departID'];
   $sql = "SELECT * FROM department";
   $departmentArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
@@ -16,12 +16,18 @@ if (!isset($_SESSION['username'])) {
       <div class="page-title">
         <div class="row">
           <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Requests</h3>
+            <h3 class="me-4" style="display:inline">Requests</h3>
+            <!-- <a style="display:inline" class="btn btn-primary mb-3" data-bs-toggle="modal" href="#sendRequest" role="button" <?php if ($_SESSION['role'] == 'head') echo "hidden" ?>>
+              Send request
+            </a> -->
+            <button style="display:inline" data-bs-toggle="modal" data-bs-target="#sendRequest" class="btn btn-primary mb-2" <?php if ($_SESSION['role'] == 'head') echo "hidden" ?>>
+              Send request
+            </button>
             <!-- <p class="text-subtitle text-muted">
               Navbar will appear on the top of the page.
             </p> -->
           </div>
-          <div class="col-12 col-md-6 order-md-2 order-first">
+          <!-- <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -32,7 +38,7 @@ if (!isset($_SESSION['username'])) {
                 </li>
               </ol>
             </nav>
-          </div>
+          </div> -->
         </div>
       </div>
       <section class="section">
@@ -255,9 +261,7 @@ if (!isset($_SESSION['username'])) {
 
     <footer>
       <div class="footer clearfix mb-0 text-muted">
-        <a class="btn btn-primary" data-bs-toggle="modal" href="#sendRequest" role="button" <?php if ($_SESSION['role'] == 'head') echo "hidden" ?>>
-          Send request
-        </a>
+
       </div>
     </footer>
   </div>
@@ -285,17 +289,19 @@ if (!isset($_SESSION['username'])) {
         </div>
         <form action="./index.php?page=request-send-processing&type=absence" method="POST">
           <div class="modal-body">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
-            <br></br>
-            <label for="description">Reason for absence</label>
-            <textarea id="description" name="description" required></textarea>
-            <br></br>
-            <label for="date_start_absence">Date start absence</label>
-            <input type="date" id="title" name="date_start_absence" required>
-            <br></br>
-            <label for="date_end_absence">Date end absence</label>
-            <input type="date" id="title" name="date_end_absence" required>
+            <dl class="row mt-2">
+              <dt class="col-sm-5"><label for="title">Title</label></dt>
+              <dd class="col-sm-7"><input type="text" id="title" name="title" required></dd>
+
+              <dt class="col-sm-5"><label for="description">Reason for absence</label></dt>
+              <dd class="col-sm-7"><textarea id="description" name="description" required></textarea></dd>
+
+              <dt class="col-sm-5"><label for="date_start_absence">Date start absence</label></dt>
+              <dd class="col-sm-7"><input type="date" id="title" name="date_start_absence" required></dd>
+
+              <dt class="col-sm-5"><label for="date_end_absence">Date end absence</label></dt>
+              <dd class="col-sm-7"><input type="date" id="title" name="date_end_absence" required></dd>
+            </dl>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
@@ -314,14 +320,16 @@ if (!isset($_SESSION['username'])) {
         </div>
         <form action="./index.php?page=request-send-processing&type=salary" method="POST">
           <div class="modal-body">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
-            <br></br>
-            <label for="description">Reason</label>
-            <textarea id="description" name="description" required></textarea>
-            <br></br>
-            <label for="amount">Amount</label>
-            <input type="number" id="amount" name="amount" required>
+            <dl class="row mt-2">
+              <dt class="col-sm-5"><label for="title">Title</label></dt>
+              <dd class="col-sm-7"><input type="text" id="title" name="title" required></dd>
+
+              <dt class="col-sm-5"><label for="description">Reason</label></dt>
+              <dd class="col-sm-7"><textarea id="description" name="description" required></textarea></dd>
+
+              <dt class="col-sm-5"><label for="amount">Amount</label></dt>
+              <dd class="col-sm-7"><input type="number" id="amount" name="amount" required></dd>
+            </dl>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
@@ -340,11 +348,13 @@ if (!isset($_SESSION['username'])) {
         </div>
         <form action="./index.php?page=request-send-processing&type=other" method="POST">
           <div class="modal-body">
-            <label for="title">Title</label>
-            <input id="title" name="title" required>
-            <br></br>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" required></textarea>
+            <dl class="row mt-2">
+              <dt class="col-sm-5"><label for="title">Title</label></dt>
+              <dd class="col-sm-7"><input id="title" name="title" required></dd>
+
+              <dt class="col-sm-5"><label for="description">Description</label></dt>
+              <dd class="col-sm-7"><textarea id="description" name="description" required></textarea></dd>
+            </dl>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
