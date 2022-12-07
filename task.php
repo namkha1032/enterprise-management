@@ -153,16 +153,21 @@ if (!isset($_SESSION['username'])) {
 
                               <dt class="col-sm-4">Check out date</dt>
                               <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
+
+                              <dt class="col-sm-4">Submit file</dt>
+                              <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?=$task['submitFile']?>"><?=str_replace("../files_submit/", "", $task['submitFile'])?></a></dd>
                             </dl>
+                            
                           </div>
                           <div class="modal-footer" <?php if ($_SESSION['role'] == 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                             <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "in progress") echo "hidden" ?>>
                               Check in
                             </a>
                             <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                              <input type="file" name="fileToUpload" id="fileToUpload"  <?php if ($task['status'] == "assigned") echo "hidden" ?> required>
+                              <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] == "assigned") echo "hidden" ?> required>
                               <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] == "assigned") echo "hidden" ?>>Check out</button>
                             </form>
+
                           </div>
                         </div>
                       </div>
