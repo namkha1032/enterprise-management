@@ -8,7 +8,14 @@ if (!isset($_SESSION['username'])) {
   require_once "./database.php";
   $deid = $_SESSION['departID'];
 ?>
-
+  <!-- ///////////////////////////////////////////////////////// -->
+  <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+  </form>
+  <a href="./processing/download-processing.php?file=../uploads/task assignment.png">click to download</a> -->
+  <!-- ///////////////////////////////////////////////////////// -->
   <div id="main-content">
     <div class="page-heading">
       <div class="page-title">
@@ -152,9 +159,10 @@ if (!isset($_SESSION['username'])) {
                             <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "in progress") echo "hidden" ?>>
                               Check in
                             </a>
-                            <a href="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "assigned") echo "hidden" ?>>
-                              Check out
-                            </a>
+                            <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
+                              <input type="file" name="fileToUpload" id="fileToUpload"  <?php if ($task['status'] == "assigned") echo "hidden" ?> required>
+                              <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] == "assigned") echo "hidden" ?>>Check out</button>
+                            </form>
                           </div>
                         </div>
                       </div>

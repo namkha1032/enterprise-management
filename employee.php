@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
   $sql = "SELECT * FROM department";
   $departmentArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
 ?>
-
+  
   <div id="main-content">
     <div class="page-heading">
       <div class="page-title">

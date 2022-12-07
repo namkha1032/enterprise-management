@@ -155,6 +155,7 @@ CREATE TABLE `task` (
   `deadline` date DEFAULT NULL,
   `checkinDate` date DEFAULT NULL,
   `checkoutDate` date DEFAULT NULL,
+  `submitFile` varchar(255) DEFAULT NULL,
   `officerID` varchar(255) DEFAULT NULL,
   `headID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`taskID`),
