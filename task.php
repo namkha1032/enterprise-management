@@ -110,7 +110,7 @@ if (!isset($_SESSION['username'])) {
                         <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                           View
                         </button>
-                        <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
+                        <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
                           Update
                         </button>
                         <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
