@@ -26,13 +26,13 @@ session_start();
 
           <form action="./processing/login-processing.php" method="POST">
             <div class="form-group position-relative has-icon-left mb-4">
-              <input type="text" class="form-control form-control-xl" placeholder="Username" name="username" />
+              <input type="text" class="form-control form-control-xl" placeholder="Username" name="username" required/>
               <div class="form-control-icon">
                 <i class="bi bi-person"></i>
               </div>
             </div>
             <div class="form-group position-relative has-icon-left mb-4">
-              <input type="password" class="form-control form-control-xl" placeholder="Password" name="password" />
+              <input type="password" class="form-control form-control-xl" placeholder="Password" name="password" required/>
               <div class="form-control-icon">
                 <i class="bi bi-shield-lock"></i>
               </div>

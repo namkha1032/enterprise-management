@@ -179,16 +179,16 @@ if (!isset($_SESSION['username'])) {
                           <form action="./index.php?page=request-update-processing&type=absence&rid=<?= $request['requestID'] ?>" method="post">
                             <div class="modal-body">
                               <label for="title">Title</label>
-                              <input type="text" id="title" name="title" value="<?= $request['title'] ?>">
+                              <input type="text" id="title" name="title" value="<?= $request['title'] ?>" required>
                               <br></br>
                               <label for="description">Reason for absence</label>
-                              <textarea id="description" name="description"><?= $request['description'] ?></textarea>
+                              <textarea id="description" name="description" required><?= $request['description'] ?></textarea>
                               <br></br>
                               <label for="date_start_absence">Date start absence</label>
-                              <input type="date" id="title" name="date_start_absence" value="<?= $request['date_start_absence'] ?>">
+                              <input type="date" id="title" name="date_start_absence" value="<?= $request['date_start_absence'] ?>" required>
                               <br></br>
                               <label for="date_end_absence">Date end absence</label>
-                              <input type="date" id="title" name="date_end_absence" value="<?= $request['date_end_absence'] ?>">
+                              <input type="date" id="title" name="date_end_absence" value="<?= $request['date_end_absence'] ?>" required>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Update</button>
@@ -207,13 +207,13 @@ if (!isset($_SESSION['username'])) {
                           <form action="./index.php?page=request-update-processing&type=salary&rid=<?= $request['requestID'] ?>" method="post">
                             <div class="modal-body">
                               <label for="title">Title</label>
-                              <input type="text" id="title" name="title" value="<?= $request['title'] ?>">
+                              <input type="text" id="title" name="title" value="<?= $request['title'] ?>" required>
                               <br></br>
                               <label for="description">Reason for salary praise</label>
-                              <textarea id="description" name="description"><?= $request['description'] ?></textarea>
+                              <textarea id="description" name="description" required><?= $request['description'] ?></textarea>
                               <br></br>
                               <label for="amount">Amount</label>
-                              <input type="number" id="amount" name="amount" value="<?= $request['amount'] ?>">
+                              <input type="number" id="amount" name="amount" value="<?= $request['amount'] ?>" required>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Update</button>
@@ -232,10 +232,10 @@ if (!isset($_SESSION['username'])) {
                           <form action="./index.php?page=request-update-processing&type=other&rid=<?= $request['requestID'] ?>" method="post">
                             <div class="modal-body">
                               <label for="title">Title</label>
-                              <input id="title" name="title" value="<?= $request['title'] ?>">
+                              <input id="title" name="title" value="<?= $request['title'] ?>" required>
                               <br></br>
                               <label for="description">Description</label>
-                              <textarea id="description" name="description"><?= $request['description'] ?></textarea>
+                              <textarea id="description" name="description" required><?= $request['description'] ?></textarea>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Update</button>
@@ -286,16 +286,16 @@ if (!isset($_SESSION['username'])) {
         <form action="./index.php?page=request-send-processing&type=absence" method="POST">
           <div class="modal-body">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title">
+            <input type="text" id="title" name="title" required>
             <br></br>
             <label for="description">Reason for absence</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" required></textarea>
             <br></br>
             <label for="date_start_absence">Date start absence</label>
-            <input type="date" id="title" name="date_start_absence">
+            <input type="date" id="title" name="date_start_absence" required>
             <br></br>
             <label for="date_end_absence">Date end absence</label>
-            <input type="date" id="title" name="date_end_absence">
+            <input type="date" id="title" name="date_end_absence" required>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
@@ -315,13 +315,13 @@ if (!isset($_SESSION['username'])) {
         <form action="./index.php?page=request-send-processing&type=salary" method="POST">
           <div class="modal-body">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title">
+            <input type="text" id="title" name="title" required>
             <br></br>
             <label for="description">Reason</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" required></textarea>
             <br></br>
             <label for="amount">Amount</label>
-            <input type="number" id="amount" name="amount">
+            <input type="number" id="amount" name="amount" required>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
@@ -341,10 +341,10 @@ if (!isset($_SESSION['username'])) {
         <form action="./index.php?page=request-send-processing&type=other" method="POST">
           <div class="modal-body">
             <label for="title">Title</label>
-            <input id="title" name="title">
+            <input id="title" name="title" required>
             <br></br>
             <label for="description">Description</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" required></textarea>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>

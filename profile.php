@@ -64,13 +64,13 @@ if (!isset($_SESSION['username'])) {
                 <form action="./index.php?page=employee-update-processing&emid=<?= $em['employeeID'] ?>" method="POST">
                     <div class="modal-body">
                         <label for="address">Address</label>
-                        <textarea id="address" name="address"><?= $em['address'] ?></textarea>
+                        <textarea id="address" name="address" required><?= $em['address'] ?></textarea>
                         <br>
                         <label for="phone">Phone</label>
-                        <input type='text' id="phone" name="phone" value="<?= $em['phone'] ?>">
+                        <input type='text' id="phone" name="phone" value="<?= $em['phone'] ?>" required>
                         <br>
                         <label for="salary">Salary</label>
-                        <input id="salary" name="salary" type="number" value="<?= $em['salary'] ?>">
+                        <input id="salary" name="salary" type="number" value="<?= $em['salary'] ?>"required>
                         <br>
                         <label for="departID" <?php if ($em['role'] == "head") echo "hidden" ?>>Department:</label>
                         <select name="departID" id="departID" value="<?= $em['departID'] ?>" <?php if ($em['role'] == "head") echo "hidden" ?>>

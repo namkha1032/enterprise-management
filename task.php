@@ -192,7 +192,7 @@ if (!isset($_SESSION['username'])) {
                           <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
                             <div class="modal-body">
                               <label for="title">Title</label>
-                              <input id="title" name="title" value="<?= $task['title'] ?>">
+                              <input id="title" name="title" value="<?= $task['title'] ?>" required>
                               <br>
                               <label for="description">Description</label>
                               <textarea id="description" name="description"><?= $task['description'] ?></textarea>
@@ -212,7 +212,7 @@ if (!isset($_SESSION['username'])) {
                               </select>
                               <br>
                               <label for="deadline">Deadline</label>
-                              <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>">
+                              <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
 
                             </div>
                             <div class="modal-footer">
@@ -251,16 +251,16 @@ if (!isset($_SESSION['username'])) {
         <form action="./index.php?page=task-assign-processing" method="POST">
           <div class="modal-body">
             <label for="title">Title</label>
-            <input id="title" name="title">
+            <input id="title" name="title" required>
             <br>
             <label for="description">Description</label>
-            <textarea id="description" name="description"></textarea>
+            <textarea id="description" name="description" required></textarea>
             <br>
             <label for="deadline">Deadline</label>
-            <input id="deadline" name="deadline" type="date">
+            <input id="deadline" name="deadline" type="date" required>
             <br>
             <label for="officerID">Choose employee:</label>
-            <select name="officerID" id="officerID">
+            <select name="officerID" id="officerID" required>
               <?php
               foreach ($emArray as $em) {
                 if ($em['role'] == 'head')
