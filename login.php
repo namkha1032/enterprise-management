@@ -37,6 +37,12 @@ session_start();
                 <i class="bi bi-shield-lock"></i>
               </div>
             </div>
+            <?php
+            if (isset($_SESSION['loginerror'])) {
+              echo "<p class = \"font-weight-bold text-danger\">" . $_SESSION['loginerror'] . "</p>";
+              unset($_SESSION['loginerror']);
+            }
+            ?>
             <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
               Log in
             </button>
@@ -52,8 +58,5 @@ session_start();
 
 </html>
 <?php
-if (isset($_SESSION['loginerror'])) {
-  echo $_SESSION['loginerror'];
-}
 require "./components/foot.php";
 ?>

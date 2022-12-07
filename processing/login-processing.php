@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //     header('location: ../index.php?page=task');
         // }
     } else {
-        $_SESSION['loginerror'] = "wrong password";
+        $_SESSION['loginerror'] = "Incorrect username or password";
         header('location: ../login.php');
     };
 }
