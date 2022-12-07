@@ -17,6 +17,9 @@ else{
         elseif ($pageName=="employee-insert-processing" || $pageName=="employee-sethead-processing" || $pageName=="employee-delete-processing" || $pageName=="employee-update-processing" ){
             require "./processing/${pageName}.php";
         }
+        elseif ($pageName=="logout-processing" ){
+            require "./processing/${pageName}.php";
+        }
         else{
             require "./${pageName}.php";
         }
