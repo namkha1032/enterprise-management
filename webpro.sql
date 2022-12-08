@@ -284,8 +284,31 @@ INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `addr
 ('onoki', 'Onoki', 'male', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006', 'https://staticg.sportskeeda.com/editor/2022/09/08997-16625499011834.png'),
 ('kurotsuchi', 'Kurotsuchi', 'female', '2002-10-10', 'vnese','langda',  '0900000000','1000','2020-01-01', 'DE0006', 'https://staticg.sportskeeda.com/editor/2022/09/b511d-16632473097456.png');
 
-
-
+-- Insert Konoha task
+INSERT INTO `task` (`title`, `description`, `status`, `deadline`, `officerID`, `headID`) VALUES
+('tit1', 'des1', 'assigned' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'assigned' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'assigned' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'assigned' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'assigned' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'assigned' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'in progress' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'in progress' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'in progress' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'pending' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'pending' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'pending' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'pending' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'completed' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'overdue' , '2022-12-30', 'EM0007', 'EM0002'),
+('tit1', 'des1', 'overdue' , '2022-12-30', 'EM0007', 'EM0002');
 -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 -- /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

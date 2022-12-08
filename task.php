@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
   require_once "./database.php";
   require "./components/head.php";
   $deid = $_SESSION['departID'];
+
 ?>
   <!-- ///////////////////////////////////////////////////////// -->
   <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -232,6 +233,26 @@ if (!isset($_SESSION['username'])) {
             </div>
           </div>
         <?php } ?>
+        <?php
+        $amountAssigned = $conn->query("SELECT * FROM task WHERE status = 'assigned'")->num_rows;
+        $amountInProgress = $conn->query("SELECT * FROM task WHERE status = 'in progress'")->num_rows;
+        $amountPending = $conn->query("SELECT * FROM task WHERE status = 'pending'")->num_rows;
+        $amountCompleted = $conn->query("SELECT * FROM task WHERE status = 'completed'")->num_rows;
+        $amountOverdue = $conn->query("SELECT * FROM task WHERE status = 'overdue'")->num_rows;
+        ?>
+        <div class="card">
+          <div class="card-header">
+            <h4>Visitors Profile</h4>
+          </div>
+          <div class="card-body">
+            <php echo $amountAssigned ?>
+              <php echo $amountInProgress ?>
+                <php echo $amountPending ?>
+                  <php echo $amountCompleted ?>
+                    <php echo $amountOverdue ?>
+                      <div id="chart-visitors-profile"></div>
+          </div>
+        </div>
       </section>
     </div>
 

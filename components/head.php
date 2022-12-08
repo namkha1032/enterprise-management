@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enterprise internal website</title>
 
-  <link rel="stylesheet" href="assets/css/main/app.css" />
-  <link rel="stylesheet" href="assets/css/main/app-dark.css" />
-
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon" />
   <!-- <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" /> -->
+  
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  
+
+  <link rel="stylesheet" href="assets/css/main/app.css" />
+  <link rel="stylesheet" href="assets/css/main/app-dark.css" />
 </head>
 
 <body>
