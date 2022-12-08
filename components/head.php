@@ -9,6 +9,7 @@
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon" />
   <!-- <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" /> -->
   
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
   
 
@@ -134,9 +135,9 @@
                         <li class="dropdown-item notification-item">
                           <a class="d-flex align-items-center" role="button">
                             <div class="notification-icon bg-primary">
-                              <i class="bi bi-cart-check"></i>
+                              <i class="bi bi-info-circle-fill" style="font-size: 24.5px;"></i>
                             </div>
-                            <div class="notification-text ms-4">
+                            <div class=" notification-text ms-4">
                               <p class="notification-title font-bold">
                                 <?= $an['title'] ?>
                               </p>
@@ -199,14 +200,14 @@
                     </div>
                     <div class="user-img d-flex align-items-center">
                       <div class="avatar avatar-md">
-                        <img src="<?=$_SESSION['avatar']?>" style="object-fit: cover;" />
+                        <img src="<?= $_SESSION['avatar'] ?>" style="object-fit: cover;" />
                       </div>
                     </div>
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem">
                   <li>
-                    <h6 class="dropdown-header">Hello, <?=$_SESSION['name']?>!</h6>
+                    <h6 class="dropdown-header">Hello, <?= $_SESSION['name'] ?>!</h6>
                   </li>
                   <li>
                     <a class="dropdown-item" href="./index.php?page=profile&employeeID=<?= $_SESSION['employeeID'] ?>"><i class="icon-mid bi bi-person me-2"></i> My
