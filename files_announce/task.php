@@ -250,76 +250,35 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5">Assign task</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=task-assign-processing" method="POST" class="form form-horizontal">
+        <form action="./index.php?page=task-assign-processing" method="POST">
           <div class="modal-body">
-            <div class="row">
-              <div class="col-md-4">
-                <label>Title</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <input type="text" name="title" class="form-control" placeholder="Task title" id="first-name-icon" required autocomplete="off" />
-                    <div class="form-control-icon">
-                      <i class="bi bi-card-heading"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <dl class="row mt-2">
+              <dt class="col-sm-4"><label for="title">Title</label></dt>
+              <dd class="col-sm-8"><input id="title" name="title" required></dd>
 
-              <div class="col-md-4">
-                <label>Deadline</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <input type="date" name="deadline" class="form-control" placeholder="Deadline" required />
-                    <div class="form-control-icon">
-                      <i class="bi bi-calendar3"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <dt class="col-sm-4"><label for="description">Description</label></dt>
+              <dd class="col-sm-8"><textarea id="description" name="description" required></textarea></dd>
 
-              <div class="col-md-4">
-                <label>Assign to</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <select name="officerID" class="form-control" required>
-                      <option disabled selected hidden value="">This task is assigned to...</option>
-                      <?php
-                      foreach ($emArray as $em) {
-                        if ($em['role'] == 'head')
-                          continue;
-                      ?>
-                        <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                    <div class="form-control-icon">
-                      <i class="bi bi-person-check"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <dt class="col-sm-4"><label for="deadline">Deadline</label></dt>
+              <dd class="col-sm-8"><input id="deadline" name="deadline" type="date" required></dd>
 
-              <div class="col-md-4">
-                <label>Description</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <textarea name="description" class="form-control" id="first-name-icon" cols="30" rows="5" placeholder="Task description..." style="resize:none;"></textarea>
-                    <div class="form-control-icon">
-                      <i class="bi bi-list-columns-reverse"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+              <dt class="col-sm-4"><label for="officerID">Choose employee:</label></dt>
+              <dd class="col-sm-8"><select name="officerID" id="officerID" required>
+                  <?php
+                  foreach ($emArray as $em) {
+                    if ($em['role'] == 'head')
+                      continue;
+                  ?>
+                    <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
+                  <?php
+                  }
+                  ?>
+                </select>
+              </dd>
+            </dl>
+
+
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save changes</button>

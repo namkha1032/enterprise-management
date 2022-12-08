@@ -4,8 +4,8 @@ if (!isset($_SESSION['username'])) {
   exit();
 } else {
   // Page
-  require_once "./database.php";
   require "./components/head.php";
+  require_once "./database.php";
   $deid = $_SESSION['departID'];
 ?>
   <!-- ///////////////////////////////////////////////////////// -->
@@ -21,15 +21,12 @@ if (!isset($_SESSION['username'])) {
       <div class="page-title">
         <div class="row">
           <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3 style="display:inline" class="me-4">Task Assignment Section</h3>
+            <h3>Task Assignment Section</h3>
             <!-- <p class="text-subtitle text-muted">
               Navbar will appear on the top of the page.
             </p> -->
-            <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary mb-2" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
-              Assign task
-            </button>
           </div>
-          <!-- <div class="col-12 col-md-6 order-md-2 order-first">
+          <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -40,13 +37,12 @@ if (!isset($_SESSION['username'])) {
                 </li>
               </ol>
             </nav>
-          </div> -->
+          </div>
         </div>
-
       </div>
       <section class="section">
         <?php
-        for ($i = 0; $i <= 4; $i++) {
+        for ($i = 0; $i <= 3; $i++) {
           if ($i == 0) {
             $status = "assigned";
             $tit = "Assigned Tasks";
@@ -56,14 +52,10 @@ if (!isset($_SESSION['username'])) {
             $tit = "In Progress";
           }
           if ($i == 2) {
-            $status = "pending";
-            $tit = "Pending";
-          }
-          if ($i == 3) {
             $status = "completed";
             $tit = "Completed Tasks";
           }
-          if ($i == 4) {
+          if ($i == 3) {
             $status = "overdue";
             $tit = "Overdue Tasks";
           }
@@ -114,7 +106,7 @@ if (!isset($_SESSION['username'])) {
                         <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                           View
                         </button>
-                        <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
+                        <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                           Update
                         </button>
                         <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
@@ -163,24 +155,19 @@ if (!isset($_SESSION['username'])) {
                               <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
 
                               <dt class="col-sm-4">Submit file</dt>
-                              <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
+                              <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?=$task['submitFile']?>"><?=str_replace("../files_submit/", "", $task['submitFile'])?></a></dd>
                             </dl>
-
+                            
                           </div>
-                          <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                            <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
+                          <div class="modal-footer" <?php if ($_SESSION['role'] == 'head' || $task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
+                            <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] == "in progress") echo "hidden" ?>>
                               Check in
                             </a>
                             <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                              <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
-                              <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
+                              <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] == "assigned") echo "hidden" ?> required>
+                              <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] == "assigned") echo "hidden" ?>>Check out</button>
                             </form>
-                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
-                              Reject
-                            </a>
-                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
-                              Approve
-                            </a>
+
                           </div>
                         </div>
                       </div>
@@ -196,7 +183,7 @@ if (!isset($_SESSION['username'])) {
                           <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
                             <div class="modal-body">
                               <label for="title">Title</label>
-                              <input id="title" name="title" value="<?= $task['title'] ?>" required>
+                              <input id="title" name="title" value="<?= $task['title'] ?>">
                               <br>
                               <label for="description">Description</label>
                               <textarea id="description" name="description"><?= $task['description'] ?></textarea>
@@ -216,7 +203,7 @@ if (!isset($_SESSION['username'])) {
                               </select>
                               <br>
                               <label for="deadline">Deadline</label>
-                              <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
+                              <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>">
 
                             </div>
                             <div class="modal-footer">
@@ -238,7 +225,9 @@ if (!isset($_SESSION['username'])) {
     <footer>
       <div class="footer clearfix mb-0 text-muted">
 
-
+        <button data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+          Assign task
+        </button>
       </div>
     </footer>
   </div>
@@ -250,76 +239,29 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5">Assign task</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=task-assign-processing" method="POST" class="form form-horizontal">
+        <form action="./index.php?page=task-assign-processing" method="POST">
           <div class="modal-body">
-            <div class="row">
-              <div class="col-md-4">
-                <label>Title</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <input type="text" name="title" class="form-control" placeholder="Task title" id="first-name-icon" required autocomplete="off" />
-                    <div class="form-control-icon">
-                      <i class="bi bi-card-heading"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label>Deadline</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <input type="date" name="deadline" class="form-control" placeholder="Deadline" required />
-                    <div class="form-control-icon">
-                      <i class="bi bi-calendar3"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label>Assign to</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <select name="officerID" class="form-control" required>
-                      <option disabled selected hidden value="">This task is assigned to...</option>
-                      <?php
-                      foreach ($emArray as $em) {
-                        if ($em['role'] == 'head')
-                          continue;
-                      ?>
-                        <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
-                    <div class="form-control-icon">
-                      <i class="bi bi-person-check"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label>Description</label>
-              </div>
-              <div class="col-md-8">
-                <div class="form-group has-icon-left">
-                  <div class="position-relative">
-                    <textarea name="description" class="form-control" id="first-name-icon" cols="30" rows="5" placeholder="Task description..." style="resize:none;"></textarea>
-                    <div class="form-control-icon">
-                      <i class="bi bi-list-columns-reverse"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <label for="title">Title</label>
+            <input id="title" name="title">
+            <br>
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+            <br>
+            <label for="deadline">Deadline</label>
+            <input id="deadline" name="deadline" type="date">
+            <br>
+            <label for="officerID">Choose employee:</label>
+            <select name="officerID" id="officerID">
+              <?php
+              foreach ($emArray as $em) {
+                if ($em['role'] == 'head')
+                  continue;
+              ?>
+                <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
+              <?php
+              }
+              ?>
+            </select>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save changes</button>
