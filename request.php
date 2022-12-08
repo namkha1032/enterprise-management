@@ -121,48 +121,93 @@ if (!isset($_SESSION['username'])) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <dl class="row mt-2">
-                              <dt class="col-sm-4">Title</dt>
-                              <dd class="col-sm-8"><?= $request['title'] ?></dd>
+                            <form class="form form-horizontal">
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <label>Title</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= $request['title'] ?>" />
+                                </div>
 
-                              <dt class="col-sm-4">Type</dt>
-                              <dd class="col-sm-8"><?= $request['type'] ?></dd>
+                                <div class="col-md-4">
+                                  <label>Type</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= $request['type'] ?>" />
+                                </div>
 
-                              <dt class="col-sm-4">Request ID</dt>
-                              <dd class="col-sm-8"><?= $request['requestID'] ?></dd>
+                                <div class="col-md-4">
+                                  <label>Request ID</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= $request['requestID'] ?>" />
+                                </div>
 
-                              <dt class="col-sm-4">Officer ID</dt>
-                              <dd class="col-sm-8"><?= $request['employeeID'] ?></dd>
+                                <div class="col-md-4">
+                                  <label>Officer ID</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= $request['employeeID'] ?>" />
+                                </div>
 
-                              <dt class="col-sm-4">Officer Name</dt>
-                              <dd class="col-sm-8"><?= $request['name'] ?></dd>
+                                <div class="col-md-4">
+                                  <label>Officer name</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= $request['name'] ?>" />
+                                </div>
 
+                                <div class="col-md-4" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>>
+                                  <label>Date start</label>
+                                </div>
+                                <div class="col-md-8 form-group" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>>
+                                  <input type="text" class="form-control" readonly value="<?= date_format(date_create($request['date_start_absence']), "d/m/Y") ?>" />
+                                </div>
 
+                                <div class="col-md-4" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>>
+                                  <label>Date end</label>
+                                </div>
+                                <div class="col-md-8 form-group" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>>
+                                  <input type="text" class="form-control" readonly value="<?= date_format(date_create($request['date_end_absence']), "d/m/Y") ?>" />
+                                </div>
 
-                              <dt class="col-sm-4" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>>Date start</dt>
-                              <dd class="col-sm-8" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>><?= $request['date_start_absence'] ?></dd>
-                              <dt class="col-sm-4" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>>Date end</dt>
-                              <dd class="col-sm-8" <?php echo $request['type'] == "absence" ? "" : "hidden" ?>><?= $request['date_end_absence'] ?></dd>
+                                <div class="col-md-4" <?php echo $request['type'] == "salary" ? "" : "hidden" ?>>
+                                  <label>Amount</label>
+                                </div>
+                                <div class="col-md-8 form-group" <?php echo $request['type'] == "salary" ? "" : "hidden" ?>>
+                                  <input type="text" class="form-control" readonly value="<?= $request['amount'] ?>" />
+                                </div>
 
+                                <div class="col-md-4">
+                                  <label><?php echo $request['type'] == "other" ? "Description" : "Reason" ?></label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <textarea class="form-control" readonly cols="30" rows="3" style="resize:none;"><?= $request['description'] ?></textarea>
+                                </div>
 
-                              <dt class="col-sm-4" <?php echo $request['type'] == "salary" ? "" : "hidden" ?>>Amount</dt>
-                              <dd class="col-sm-8" <?php echo $request['type'] == "salary" ? "" : "hidden" ?>><?= $request['amount'] ?></dd>
+                                <div class="col-md-4">
+                                  <label>Status</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= $request['status'] ?>" />
+                                </div>
 
+                                <div class="col-md-4">
+                                  <label>Date sent</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly value="<?= date_format(date_create($request['datesent']), "d/m/Y") ?>" />
+                                </div>
 
-                              <dt class="col-sm-4"><?php echo $request['type'] == "other" ? "Description" : "Reason" ?></dt>
-                              <dd class="col-sm-8"><?= $request['description'] ?></dd>
-
-
-                              <dt class="col-sm-4">Status</dt>
-                              <dd class="col-sm-8"><?= $request['status'] ?></dd>
-
-                              <dt class="col-sm-4">Date sent</dt>
-                              <dd class="col-sm-8"><?= $request['datesent'] ?></dd>
-
-                              <dt class="col-sm-4">Date decided</dt>
-                              <dd class="col-sm-8"><?= $request['datedecided'] ?></dd>
-                            </dl>
-
+                                <div class="col-md-4">
+                                  <label>Date decided</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                  <input type="text" class="form-control" readonly <?= ($request['status'] == "pending") ? "disabled" : "value=\"" . date_format(date_create($request['datedecided']), "d/m/Y") . "\""; ?> />
+                                </div>
+                              </div>
+                            </form>
                           </div>
                           <div class="modal-footer" <?php if ($_SESSION['role'] == 'officer' || $request['status'] != "pending") echo "hidden" ?>>
                             <a href="./index.php?page=request-rep-processing&rid=<?= $request['requestID'] ?>&rep=accepted&type=<?= $request['type'] ?>" class="btn btn-primary">
@@ -175,6 +220,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                       </div>
                     </div>
+
                     <div class="modal fade" id="updateAbsenceRequest<?= $request['requestID'] ?>" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                         <div class="modal-content">
@@ -203,6 +249,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                       </div>
                     </div>
+
                     <div class="modal fade" id="updateSalaryRequest<?= $request['requestID'] ?>" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                         <div class="modal-content">
@@ -210,16 +257,58 @@ if (!isset($_SESSION['username'])) {
                             <h1 class="modal-title fs-5">Update request</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                          <form action="./index.php?page=request-update-processing&type=salary&rid=<?= $request['requestID'] ?>" method="post">
+                          <form action="./index.php?page=request-update-processing&type=salary&rid=<?= $request['requestID'] ?>" method="post" class="form form-horizontal">
                             <div class="modal-body">
-                              <label for="title">Title</label>
-                              <input type="text" id="title" name="title" value="<?= $request['title'] ?>" required>
-                              <br></br>
-                              <label for="description">Reason for salary praise</label>
-                              <textarea id="description" name="description" required><?= $request['description'] ?></textarea>
-                              <br></br>
-                              <label for="amount">Amount</label>
-                              <input type="number" id="amount" name="amount" value="<?= $request['amount'] ?>" required>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <label>Title</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <input type="text" name="title" class="form-control" value="<?= $request['title'] ?>" required />
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-card-list"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Reason for salary praise</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <textarea name="description" cols="30" rows="3" required class="form-control" style="resize:none;"><?= $request['description'] ?></textarea>
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-list-columns-reverse"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Amount</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <input type="number" name="amount" class="form-control" value="<?= $request['amount'] ?>" required />
+                                      <style>
+                                        input::-webkit-outer-spin-button,
+                                        input::-webkit-inner-spin-button {
+                                          appearance: none;
+                                          margin: 0;
+                                        }
+                                      </style>
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-currency-dollar"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Update</button>
@@ -228,6 +317,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                       </div>
                     </div>
+
                     <div class="modal fade" id="updateOtherRequest<?= $request['requestID'] ?>" tabindex="-1" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                         <div class="modal-content">
@@ -280,6 +370,7 @@ if (!isset($_SESSION['username'])) {
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="sendAbsenceRequest" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -287,21 +378,65 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5">Absence request</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=request-send-processing&type=absence" method="POST">
+        <form action="./index.php?page=request-send-processing&type=absence" method="POST" class="form form-horizontal">
           <div class="modal-body">
-            <dl class="row mt-2">
-              <dt class="col-sm-5"><label for="title">Title</label></dt>
-              <dd class="col-sm-7"><input type="text" id="title" name="title" required></dd>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Title</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="title" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-card-list"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <dt class="col-sm-5"><label for="description">Reason for absence</label></dt>
-              <dd class="col-sm-7"><textarea id="description" name="description" required></textarea></dd>
+              <div class="col-md-4">
+                <label>Reason</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <textarea name="description" cols="30" rows="3" class="form-control" required style="resize: none;"></textarea>
+                    <div class="form-control-icon">
+                      <i class="bi bi-list-columns-reverse"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <dt class="col-sm-5"><label for="date_start_absence">Date start absence</label></dt>
-              <dd class="col-sm-7"><input type="date" id="title" name="date_start_absence" required></dd>
+              <div class="col-md-4">
+                <label>Date start</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="date" name="date_start_absence" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-calendar-check"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <dt class="col-sm-5"><label for="date_end_absence">Date end absence</label></dt>
-              <dd class="col-sm-7"><input type="date" id="title" name="date_end_absence" required></dd>
-            </dl>
+              <div class="col-md-4">
+                <label>Date end</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="date" name="date_end_absence" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-calendar-x"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
@@ -311,6 +446,7 @@ if (!isset($_SESSION['username'])) {
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="sendSalaryRequest" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -339,6 +475,7 @@ if (!isset($_SESSION['username'])) {
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="sendOtherRequest" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

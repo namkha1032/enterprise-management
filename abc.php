@@ -27,7 +27,7 @@
                                 <label>First Name</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <input type="text" id="first-name" class="form-control" name="fname" placeholder="First Name" />
+                                <input type="text" id="first-name" class="form-control" readonly />
                             </div>
                             <div class="col-md-4">
                                 <label>Email</label>
