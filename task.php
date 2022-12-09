@@ -80,10 +80,14 @@ if (!isset($_SESSION['username'])) {
                             <div class="card-header">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#assignTab" role="tab" aria-controls="home" aria-selected="true"><h3 class="card-title">Assigned Tasks</h3></a>
+                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#assignTab" role="tab" aria-controls="home" aria-selected="true">
+                                            <h3 class="card-title">Assigned Tasks</h3>
+                                        </a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#progressTab" role="tab" aria-controls="profile" aria-selected="false"><h3 class="card-title">In Progress Tasks</h3></a>
+                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#progressTab" role="tab" aria-controls="profile" aria-selected="false">
+                                            <h3 class="card-title">In Progress Tasks</h3>
+                                        </a>
                                     </li>
                                 </ul>
 
@@ -547,10 +551,14 @@ if (!isset($_SESSION['username'])) {
                             <div class="card-header">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#completeTab" role="tab" aria-controls="home" aria-selected="true"><h3 class="card-title">Completed Tasks</h3></a>
+                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#completeTab" role="tab" aria-controls="home" aria-selected="true">
+                                            <h3 class="card-title">Completed Tasks</h3>
+                                        </a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#overdueTab" role="tab" aria-controls="profile" aria-selected="false"><h3 class="card-title">Overdue Tasks</h3></a>
+                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#overdueTab" role="tab" aria-controls="profile" aria-selected="false">
+                                            <h3 class="card-title">Overdue Tasks</h3>
+                                        </a>
                                     </li>
                                 </ul>
 
