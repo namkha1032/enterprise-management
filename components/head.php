@@ -8,13 +8,25 @@
 
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon" />
   <!-- <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" /> -->
-  
+
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-  
+
 
   <link rel="stylesheet" href="assets/css/main/app.css" />
   <link rel="stylesheet" href="assets/css/main/app-dark.css" />
+  <link rel="stylesheet" href="assets/css/shared/iconly.css" />
+  <style>
+    /* .navHead{
+      font-size:1.8rem; 
+      font-weight:bold;
+    }
+    .card-title{
+      font-size:1.8rem;
+      font-weight:bold;
+    } */
+    
+  </style>
 </head>
 
 <body>
@@ -54,7 +66,7 @@
           <ul class="menu">
             <li class="sidebar-title">Menu</li>
 
-            <li class="sidebar-item <?php if ($_GET['page'] == 'employee') echo "active" ?>" <?php if ($_SESSION['role'] == 'officer') echo "hidden" ?>>
+            <li class="sidebar-item <?php if ($_GET['page'] == 'employee' || $_GET['page'] == 'profile') echo "active" ?>" <?php if ($_SESSION['role'] == 'officer') echo "hidden" ?>>
               <a href="./index.php?page=employee" class="sidebar-link">
                 <i class="bi bi-person-fill"></i>
                 <span>Employees</span>
