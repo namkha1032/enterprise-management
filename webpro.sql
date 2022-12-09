@@ -203,6 +203,7 @@ END$$
 DELIMITER ;
 -- Insert department
 INSERT INTO `department` (`name`) VALUES
+('Ceo'),
 ('Admin'),
 ('Konoha'),
 ('Suna'),
@@ -212,6 +213,7 @@ INSERT INTO `department` (`name`) VALUES
 -- -- --------------------------------------------------------
 -- Insert admin and head account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
+('ceo','ceo','ceo'),
 ('admin', 'admin', 'admin'),
 ('hokage', 'hokage', 'head'),
 ('kazekage', 'kazekage', 'head'),
@@ -221,6 +223,7 @@ INSERT INTO `account` (`username`, `password`, `role`) VALUES
 
 -- Insert head employee
 INSERT INTO `employee` (`username`, `name`, `gender`, `dob`,`nationality`, `address`, `phone`, `salary`, `startDate`, `departID`, `avatar`) VALUES
+('ceo','ceo','male','2002-10-10','vnese','ceo','0900000000','10000','2020-01-01','DE0001','https://fandom.vn/wp-content/uploads/2019/04/naruto-hagoromo-otsutsuki-1.jpg'),
 ('admin', 'admin', 'male', '2002-10-10', 'vnese', 'admin', '090000000','1000','2020-01-01','DE0001','https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Chapeau_Hiruzen_Sarutobi.svg/1575px-Chapeau_Hiruzen_Sarutobi.svg.png'),
 ('hokage', 'Hokage', 'female', '2002-10-10', 'vnese','langla',  '0900000000','1000','2020-01-01', 'DE0002','https://pbs.twimg.com/media/EkUBRodXcAEILDa.jpg'),
 ('kazekage', 'Kazekage', 'male', '2002-10-10', 'vnese','langcat',  '0900000000','1000','2020-01-01', 'DE0003','https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Kazekage_hat_%28Naruto%2C_manga%29.svg/1200px-Kazekage_hat_%28Naruto%2C_manga%29.svg.png'),

@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
         INNER JOIN account ON employee.username = account.username WHERE employee.departID='$deid'";
           $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
         ?>
-          <div class="card border border-dark">
+          <div class="card">
             <div class="card-header">
               <h4 class="card-title">Department: <?= $department['name'] ?></h4>
             </div>

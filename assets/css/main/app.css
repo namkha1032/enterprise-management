@@ -4412,7 +4412,7 @@ fieldset:disabled .btn {
   --bs-card-spacer-x: 1rem;
   --bs-card-title-spacer-y: 0.5rem;
   --bs-card-border-width: 1px;
-  --bs-card-border-color: rgba(0, 0, 0, 0.125);
+  --bs-card-border-color: rgb(0, 0, 0);
   --bs-card-border-radius: 0.7rem;
   --bs-card-box-shadow: -8px 12px 18px 0 rgba(25, 42, 70, 0.13);
   --bs-card-inner-border-radius: calc(0.7rem - 1px);
@@ -17033,10 +17033,9 @@ body .bi:before {
 .carousel-caption h5 {
   color: #fff;
 }
-.card {
-  border: none;
+/* .card {
   margin-bottom: 2.2rem;
-}
+} */
 .card.card-statistic {
   background: linear-gradient(180deg, #25a6f1, #54b9ff);
   box-shadow: 1px 2px 5px rgba(47, 170, 244, 0.5);

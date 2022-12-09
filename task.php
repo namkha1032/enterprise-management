@@ -15,36 +15,16 @@ if (!isset($_SESSION['username'])) {
 ?>
     <div id="main-content">
         <div class="page-heading">
-            <div class="page-title">
-                <div class="row">
-                    <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3 style="display:inline" class="me-4">Task Assignment Section</h3>
-                        <!-- <p class="text-subtitle text-muted">
-              Navbar will appear on the top of the page.
-            </p> -->
-                        <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary rounded-pill mb-2" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
-                            Assign task
-                        </button>
-                    </div>
-                    <!-- <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Layout Vertical Navbar
-                </li>
-              </ol>
-            </nav>
-          </div> -->
-                </div>
-
+            <div class="page-title mb-2">
+                <h1 style="display:inline" class="me-4">Task Assignment Section</h1>
+                <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary rounded-pill mb-4" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                    Assign task
+                </button>
             </div>
             <section class="section">
                 <div class="row">
                     <div class="col-4 mb-4">
-                        <div class="card h-100 border border-dark">
+                        <div class="card h-100">
                             <div class="card-header">
                                 <h3 class="card-title">Chart</h3>
                             </div>
@@ -76,14 +56,18 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="col-8 mb-4">
-                        <div class="card h-100 border border-dark">
+                        <div class="card h-100">
                             <div class="card-header">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#assignTab" role="tab" aria-controls="home" aria-selected="true"><h3 class="card-title">Assigned Tasks</h3></a>
+                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#assignTab" role="tab" aria-controls="home" aria-selected="true">
+                                            <h3 class="card-title">Assigned Tasks</h3>
+                                        </a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#progressTab" role="tab" aria-controls="profile" aria-selected="false"><h3 class="card-title">In Progress Tasks</h3></a>
+                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#progressTab" role="tab" aria-controls="profile" aria-selected="false">
+                                            <h3 class="card-title">In Progress Tasks</h3>
+                                        </a>
                                     </li>
                                 </ul>
 
@@ -389,7 +373,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="col-7 mb-4">
-                        <div class="card h-100 border border-dark">
+                        <div class="card h-100">
                             <div class="card-header">
                                 <h3 class="card-title">Pending Tasks</h3>
                             </div>
@@ -543,14 +527,18 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="col-5 mb-4">
-                        <div class="card h-100 border border-dark">
+                        <div class="card h-100">
                             <div class="card-header">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#completeTab" role="tab" aria-controls="home" aria-selected="true"><h3 class="card-title">Completed Tasks</h3></a>
+                                        <a class="nav-link active navHead" id="home-tab" data-bs-toggle="tab" href="#completeTab" role="tab" aria-controls="home" aria-selected="true">
+                                            <h3 class="card-title">Completed Tasks</h3>
+                                        </a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#overdueTab" role="tab" aria-controls="profile" aria-selected="false"><h3 class="card-title">Overdue Tasks</h3></a>
+                                        <a class="nav-link navHead" id="profile-tab" data-bs-toggle="tab" href="#overdueTab" role="tab" aria-controls="profile" aria-selected="false">
+                                            <h3 class="card-title">Overdue Tasks</h3>
+                                        </a>
                                     </li>
                                 </ul>
 
@@ -856,7 +844,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="col-12 mb-4" <?php if ($_SESSION['role'] == 'officer') echo 'hidden' ?>>
-                        <div class="card h-100 border border-dark">
+                        <div class="card h-100">
                             <div class="card-header">
                                 <h3 class="card-title">Chart</h3>
                             </div>
