@@ -8,13 +8,14 @@
 
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon" />
   <!-- <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" /> -->
-  
+
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-  
+
 
   <link rel="stylesheet" href="assets/css/main/app.css" />
   <link rel="stylesheet" href="assets/css/main/app-dark.css" />
+  <link rel="stylesheet" href="assets/css/shared/iconly.css" />
   <style>
     /* .navHead{
       font-size:1.8rem; 
@@ -24,6 +25,7 @@
       font-size:1.8rem;
       font-weight:bold;
     } */
+    
   </style>
 </head>
 
