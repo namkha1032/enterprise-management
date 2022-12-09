@@ -228,19 +228,65 @@ if (!isset($_SESSION['username'])) {
                             <h1 class="modal-title fs-5">Update request</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                          <form action="./index.php?page=request-update-processing&type=absence&rid=<?= $request['requestID'] ?>" method="post">
+                          <form action="./index.php?page=request-update-processing&type=absence&rid=<?= $request['requestID'] ?>" method="post" class="form form-horizontal">
                             <div class="modal-body">
-                              <label for="title">Title</label>
-                              <input type="text" id="title" name="title" value="<?= $request['title'] ?>" required>
-                              <br></br>
-                              <label for="description">Reason for absence</label>
-                              <textarea id="description" name="description" required><?= $request['description'] ?></textarea>
-                              <br></br>
-                              <label for="date_start_absence">Date start absence</label>
-                              <input type="date" id="title" name="date_start_absence" value="<?= $request['date_start_absence'] ?>" required>
-                              <br></br>
-                              <label for="date_end_absence">Date end absence</label>
-                              <input type="date" id="title" name="date_end_absence" value="<?= $request['date_end_absence'] ?>" required>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <label>Title</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <input type="text" name="title" class="form-control" value="<?= $request['title'] ?>" required />
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-card-list"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Reason for absence</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <textarea name="description" cols="30" rows="3" required class="form-control" style="resize:none;"><?= $request['description'] ?></textarea>
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-list-columns-reverse"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Date start</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <input type="date" name="date_start_absence" class="form-control" value="<?= $request['date_start_absence'] ?>" required />
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-calendar-check"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Date end</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <input type="date" name="date_end_absence" class="form-control" value="<?= $request['date_end_absence'] ?>" required />
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-calendar-x"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Update</button>
@@ -325,13 +371,37 @@ if (!isset($_SESSION['username'])) {
                             <h1 class="modal-title fs-5">Update request</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                          <form action="./index.php?page=request-update-processing&type=other&rid=<?= $request['requestID'] ?>" method="post">
+                          <form action="./index.php?page=request-update-processing&type=other&rid=<?= $request['requestID'] ?>" method="post" class="form form-horizontal">
                             <div class="modal-body">
-                              <label for="title">Title</label>
-                              <input id="title" name="title" value="<?= $request['title'] ?>" required>
-                              <br></br>
-                              <label for="description">Description</label>
-                              <textarea id="description" name="description" required><?= $request['description'] ?></textarea>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <label>Title</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <input type="text" name="title" class="form-control" value="<?= $request['title'] ?>" required />
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-card-list"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <label>Reason</label>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="form-group has-icon-left">
+                                    <div class="position-relative">
+                                      <textarea name="description" cols="30" rows="3" required class="form-control" style="resize:none;"><?= $request['description'] ?></textarea>
+                                      <div class="form-control-icon">
+                                        <i class="bi bi-list-columns-reverse"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">Update</button>
@@ -473,18 +543,58 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Salary request</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=request-send-processing&type=salary" method="POST">
+        <form action="./index.php?page=request-send-processing&type=salary" method="POST" class="form form-horizontal">
           <div class="modal-body">
-            <dl class="row mt-2">
-              <dt class="col-sm-5"><label for="title">Title</label></dt>
-              <dd class="col-sm-7"><input type="text" id="title" name="title" required></dd>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Title</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="title" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-card-list"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <dt class="col-sm-5"><label for="description">Reason</label></dt>
-              <dd class="col-sm-7"><textarea id="description" name="description" required></textarea></dd>
+              <div class="col-md-4">
+                <label>Reason</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <textarea name="description" cols="30" rows="3" class="form-control" required style="resize: none;"></textarea>
+                    <div class="form-control-icon">
+                      <i class="bi bi-list-columns-reverse"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <dt class="col-sm-5"><label for="amount">Amount</label></dt>
-              <dd class="col-sm-7"><input type="number" id="amount" name="amount" required></dd>
-            </dl>
+              <div class="col-md-4">
+                <label>Amount</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="number" name="amount" class="form-control" required />
+                    <style>
+                      input::-webkit-outer-spin-button,
+                      input::-webkit-inner-spin-button {
+                        appearance: none;
+                        margin: 0;
+                      }
+                    </style>
+                    <div class="form-control-icon">
+                      <i class="bi bi-currency-dollar"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
@@ -502,15 +612,37 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Other request</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=request-send-processing&type=other" method="POST">
+        <form action="./index.php?page=request-send-processing&type=other" method="POST" class="form form-horizontal">
           <div class="modal-body">
-            <dl class="row mt-2">
-              <dt class="col-sm-5"><label for="title">Title</label></dt>
-              <dd class="col-sm-7"><input id="title" name="title" required></dd>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Title</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="title" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-card-list"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <dt class="col-sm-5"><label for="description">Description</label></dt>
-              <dd class="col-sm-7"><textarea id="description" name="description" required></textarea></dd>
-            </dl>
+              <div class="col-md-4">
+                <label>Reason</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <textarea name="description" cols="30" rows="3" class="form-control" required style="resize: none;"></textarea>
+                    <div class="form-control-icon">
+                      <i class="bi bi-list-columns-reverse"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <a class="btn btn-primary" data-bs-target="#sendRequest" data-bs-toggle="modal">Back to first</a>
