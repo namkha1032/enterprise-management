@@ -157,6 +157,7 @@ if (!isset($_SESSION['username'])) {
       </div>
     </footer>
   </div>
+
   <div class="modal fade" id="insertEmployee" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
       <div class="modal-content">
@@ -164,58 +165,181 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5">Add new employee</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=employee-insert-processing" method="POST">
+        <form action="./index.php?page=employee-insert-processing" method="POST" class="form form-horizontal">
           <div class="modal-body">
-            <label for="name">Name</label><span class="text-danger">*</span>
-            <input type="text" id="name" name="name" placeholder="Name..." required>
-            <br>
-            <label for="username">username</label><span class="text-danger">*</span>
-            <input type="text" id="username" name="username" placeholder="username..." required>
-            <br>
-            <label for="password">password</label><span class="text-danger">*</span>
-            <input type="text" id="password" name="password" placeholder="password..." required>
-            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Name</label><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="name" class="form-control" placeholder="Name..." id="first-name-icon" required autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-person"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <label for="role">Role</label><span class="text-danger">*</span>
-            <select name="role" id="role" required>
-              <option value="officer">Officer</option>
-              <option value="head">Head</option>
-            </select>
-            <br>
-            <label for="departID">Department</label><span class="text-danger">*</span>
-            <select name="departID" id="departID" required>
-              <?php
-              foreach ($departmentArray as $depart) {
-                if ($depart['name'] == 'Admin')
-                  continue;
-              ?>
-                <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
-              <?php
-              }
-              ?>
-            </select>
-            <br>
-            <label for="gender">Gender</label>
-            <select name="gender" id="gender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            <br>
-            <label for="dob">Date of birth</label>
-            <input type="date" name="dob" id="dob">
-            <br>
-            <label for="nationality">Nationality</label>
-            <input type="text" name="nationality" id="nationality">
-            <br>
-            <label for="address">Address</label>
-            <textarea name="address" id="address"></textarea>
-            <br>
-            <label for="phone">Phone</label>
-            <input type="text" name="phone" id="phone">
-            <br>
-            <label for="salary">Salary</label>
-            <input type="number" name="salary" id="salary">
+              <div class="col-md-4">
+                <label>Username</label><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="username" class="form-control" placeholder="Username..." id="first-name-icon" required autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-person-vcard"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Password</label><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="password" class="form-control" placeholder="Password..." id="first-name-icon" required autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-shield-lock"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Date of birth</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="date" name="dob" class="form-control" placeholder="Date of birth..." id="first-name-icon" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-calendar"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Nationality</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="nationality" class="form-control" placeholder="Nationality..." id="first-name-icon" autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-globe"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Address</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="address" class="form-control" placeholder="Address..." id="first-name-icon" autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-house"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Phone number</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="phone" class="form-control" placeholder="Phone..." id="first-name-icon" autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-telephone"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Salary</label><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="number" name="salary" class="form-control" placeholder="Salary..." id="first-name-icon" required autocomplete="off" />
+                    <div class="form-control-icon">
+                      <i class="bi bi-currency-dollar"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <style>
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                  appearance: none;
+                  margin: 0;
+                }
+              </style>
+
+              <div class="col-md-4">
+                <label>Role</label><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <select name="role" id="role" required style="width:100%">
+                      <option selected hidden>Please choose a role...</option>
+                      <option value="officer">Officer</option>
+                      <option value="head">Head</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Department</label><span class="text-danger">*</span>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <select name="departID" id="departID" required style="width:100%">
+                      <option selected hidden>Please choose a department...</option>
+                      <?php
+                      foreach ($departmentArray as $depart) {
+                        if ($depart['name'] == 'Admin')
+                          continue;
+                      ?>
+                        <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Gender</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <select name="gender" id="gender" style="width:100%">
+                      <option selected hidden>Please choose employee's gender...</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Insert</button>
