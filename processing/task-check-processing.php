@@ -17,5 +17,5 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $sql="UPDATE task SET status = 'in progress' WHERE taskID='$tid'";
         $conn->query($sql);
     }
-    header("location: ./index.php?page=task");
+    header("location: ./index.php?page=taskmanage");
 }

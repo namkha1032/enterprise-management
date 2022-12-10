@@ -11,5 +11,5 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $tid = $_GET['tid'];
     $sql="DELETE FROM task WHERE taskID='$tid'";
     $conn->query($sql);
-    header("location: ./index.php?page=task");
+    header("location: ./index.php?page=taskmanage");
 }

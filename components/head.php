@@ -72,7 +72,14 @@
               </a>
             </li>
 
-            <li class="sidebar-item <?php if ($_GET['page'] == 'task') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
+            <li class="sidebar-item <?php if ($_GET['page'] == 'taskme') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'ceo') echo "hidden" ?>>
+              <a href="./index.php?page=taskme" class="sidebar-link">
+                <i class="bi bi-clipboard-check-fill"></i>
+                <span>My Tasks</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item <?php if ($_GET['page'] == 'taskmanage') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'officer') echo "hidden" ?>>
               <a href="./index.php?page=taskmanage" class="sidebar-link">
                 <i class="bi bi-clipboard-check-fill"></i>
                 <span>Task Management</span>
