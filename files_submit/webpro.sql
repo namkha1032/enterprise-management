@@ -543,7 +543,7 @@ INSERT INTO `task` (`title`, `description`, `status`, `deadline`, `lowerID`, `up
 
 
 -- insert request from head
-INSERT INTO `request` (`type`,`title`, `description`, `status`, `lowerID`, `upperID`) VALUES
+INSERT INTO `request` (`type`,`title`, `description`, `status` `lowerID`, `upperID`) VALUES
 ('absence', 'reqtit', 'reqdes', 'pending','EM0003','EM0001'),
 ('absence', 'reqtit', 'reqdes', 'pending','EM0003','EM0001'),
 ('salary', 'reqtit', 'reqdes', 'accepted','EM0003','EM0001'),
@@ -589,48 +589,7 @@ INSERT INTO `request` (`type`,`title`, `description`, `status`, `lowerID`, `uppe
 ('other', 'reqtit', 'reqdes', 'rejected','EM0007','EM0001'),
 ('other', 'reqtit', 'reqdes', 'rejected','EM0007','EM0001'),
 ('other', 'reqtit', 'reqdes', 'rejected','EM0007','EM0001'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0007','EM0001');
-
-
--- insert request from konoha
-INSERT INTO `request` (`type`,`title`, `description`, `status`, `lowerID`, `upperID`) VALUES
-('absence', 'reqtit', 'reqdes', 'pending','EM0008','EM0003'),
-('absence', 'reqtit', 'reqdes', 'pending','EM0008','EM0003'),
-('salary', 'reqtit', 'reqdes', 'accepted','EM0008','EM0003'),
-('salary', 'reqtit', 'reqdes', 'accepted','EM0008','EM0003'),
-('other', 'reqtit', 'reqdes', 'accepted','EM0008','EM0003'),
-('other', 'reqtit', 'reqdes', 'accepted','EM0008','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0008','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0008','EM0003'),
-
-
-('absence', 'reqtit', 'reqdes', 'pending','EM0009','EM0003'),
-('absence', 'reqtit', 'reqdes', 'pending','EM0009','EM0003'),
-('absence', 'reqtit', 'reqdes', 'pending','EM0009','EM0003'),
-('salary', 'reqtit', 'reqdes', 'pending','EM0009','EM0003'),
-('salary', 'reqtit', 'reqdes', 'accepted','EM0009','EM0003'),
-('salary', 'reqtit', 'reqdes', 'rejected','EM0009','EM0003'),
-('salary', 'reqtit', 'reqdes', 'rejected','EM0009','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0009','EM0003'),
-
-
-('absence', 'reqtit', 'reqdes', 'pending','EM0010','EM0003'),
-('absence', 'reqtit', 'reqdes', 'accepted','EM0010','EM0003'),
-('salary', 'reqtit', 'reqdes', 'accepted','EM0010','EM0003'),
-('salary', 'reqtit', 'reqdes', 'accepted','EM0010','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0010','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0010','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0010','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0010','EM0003'),
-
-('absence', 'reqtit', 'reqdes', 'pending','EM0011','EM0003'),
-('absence', 'reqtit', 'reqdes', 'pending','EM0011','EM0003'),
-('salary', 'reqtit', 'reqdes', 'pending','EM0011','EM0003'),
-('salary', 'reqtit', 'reqdes', 'pending','EM0011','EM0003'),
-('other', 'reqtit', 'reqdes', 'accepted','EM0011','EM0003'),
-('other', 'reqtit', 'reqdes', 'accepted','EM0011','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0011','EM0003'),
-('other', 'reqtit', 'reqdes', 'rejected','EM0011','EM0003');
+('other', 'reqtit', 'reqdes', 'rejected','EM0007','EM0001'),
 
 -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
