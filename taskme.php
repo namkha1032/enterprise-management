@@ -170,7 +170,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -184,7 +184,7 @@ if (!isset($_SESSION['username'])) {
                                                                         Check in
                                                                     </a>
                                                                     <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
+                                                                        <input type="file" name="fileToUpload" id="fileToUpload formFile" class="form-control" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
                                                                         <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
                                                                             Check out
                                                                         </button>
@@ -316,7 +316,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -330,7 +330,7 @@ if (!isset($_SESSION['username'])) {
                                                                         Check in
                                                                     </a>
                                                                     <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
+                                                                        <input type="file" name="fileToUpload" id="fileToUpload formFile" class="form-control" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
                                                                         <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
                                                                             Check out
                                                                         </button>
@@ -477,7 +477,7 @@ if (!isset($_SESSION['username'])) {
                                                                     </div>
 
                                                                     <div class="col-md-4">
-                                                                        <label>Submit file</label>
+                                                                        <label>Submitted file</label>
                                                                     </div>
                                                                     <div class="col-md-8 form-group">
                                                                         <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -491,7 +491,7 @@ if (!isset($_SESSION['username'])) {
                                                                 Check in
                                                             </a>
                                                             <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
+                                                                <input type="file" name="fileToUpload" id="fileToUpload formFile" class="form-control" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
                                                                 <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
                                                                     Check out
                                                                 </button>
@@ -644,7 +644,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -658,7 +658,7 @@ if (!isset($_SESSION['username'])) {
                                                                         Check in
                                                                     </a>
                                                                     <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
+                                                                        <input type="file" name="fileToUpload" id="fileToUpload formFile" class="form-control" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
                                                                         <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>Check out</button>
                                                                     </form>
                                                                 </div>
@@ -788,7 +788,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -802,7 +802,7 @@ if (!isset($_SESSION['username'])) {
                                                                         Check in
                                                                     </a>
                                                                     <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
+                                                                        <input type="file" name="fileToUpload" id="fileToUpload formFile" class="form-control" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
                                                                         <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>Check out</button>
                                                                     </form>
                                                                 </div>

@@ -252,7 +252,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -465,7 +465,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -688,7 +688,7 @@ if (!isset($_SESSION['username'])) {
                                                                     </div>
 
                                                                     <div class="col-md-4">
-                                                                        <label>Submit file</label>
+                                                                        <label>Submitted file</label>
                                                                     </div>
                                                                     <div class="col-md-8 form-group">
                                                                         <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -850,7 +850,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
@@ -984,7 +984,7 @@ if (!isset($_SESSION['username'])) {
                                                                             </div>
 
                                                                             <div class="col-md-4">
-                                                                                <label>Submit file</label>
+                                                                                <label>Submitted file</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
                                                                                 <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";

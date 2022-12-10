@@ -134,14 +134,14 @@ if (!isset($_SESSION['username'])) {
       </section>
     </div>
 
-    <footer>
+    <!-- <footer>
       <div class="footer clearfix mb-0 text-muted">
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertEmployee" <?php if ($_SESSION['role'] != 'admin') echo "hidden" ?>>
           Add employee
         </button>
       </div>
-    </footer>
+    </footer> -->
   </div>
 
   <div class="modal fade" id="insertEmployee" tabindex="-1" aria-hidden="true">

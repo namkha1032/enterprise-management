@@ -57,12 +57,18 @@ if (!isset($_SESSION['username'])) {
               <img src="<?= $em['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
             </div>
             <form action="./index.php?page=avatar-upload-processing&emid=<?= $em['employeeID'] ?>" method="post" enctype="multipart/form-data">
-              <input type="file" name="fileToUpload" id="fileToUpload" required>
-              <button type="submit" value="Upload Image" class="btn btn-primary" >
-                Upload your avatar
-              </button>
+              <div class="col-md-6 mb-1" style="margin-top:20px;">
+                <fieldset>
+                  <div class="input-group">
+                    <input type="file" name="fileToUpload" id="fileToUpload inputGroupFile04" class="form-control" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                    <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04" value="Upload Image">
+                      Change your avatar
+                    </button>
+                  </div>
+                </fieldset>
+              </div>
             </form>
-            <form class="form" style="margin-top: 20px;">
+            <form class="form form-horizontal" style="margin-top: 20px;">
               <div class="row">
                 <div class="col-md-6 col-12">
                   <div class="form-group has-icon-left">
@@ -222,29 +228,62 @@ if (!isset($_SESSION['username'])) {
                   <h1 class="modal-title fs-5">Update employee</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="./index.php?page=employee-update-processing&emid=<?= $em['employeeID'] ?>" method="POST">
+                <form action="./index.php?page=employee-update-processing&emid=<?= $em['employeeID'] ?>" method="POST" class="form form-horizontal">
                   <div class="modal-body">
-                    <label for="address">Address</label>
-                    <textarea id="address" name="address" required><?= $em['address'] ?></textarea>
-                    <br>
-                    <label for="phone">Phone</label>
-                    <input type='text' id="phone" name="phone" value="<?= $em['phone'] ?>" required>
-                    <br>
-                    <label for="salary">Salary</label>
-                    <input id="salary" name="salary" type="number" value="<?= $em['salary'] ?>" required>
-                    <br>
-                    <label for="departID" <?php if ($em['role'] == "head") echo "hidden" ?>>Department:</label>
-                    <select name="departID" id="departID" value="<?= $em['departID'] ?>" <?php if ($em['role'] == "head") echo "hidden" ?>>
-                      <?php
-                      foreach ($departmentArray as $depart) {
-                        if ($depart['name'] == 'Admin')
-                          continue;
-                      ?>
-                        <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
-                      <?php
-                      }
-                      ?>
-                    </select>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Address</label>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <textarea name="address" required rows="3" cols="10" style="resize:none; width:100%;"><?= $em['address'] ?></textarea>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Phone</label>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <input type='text' name="phone" value="<?= $em['phone'] ?>" required style="width:100%;">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Salary</label>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <input type='number' name="salary" value="<?= $em['salary'] ?>" required style="width:100%;">
+                        </div>
+                      </div>
+                      <style>
+                        input::-webkit-outer-spin-button,
+                        input::-webkit-inner-spin-button {
+                          appearance: none;
+                          margin: 0;
+                        }
+                      </style>
+
+                      <div class="col-md-4" <?php if ($em['role'] == "head") echo "hidden" ?>>
+                        <label>Department</label>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <select name="departID" value="<?= $em['departID'] ?>" <?php if ($em['role'] == "head") echo "hidden" ?>>
+                            <?php
+                            foreach ($departmentArray as $depart) {
+                              if ($depart['name'] == 'Admin')
+                                continue;
+                            ?>
+                              <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
+                            <?php
+                            }
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Update</button>
