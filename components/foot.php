@@ -17,7 +17,7 @@
             });
         </script>
         <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
-        <?php if ($_GET['page'] == 'taskmanage') { ?>
+        <?php if (isset($_GET['page']) && $_GET['page'] == 'taskmanage') { ?>
             <script>
                 // Task pie chart
                 let taskDonutConfig = {
@@ -117,7 +117,7 @@
                 taskBarChart.render();
             </script>
         <?php } ?>
-        <?php if ($_GET['page'] == 'request2') { ?>
+        <?php if (isset($_GET['page']) && $_GET['page'] == 'request2') { ?>
             <script>
                 // request Pie chart
                 let requestPieConfig = {
