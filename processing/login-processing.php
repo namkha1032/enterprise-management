@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($loginuser['role'] != "officer")
             header('location: ../index.php?page=employee');
         else
-            header('location: ../index.php?page=task');
+            header('location: ../index.php?page=taskme');
 
         // mysqli_close($conn);
         // if ($_SESSION['level'] == 'admin'){

@@ -28,6 +28,6 @@ else{
         }
     }
     else{
-        header("location: ./index.php?page=task");
+        header("location: ./index.php?page=taskmanage");
     }
 }
