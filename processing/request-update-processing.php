@@ -32,5 +32,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE request_salary SET amount = '$amount' WHERE salaryID='$rid'";
         $conn->query($sql);
     }
-    header("location: ./index.php?page=request");
+    header("location: ./index.php?page=requestme");
 }

@@ -20,6 +20,9 @@ else{
         elseif ($pageName=="announce-create-processing" ){
             require "./processing/${pageName}.php";
         }
+        elseif ($pageName=="avatar-upload-processing" ){
+            require "./processing/${pageName}.php";
+        }
         elseif ($pageName=="logout-processing" ){
             require "./processing/${pageName}.php";
         }

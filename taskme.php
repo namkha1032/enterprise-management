@@ -18,7 +18,8 @@ if (!isset($_SESSION['username'])) {
         <div class="page-heading">
             <div class="page-title mb-2">
                 <h1 style="display:inline" class="me-4">My Tasks</h1>
-
+                <div class="mb-4">
+                </div>
             </div>
             <section class="section">
                 <div class="row">
@@ -91,6 +92,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $task['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
@@ -234,6 +238,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $task['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
@@ -392,6 +399,9 @@ if (!isset($_SESSION['username'])) {
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
+                                                            <div class="avatar mb-4 d-flex justify-content-center">
+                                                                <img src="<?= $task['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                            </div>
                                                             <form class="form form-horizontal">
                                                                 <div class="row">
                                                                     <div class="col-md-4">
@@ -556,6 +566,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $task['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
@@ -697,6 +710,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $task['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">

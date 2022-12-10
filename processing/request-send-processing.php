@@ -44,5 +44,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // $sql = "INSERT INTO request (title, description, userid, departmentid)
   //             VALUES ('$title', '$description', '$uid','$deid')";
   // $conn->query($sql);
-  header("location: ./index.php?page=request");
+  header("location: ./index.php?page=requestme");
 }

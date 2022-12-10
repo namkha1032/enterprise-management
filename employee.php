@@ -13,26 +13,12 @@ if (!isset($_SESSION['username'])) {
 
   <div id="main-content">
     <div class="page-heading">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Human Resources</h3>
-            <!-- <p class="text-subtitle text-muted">
-              Navbar will appear on the top of the page.
-            </p> -->
-          </div>
-          <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Layout Vertical Navbar
-                </li>
-              </ol>
-            </nav>
-          </div>
+      <div class="page-title mb-2">
+        <h1 style="display:inline" class="me-4">Human resources</h1>
+        <div class="mb-4" <?php if ($_SESSION['role'] == 'admin') echo "style='display:inline'" ?>>
+          <button style="display:inline" data-bs-toggle="modal" data-bs-target="#insertEmployee" class="btn btn-primary rounded-pill mb-4" <?php if ($_SESSION['role'] != 'admin') echo 'hidden' ?>>
+            Add employee
+          </button>
         </div>
       </div>
       <section class="section">
@@ -312,7 +298,7 @@ if (!isset($_SESSION['username'])) {
                       <option selected hidden>Please choose a department...</option>
                       <?php
                       foreach ($departmentArray as $depart) {
-                        if ($depart['name'] == 'Admin')
+                        if ($depart['departID'] == 'DE0001' || $depart['departID'] == 'DE0002')
                           continue;
                       ?>
                         <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>

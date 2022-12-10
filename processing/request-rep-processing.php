@@ -35,5 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $sql = "UPDATE employee SET salary = '$emsala' WHERE employeeID='$emid'";
         $conn->query($sql);
     }
-    header("location: ./index.php?page=request");
+    
+    header("location: ./index.php?page=requestmanage");
 }

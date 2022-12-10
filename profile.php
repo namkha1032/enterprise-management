@@ -56,6 +56,12 @@ if (!isset($_SESSION['username'])) {
             <div class="avatar me-3">
               <img src="<?= $em['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
             </div>
+            <form action="./index.php?page=avatar-upload-processing&emid=<?= $em['employeeID'] ?>" method="post" enctype="multipart/form-data">
+              <input type="file" name="fileToUpload" id="fileToUpload" required>
+              <button type="submit" value="Upload Image" class="btn btn-primary" >
+                Upload your avatar
+              </button>
+            </form>
             <form class="form" style="margin-top: 20px;">
               <div class="row">
                 <div class="col-md-6 col-12">

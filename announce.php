@@ -18,31 +18,13 @@ if (!isset($_SESSION['username'])) {
   <!-- ///////////////////////////////////////////////////////// -->
   <div id="main-content">
     <div class="page-heading">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3 style="display:inline" class="me-4">Announcement</h3>
-            <!-- <p class="text-subtitle text-muted">
-              Navbar will appear on the top of the page.
-            </p> -->
-            <button style="display:inline" data-bs-toggle="modal" data-bs-target="#createAnnounce" class="btn btn-primary mb-2" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
-              Create announcement
-            </button>
-          </div>
-          <!-- <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Layout Vertical Navbar
-                </li>
-              </ol>
-            </nav>
-          </div> -->
+      <div class="page-title mb-2">
+        <h1 style="display:inline" class="me-4">Announcement</h1>
+        <div class="mb-4" <?php if ($_SESSION['role'] != 'officer') echo "style='display:inline'" ?>>
+          <button style="display:inline" data-bs-toggle="modal" data-bs-target="#createAnnounce" class="btn btn-primary rounded-pill mb-4" <?php if ($_SESSION['role'] == 'officer') echo 'hidden' ?>>
+            Create Announce
+          </button>
         </div>
-
       </div>
       <section class="section">
         <?php
@@ -199,7 +181,7 @@ if (!isset($_SESSION['username'])) {
               <div class="col-md-8">
                 <div class="form-group has-icon-left">
                   <div class="position-relative">
-                    <input type="text" name="description" class="form-control" required />
+                    <textarea name="description" class="form-control" id="first-name-icon" cols="30" rows="5" placeholder="Announcement description..." style="resize:none;"></textarea>
                     <div class="form-control-icon">
                       <i class="bi bi-list-columns-reverse"></i>
                     </div>

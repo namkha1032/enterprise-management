@@ -14,6 +14,13 @@
                     info: false,
                     "autoWidth": false
                 });
+                var reqTable = $('.reqTable').DataTable({
+                    scrollY: '550px',
+                    scrollCollapse: true,
+                    paging: false,
+                    info: false,
+                    "autoWidth": false
+                });
             });
         </script>
         <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
@@ -112,28 +119,28 @@
                     },
                 }
                 var taskBarChart = new ApexCharts(document.getElementById("task-bar-chart"), taskBarConfig);
-                
+
                 taskDonutChart.render();
                 taskBarChart.render();
             </script>
         <?php } ?>
-        <?php if (isset($_GET['page']) && $_GET['page'] == 'request2') { ?>
+        <?php if (isset($_GET['page']) && ($_GET['page'] == 'requestmanage' || $_GET['page'] == 'requestme')) { ?>
             <script>
                 // request Pie chart
                 let requestPieConfig = {
-                    series: [70, 30],
-                    labels: ["Male", "Female"],
-                    colors: ["#435ebe", "#55c6e8"],
+                    series: [<?=$pendingAmount?>,<?=$acceptedAmount?>, <?=$rejectedAmount?>],
+                    labels: ["Pending", "Accepted", "Rejected"],
+                    colors: ["#435ebe", "#55c6e8", "#00c6e8"],
                     chart: {
                         type: "pie",
                         width: "100%",
-                        height: "350px",
+                        height: "400px",
                     },
                     legend: {
                         position: "bottom",
                     },
                 }
-                var requestPieChart = new ApexCharts(document.getElementById("request-pie-chart"), requestPieConfig)
+                var requestPieChart = new ApexCharts(document.querySelector(".request-pie-chart"), requestPieConfig)
                 requestPieChart.render();
             </script>
 

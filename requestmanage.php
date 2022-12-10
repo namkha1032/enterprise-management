@@ -71,11 +71,9 @@ if (!isset($_SESSION['username'])) {
     <div id="main-content">
         <div class="page-heading">
             <div class="page-title mb-2">
-                <h1 class="me-4" style="display:inline">Requests</h1>
-
-                <button style="display:inline" data-bs-toggle="modal" data-bs-target="#sendRequest" class="btn btn-primary mb-2" <?php if ($_SESSION['role'] == 'head') echo "hidden" ?>>
-                    Send request
-                </button>
+                <h1 style="display:inline" class="me-4">Request Management</h1>
+                <div class="mb-4">
+                </div>
             </div>
             <section class="section">
                 <div class="row">
@@ -95,8 +93,8 @@ if (!isset($_SESSION['username'])) {
                                                     <a class="nav-link active p-3" id="home-tab" data-bs-toggle="tab" href="#pendingTab" role="tab" aria-controls="home" aria-selected="true">
                                                         <div class="row">
                                                             <div class="col-4 d-flex justify-content-start">
-                                                                <div class="stats-icon purple">
-                                                                    <i class="iconly-boldShow"></i>
+                                                                <div class="stats-icon blue">
+                                                                    <i class="bi-hourglass-bottom"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-8">
@@ -112,8 +110,8 @@ if (!isset($_SESSION['username'])) {
                                                     <a class="nav-link p-3" id="profile-tab" data-bs-toggle="tab" href="#acceptedTab" role="tab" aria-controls="profile" aria-selected="false">
                                                         <div class="row">
                                                             <div class="col-4 d-flex justify-content-start">
-                                                                <div class="stats-icon purple">
-                                                                    <i class="iconly-boldShow"></i>
+                                                                <div class="stats-icon green">
+                                                                    <i class="bi-check-lg"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-8">
@@ -129,8 +127,8 @@ if (!isset($_SESSION['username'])) {
                                                     <a class="nav-link p-3" id="contact-tab" data-bs-toggle="tab" href="#rejectedTab" role="tab" aria-controls="contact" aria-selected="false">
                                                         <div class="row">
                                                             <div class="col-4 d-flex justify-content-start">
-                                                                <div class="stats-icon purple">
-                                                                    <i class="iconly-boldShow"></i>
+                                                                <div class="stats-icon red">
+                                                                    <i class="bi-x-lg"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-8">
@@ -155,6 +153,9 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                     </div>
                                     <div class="card-body">
+                                        <div class="request-pie-chart">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +171,7 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-hover datatable">
+                                        <table class="table table-hover" id="reqTable">
                                             <thead>
                                                 <tr>
                                                     <th>Request ID</th>
@@ -205,7 +206,7 @@ if (!isset($_SESSION['username'])) {
                                                             <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($request['status'] != "pending") echo "hidden" ?>>
+                                                            <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($request['status'] == "pending") echo "hidden" ?>>
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -219,6 +220,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $request['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
@@ -330,7 +334,7 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-hover datatable">
+                                        <table class="table table-hover" id="reqTable">
                                             <thead>
                                                 <tr>
                                                     <th>Request ID</th>
@@ -365,7 +369,7 @@ if (!isset($_SESSION['username'])) {
                                                             <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($request['status'] != "pending") echo "hidden" ?>>
+                                                            <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($request['status'] == "pending") echo "hidden" ?>>
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -379,6 +383,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $request['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
@@ -490,7 +497,7 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-hover datatable">
+                                        <table class="table table-hover" id="reqTable">
                                             <thead>
                                                 <tr>
                                                     <th>Request ID</th>
@@ -525,7 +532,7 @@ if (!isset($_SESSION['username'])) {
                                                             <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($request['status'] != "pending") echo "hidden" ?>>
+                                                            <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($request['status'] == "pending") echo "hidden" ?>>
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -539,6 +546,9 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div class="avatar mb-4 d-flex justify-content-center">
+                                                                        <img src="<?= $request['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                                                                    </div>
                                                                     <form class="form form-horizontal">
                                                                         <div class="row">
                                                                             <div class="col-md-4">
