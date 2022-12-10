@@ -229,29 +229,68 @@ if (!isset($_SESSION['username'])) {
                                                                     <h1 class="modal-title fs-5">Update Task</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
+                                                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST" class="form form-horizontal">
                                                                     <div class="modal-body">
-                                                                        <label for="title">Title</label>
-                                                                        <input id="title" name="title" value="<?= $task['title'] ?>" required>
-                                                                        <br>
-                                                                        <label for="description">Description</label>
-                                                                        <textarea id="description" name="description"><?= $task['description'] ?></textarea>
-                                                                        <br>
-                                                                        <label for="lowerID">Choose officer:</label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <label>Title</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group has-icon-left">
+                                                                                    <div class="position-relative">
+                                                                                        <input type="text" name="title" class="form-control" value="<?= $task['title'] ?>" required />
+                                                                                        <div class="form-control-icon">
+                                                                                            <i class="bi-card-list"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                                                        <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
-                                                                            <?php
-                                                                            foreach ($emArray as $em) {
-                                                                            ?>
-                                                                                <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
-                                                                            <?php
-                                                                            }
-                                                                            ?>
-                                                                        </select>
-                                                                        <br>
-                                                                        <label for="deadline">Deadline</label>
-                                                                        <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
+                                                                            <div class="col-md-4">
+                                                                                <label>Description</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group has-icon-left">
+                                                                                    <div class="position-relative">
+                                                                                        <textarea id="description" name="description" class="form-control" rows="5" cols="10" style="resize:none;" required><?= $task['description'] ?></textarea>
+                                                                                        <div class="form-control-icon">
+                                                                                            <i class="bi-list-columns-reverse"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
+                                                                            <div class="col-md-4">
+                                                                                <label>Deadline</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group has-icon-left">
+                                                                                    <div class="position-relative">
+                                                                                        <input type="date" name="deadline" class="form-control" value="<?= $task['deadline'] ?>" required />
+                                                                                        <div class="form-control-icon">
+                                                                                            <i class="bi-calendar"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-4">
+                                                                                <label>Assign to</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group">
+                                                                                    <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>" style="width:100%;">
+                                                                                        <?php
+                                                                                        foreach ($emArray as $em) {
+                                                                                        ?>
+                                                                                            <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
+                                                                                        <?php
+                                                                                        }
+                                                                                        ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -361,29 +400,68 @@ if (!isset($_SESSION['username'])) {
                                                                     <h1 class="modal-title fs-5">Update Task</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
-                                                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
+                                                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST" class="form form-horizontal">
                                                                     <div class="modal-body">
-                                                                        <label for="title">Title</label>
-                                                                        <input id="title" name="title" value="<?= $task['title'] ?>" required>
-                                                                        <br>
-                                                                        <label for="description">Description</label>
-                                                                        <textarea id="description" name="description"><?= $task['description'] ?></textarea>
-                                                                        <br>
-                                                                        <label for="lowerID">Choose officer:</label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <label>Title</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group has-icon-left">
+                                                                                    <div class="position-relative">
+                                                                                        <input type="text" name="title" class="form-control" value="<?= $task['title'] ?>" required />
+                                                                                        <div class="form-control-icon">
+                                                                                            <i class="bi-card-list"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                                                        <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
-                                                                            <?php
-                                                                            foreach ($emArray as $em) {
-                                                                            ?>
-                                                                                <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
-                                                                            <?php
-                                                                            }
-                                                                            ?>
-                                                                        </select>
-                                                                        <br>
-                                                                        <label for="deadline">Deadline</label>
-                                                                        <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
+                                                                            <div class="col-md-4">
+                                                                                <label>Description</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group has-icon-left">
+                                                                                    <div class="position-relative">
+                                                                                        <textarea id="description" name="description" class="form-control" rows="5" cols="10" style="resize:none;" required><?= $task['description'] ?></textarea>
+                                                                                        <div class="form-control-icon">
+                                                                                            <i class="bi-list-columns-reverse"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
+                                                                            <div class="col-md-4">
+                                                                                <label>Deadline</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group has-icon-left">
+                                                                                    <div class="position-relative">
+                                                                                        <input type="date" name="deadline" class="form-control" value="<?= $task['deadline'] ?>" required />
+                                                                                        <div class="form-control-icon">
+                                                                                            <i class="bi-calendar"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-4">
+                                                                                <label>Assign to</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group">
+                                                                                    <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>" style="width:100%;">
+                                                                                        <?php
+                                                                                        foreach ($emArray as $em) {
+                                                                                        ?>
+                                                                                            <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
+                                                                                        <?php
+                                                                                        }
+                                                                                        ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -493,45 +571,6 @@ if (!isset($_SESSION['username'])) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Modal for updating task -->
-                                            <div class="modal fade" id="updateTask<?= $task['taskID'] ?>" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5">Update Task</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
-                                                            <div class="modal-body">
-                                                                <label for="title">Title</label>
-                                                                <input id="title" name="title" value="<?= $task['title'] ?>" required>
-                                                                <br>
-                                                                <label for="description">Description</label>
-                                                                <textarea id="description" name="description"><?= $task['description'] ?></textarea>
-                                                                <br>
-                                                                <label for="lowerID">Choose officer:</label>
-
-                                                                <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
-                                                                    <?php
-                                                                    foreach ($emArray as $em) {
-                                                                    ?>
-                                                                        <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </select>
-                                                                <br>
-                                                                <label for="deadline">Deadline</label>
-                                                                <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -643,45 +682,6 @@ if (!isset($_SESSION['username'])) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Modal for updating task -->
-                                                    <div class="modal fade" id="updateTask<?= $task['taskID'] ?>" tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5">Update Task</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
-                                                                    <div class="modal-body">
-                                                                        <label for="title">Title</label>
-                                                                        <input id="title" name="title" value="<?= $task['title'] ?>" required>
-                                                                        <br>
-                                                                        <label for="description">Description</label>
-                                                                        <textarea id="description" name="description"><?= $task['description'] ?></textarea>
-                                                                        <br>
-                                                                        <label for="lowerID">Choose officer:</label>
-
-                                                                        <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
-                                                                            <?php
-                                                                            foreach ($emArray as $em) {
-                                                                            ?>
-                                                                                <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
-                                                                            <?php
-                                                                            }
-                                                                            ?>
-                                                                        </select>
-                                                                        <br>
-                                                                        <label for="deadline">Deadline</label>
-                                                                        <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
-
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
                                                 <?php } ?>
                                             </tbody>
                                         </table>
@@ -773,45 +773,6 @@ if (!isset($_SESSION['username'])) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Modal for updating task -->
-                                                    <div class="modal fade" id="updateTask<?= $task['taskID'] ?>" tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5">Update Task</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <form action="./index.php?page=task-update-processing&tid=<?= $task['taskID'] ?>" method="POST">
-                                                                    <div class="modal-body">
-                                                                        <label for="title">Title</label>
-                                                                        <input id="title" name="title" value="<?= $task['title'] ?>" required>
-                                                                        <br>
-                                                                        <label for="description">Description</label>
-                                                                        <textarea id="description" name="description"><?= $task['description'] ?></textarea>
-                                                                        <br>
-                                                                        <label for="lowerID">Choose officer:</label>
-
-                                                                        <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
-                                                                            <?php
-                                                                            foreach ($emArray as $em) {
-                                                                            ?>
-                                                                                <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
-                                                                            <?php
-                                                                            }
-                                                                            ?>
-                                                                        </select>
-                                                                        <br>
-                                                                        <label for="deadline">Deadline</label>
-                                                                        <input id="deadline" name="deadline" type="date" value="<?= $task['deadline'] ?>" required>
-
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
                                                 <?php } ?>
                                             </tbody>
                                         </table>
@@ -937,7 +898,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Assign</button>
                     </div>
                 </form>
             </div>
