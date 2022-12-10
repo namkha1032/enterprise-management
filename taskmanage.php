@@ -261,17 +261,6 @@ if (!isset($_SESSION['username'])) {
                                                                         </div>
                                                                     </form>
                                                                 </div>
-                                                                <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
-                                                                            Check out
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -485,17 +474,7 @@ if (!isset($_SESSION['username'])) {
                                                                         </div>
                                                                     </form>
                                                                 </div>
-                                                                <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
-                                                                            Check out
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -718,16 +697,13 @@ if (!isset($_SESSION['username'])) {
                                                                 </div>
                                                             </form>
                                                         </div>
-                                                        <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                            <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
-                                                                Check in
+                                                        <div class="modal-footer" <?php if ($task['status'] != "pending") echo "hidden" ?>>
+                                                            <a href="./index.php?page=request-rep-processing&rid=<?= $request['requestID'] ?>&rep=accepted&type=<?= $request['type'] ?>" class="btn btn-primary">
+                                                                Accept
                                                             </a>
-                                                            <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
-                                                                <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
-                                                                    Check out
-                                                                </button>
-                                                            </form>
+                                                            <a href="./index.php?page=request-rep-processing&rid=<?= $request['requestID'] ?>&rep=rejected" class="btn btn-warning">
+                                                                Reject
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -883,17 +859,6 @@ if (!isset($_SESSION['username'])) {
                                                                         </div>
                                                                     </form>
                                                                 </div>
-                                                                <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
-                                                                            Check out
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1026,17 +991,6 @@ if (!isset($_SESSION['username'])) {
                                                                                                                                                                                                                                                                                                                     else echo "value=\"" . str_replace("../files_submit/", "", $task['submitFile']) . "\" " . "style=\"cursor:pointer; color:blue;\""; ?> /></a>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
-                                                                            Check out
-                                                                        </button>
                                                                     </form>
                                                                 </div>
                                                             </div>

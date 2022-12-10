@@ -173,13 +173,13 @@ if (!isset($_SESSION['username'])) {
                                                             <a class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewRequest<?= $request['requestID'] ?>">
                                                                 View
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateOtherRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "other") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateOtherRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "other") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateAbsenceRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "absence") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateAbsenceRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "absence") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
                                                                 Update
                                                             </a>
                                                             <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] == 'officer' && $request['status'] != "pending") echo "hidden" ?>>
@@ -517,13 +517,13 @@ if (!isset($_SESSION['username'])) {
                                                             <a class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewRequest<?= $request['requestID'] ?>">
                                                                 View
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateOtherRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "other") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateOtherRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "other") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateAbsenceRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "absence") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateAbsenceRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "absence") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
                                                                 Update
                                                             </a>
                                                             <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] == 'officer' && $request['status'] != "pending") echo "hidden" ?>>
@@ -861,13 +861,13 @@ if (!isset($_SESSION['username'])) {
                                                             <a class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewRequest<?= $request['requestID'] ?>">
                                                                 View
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateOtherRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "other") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateOtherRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "other") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateAbsenceRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "absence") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateAbsenceRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "absence") echo "hidden" ?>>
                                                                 Update
                                                             </a>
-                                                            <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] == 'head' || $request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
+                                                            <a data-bs-toggle="modal" data-bs-target="#updateSalaryRequest<?= $request['requestID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($request['status'] != "pending" || $request['type'] != "salary") echo "hidden" ?>>
                                                                 Update
                                                             </a>
                                                             <a href="./index.php?page=request-delete-processing&rid=<?= $request['requestID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] == 'officer' && $request['status'] != "pending") echo "hidden" ?>>
