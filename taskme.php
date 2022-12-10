@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
         <div class="page-heading">
             <div class="page-title mb-2">
                 <h1 style="display:inline" class="me-4">My Tasks</h1>
-                
+
             </div>
             <section class="section">
                 <div class="row">
@@ -91,41 +91,89 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <dl class="row mt-2">
-                                                                        <dt class="col-sm-4">Task ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['taskID'] ?></dd>
+                                                                    <form class="form form-horizontal">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <label>Task ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['taskID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Title</dt>
-                                                                        <dd class="col-sm-8"><?= $task['title'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Title</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['title'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Description</dt>
-                                                                        <dd class="col-sm-8"><?= $task['description'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Description</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">ID of employee being assigned</dt>
-                                                                        <dd class="col-sm-8"><?= $task['lowerID'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['lowerID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Name of employee being assigned</dt>
-                                                                        <dd class="col-sm-8"><?= $task['name'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer name</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['name'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Status</dt>
-                                                                        <dd class="col-sm-8"><?= $task['status'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Status</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['status'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Assigned date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['assignedDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Assign date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['assignedDate']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Deadline</dt>
-                                                                        <dd class="col-sm-8"><?= $task['deadline'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Due date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['deadline']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check in date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkinDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check in day</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkinDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check out date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check out date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkoutDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Submit file</dt>
-                                                                        <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
-                                                                    </dl>
-
+                                                                            <div class="col-md-4">
+                                                                                <label>Submit file</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                                                                                                                                                                                                    else echo "value=\"" . str_replace("../files_submit/", "", $task['submitFile']) . "\" " . "style=\"cursor:pointer; color:blue;\""; ?> /></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                                                                     <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
@@ -186,41 +234,89 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <dl class="row mt-2">
-                                                                        <dt class="col-sm-4">Task ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['taskID'] ?></dd>
+                                                                    <form class="form form-horizontal">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <label>Task ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['taskID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Title</dt>
-                                                                        <dd class="col-sm-8"><?= $task['title'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Title</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['title'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Description</dt>
-                                                                        <dd class="col-sm-8"><?= $task['description'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Description</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Officer ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['lowerID'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['lowerID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Officer Name</dt>
-                                                                        <dd class="col-sm-8"><?= $task['name'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer name</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['name'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Status</dt>
-                                                                        <dd class="col-sm-8"><?= $task['status'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Status</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['status'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Assigned date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['assignedDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Assign date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['assignedDate']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Deadline</dt>
-                                                                        <dd class="col-sm-8"><?= $task['deadline'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Due date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['deadline']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check in date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkinDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check in day</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkinDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check out date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check out date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkoutDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Submit file</dt>
-                                                                        <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
-                                                                    </dl>
-
+                                                                            <div class="col-md-4">
+                                                                                <label>Submit file</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                                                                                                                                                                                                    else echo "value=\"" . str_replace("../files_submit/", "", $task['submitFile']) . "\" " . "style=\"cursor:pointer; color:blue;\""; ?> /></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                                                                     <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
@@ -296,41 +392,89 @@ if (!isset($_SESSION['username'])) {
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <dl class="row mt-2">
-                                                                <dt class="col-sm-4">Task ID</dt>
-                                                                <dd class="col-sm-8"><?= $task['taskID'] ?></dd>
+                                                            <form class="form form-horizontal">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <label>Task ID</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= $task['taskID'] ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Title</dt>
-                                                                <dd class="col-sm-8"><?= $task['title'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Title</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= $task['title'] ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Description</dt>
-                                                                <dd class="col-sm-8"><?= $task['description'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Description</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Officer ID</dt>
-                                                                <dd class="col-sm-8"><?= $task['lowerID'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Officer ID</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= $task['lowerID'] ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Officer Name</dt>
-                                                                <dd class="col-sm-8"><?= $task['name'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Officer name</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= $task['name'] ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Status</dt>
-                                                                <dd class="col-sm-8"><?= $task['status'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Status</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= $task['status'] ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Assigned date</dt>
-                                                                <dd class="col-sm-8"><?= $task['assignedDate'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Assign date</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['assignedDate']), "d/m/Y") ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Deadline</dt>
-                                                                <dd class="col-sm-8"><?= $task['deadline'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Due date</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['deadline']), "d/m/Y") ?>" />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Check in date</dt>
-                                                                <dd class="col-sm-8"><?= $task['checkinDate'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Check in day</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned") echo "disabled";
+                                                                                                                            else echo "value=\"" . date_format(date_create($task['checkinDate']), "d/m/Y") . "\""; ?> />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Check out date</dt>
-                                                                <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
+                                                                    <div class="col-md-4">
+                                                                        <label>Check out date</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                            else echo "value=\"" . date_format(date_create($task['checkoutDate']), "d/m/Y") . "\""; ?> />
+                                                                    </div>
 
-                                                                <dt class="col-sm-4">Submit file</dt>
-                                                                <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
-                                                            </dl>
-
+                                                                    <div class="col-md-4">
+                                                                        <label>Submit file</label>
+                                                                    </div>
+                                                                    <div class="col-md-8 form-group">
+                                                                        <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                                                                                                                                                                                            else echo "value=\"" . str_replace("../files_submit/", "", $task['submitFile']) . "\" " . "style=\"cursor:pointer; color:blue;\""; ?> /></a>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                         <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                                                             <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
@@ -412,41 +556,89 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <dl class="row mt-2">
-                                                                        <dt class="col-sm-4">Task ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['taskID'] ?></dd>
+                                                                    <form class="form form-horizontal">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <label>Task ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['taskID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Title</dt>
-                                                                        <dd class="col-sm-8"><?= $task['title'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Title</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['title'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Description</dt>
-                                                                        <dd class="col-sm-8"><?= $task['description'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Description</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Officer ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['lowerID'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['lowerID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Officer Name</dt>
-                                                                        <dd class="col-sm-8"><?= $task['name'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer name</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['name'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Status</dt>
-                                                                        <dd class="col-sm-8"><?= $task['status'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Status</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['status'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Assigned date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['assignedDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Assign date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['assignedDate']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Deadline</dt>
-                                                                        <dd class="col-sm-8"><?= $task['deadline'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Due date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['deadline']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check in date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkinDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check in day</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkinDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check out date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check out date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkoutDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Submit file</dt>
-                                                                        <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
-                                                                    </dl>
-
+                                                                            <div class="col-md-4">
+                                                                                <label>Submit file</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                                                                                                                                                                                                    else echo "value=\"" . str_replace("../files_submit/", "", $task['submitFile']) . "\" " . "style=\"cursor:pointer; color:blue;\""; ?> /></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                                                                     <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
@@ -505,41 +697,89 @@ if (!isset($_SESSION['username'])) {
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <dl class="row mt-2">
-                                                                        <dt class="col-sm-4">Task ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['taskID'] ?></dd>
+                                                                    <form class="form form-horizontal">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <label>Task ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['taskID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Title</dt>
-                                                                        <dd class="col-sm-8"><?= $task['title'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Title</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['title'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Description</dt>
-                                                                        <dd class="col-sm-8"><?= $task['description'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Description</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Officer ID</dt>
-                                                                        <dd class="col-sm-8"><?= $task['lowerID'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer ID</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['lowerID'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Officer Name</dt>
-                                                                        <dd class="col-sm-8"><?= $task['name'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Officer name</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['name'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Status</dt>
-                                                                        <dd class="col-sm-8"><?= $task['status'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Status</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= $task['status'] ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Assigned date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['assignedDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Assign date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['assignedDate']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Deadline</dt>
-                                                                        <dd class="col-sm-8"><?= $task['deadline'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Due date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($task['deadline']), "d/m/Y") ?>" />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check in date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkinDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check in day</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkinDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Check out date</dt>
-                                                                        <dd class="col-sm-8"><?= $task['checkoutDate'] ?></dd>
+                                                                            <div class="col-md-4">
+                                                                                <label>Check out date</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                    else echo "value=\"" . date_format(date_create($task['checkoutDate']), "d/m/Y") . "\""; ?> />
+                                                                            </div>
 
-                                                                        <dt class="col-sm-4">Submit file</dt>
-                                                                        <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $task['submitFile'] ?>"><?= str_replace("../files_submit/", "", $task['submitFile']) ?></a></dd>
-                                                                    </dl>
-
+                                                                            <div class="col-md-4">
+                                                                                <label>Submit file</label>
+                                                                            </div>
+                                                                            <div class="col-md-8 form-group">
+                                                                                <a <?php if ($task['status'] !== "assigned" && $task['status'] !== "in progress") echo "href=\"./processing/file-download-processing.php?file=" . $task['submitFile'] . "\""; ?>><input type="text" class="form-control" readonly <?php if ($task['status'] == "assigned" || $task['status'] == "in progress") echo "disabled";
+                                                                                                                                                                                                                                                                                                                    else echo "value=\"" . str_replace("../files_submit/", "", $task['submitFile']) . "\" " . "style=\"cursor:pointer; color:blue;\""; ?> /></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
                                                                     <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned") echo "hidden" ?>>
@@ -561,7 +801,7 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </section>
         </div>
