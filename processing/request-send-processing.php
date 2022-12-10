@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $datestart = '';
   $dateend = '';
   //
-  $sql = "INSERT INTO request (title, description,type, officerID)
+  $sql = "INSERT INTO request (title, description,type, lowerID)
                       VALUES ('$title', '$description','$type', '$uid')";
   $conn->query($sql);
 

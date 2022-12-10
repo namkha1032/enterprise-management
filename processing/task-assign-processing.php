@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
     // $sql = "SELECT * FROM request 
-    // INNER JOIN employee ON request.officerID = employee.employeeID
+    // INNER JOIN employee ON request.lowerID = employee.employeeID
     // LEFT JOIN request_absence ON request.requestID = request_absence.absenceID
     // LEFT JOIN request_salary ON request.requestID = request_salary.salaryID";
     // $requestArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
@@ -32,18 +32,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = validate($_POST['description']);
     echo $description;
     echo "<br>";
-    $officerID = $_POST['officerID'];
-    echo $officerID;
+    $lowerID = $_POST['lowerID'];
+    echo $lowerID;
     echo "<br>";
     
-    $headID = $_SESSION['employeeID'];
-    echo $headID;
+    $upperID = $_SESSION['employeeID'];
+    echo $upperID;
     echo "<br>";
     $deadline = validate($_POST['deadline']);
     echo $deadline;
     echo "<br>";
-    $sql = "INSERT INTO task (title, description, officerID, headID, deadline)
-                VALUES ('$title', '$description', '$officerID','$headID', '$deadline')";
+    $sql = "INSERT INTO task (title, description, lowerID, upperID, deadline)
+                VALUES ('$title', '$description', '$lowerID','$upperID', '$deadline')";
     $conn->query($sql);
     header("location: ./index.php?page=task");
 }

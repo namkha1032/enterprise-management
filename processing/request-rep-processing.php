@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $conn->query($sql);
     if ($type == 'salary' && $rep == 'accepted') {
         $sql = "SELECT * FROM request
-                LEFT JOIN employee ON request.officerID = employee.employeeID
+                LEFT JOIN employee ON request.lowerID = employee.employeeID
                 LEFT JOIN request_absence ON request.requestID = request_absence.absenceID
                 LEFT JOIN request_salary ON request.requestID = request_salary.salaryID
                 WHERE request.requestID = '$rid'";

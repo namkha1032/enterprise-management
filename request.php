@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'])) {
           }
 
           $sql = "SELECT * FROM request 
-                  INNER JOIN employee ON request.officerID = employee.employeeID
+                  INNER JOIN employee ON request.lowerID = employee.employeeID
                   LEFT JOIN request_absence ON request.requestID = request_absence.absenceID
                   LEFT JOIN request_salary ON request.requestID = request_salary.salaryID WHERE request.status='$status'";
           $requestArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);

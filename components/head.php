@@ -132,7 +132,7 @@
                     <?php
                     $deid = $_SESSION['departID'];
                     $sql = "SELECT * FROM announce
-                            JOIN employee ON announce.headID = employee.employeeID
+                            JOIN employee ON announce.upperID = employee.employeeID
                             WHERE announce.departID='$deid'";
                     $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
                     $sql = "SELECT * FROM department WHERE departID='$deid'";
@@ -178,7 +178,7 @@
                                   <dd class="col-sm-8"><?= $an['description'] ?></dd>
 
                                   <dt class="col-sm-4">Officer ID</dt>
-                                  <dd class="col-sm-8"><?= $an['headID'] ?></dd>
+                                  <dd class="col-sm-8"><?= $an['upperID'] ?></dd>
 
                                   <dt class="col-sm-4">Announce date</dt>
                                   <dd class="col-sm-8"><?= $an['announceDate'] ?></dd>

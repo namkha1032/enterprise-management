@@ -32,7 +32,7 @@ $hid = $_SESSION['employeeID'];
 $deid = $_SESSION['departID'];
 $path = "../files_announce/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
 
-$sql = "INSERT INTO announce (title, description, headID, departID, announceFile)
+$sql = "INSERT INTO announce (title, description, upperID, departID, announceFile)
 VALUES ('$title', '$description', '$hid','$deid', '$path')";
 $conn->query($sql);
 header("location: ./index.php?page=announce");
