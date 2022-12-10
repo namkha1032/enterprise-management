@@ -38,16 +38,16 @@ if (!isset($_SESSION['username'])) {
       <section class="section">
         <?php
         foreach ($departmentArray as $department) {
-          if ($department['departID'] == 'DE0001')
+          if ($department['departID'] == 'DE0001' || $department['departID'] == 'DE0002')
             continue;
           $deid = $department['departID'];
-          if ($_SESSION['role'] != 'admin' && $_SESSION['departID'] != $deid)
+          if ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'ceo' && $_SESSION['departID'] != $deid)
             continue;
           $sql = "SELECT * FROM employee 
         INNER JOIN account ON employee.username = account.username WHERE employee.departID='$deid'";
           $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
         ?>
-          <div class="card border border-dark">
+          <div class="card h-100 mb-4">
             <div class="card-header">
               <h4 class="card-title">Department: <?= $department['name'] ?></h4>
             </div>

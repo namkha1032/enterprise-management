@@ -4043,7 +4043,7 @@ body.theme-dark .card {
   --bs-card-spacer-x: 1rem;
   --bs-card-title-spacer-y: 0.5rem;
   --bs-card-border-width: 1px;
-  --bs-card-border-color: rgba(0, 0, 0, 0.125);
+  --bs-card-border-color: rgba(255, 255, 255);
   --bs-card-border-radius: 0.7rem;
   --bs-card-box-shadow: -8px 12px 18px 0 rgba(25, 42, 70, 0.13);
   --bs-card-inner-border-radius: calc(0.7rem - 1px);
@@ -6906,7 +6906,6 @@ body.theme-dark .carousel-caption h5 {
   color: #fff;
 }
 body.theme-dark .card {
-  border: none;
   margin-bottom: 2.2rem;
 }
 body.theme-dark .card.card-statistic {

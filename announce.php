@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
       <section class="section">
         <?php
         $sql = "SELECT * FROM announce
-        JOIN employee ON announce.headID = employee.employeeID
+        JOIN employee ON announce.upperID = employee.employeeID
         WHERE announce.departID='$deid'";
         $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
         $sql = "SELECT * FROM department WHERE departID='$deid'";
@@ -124,7 +124,7 @@ if (!isset($_SESSION['username'])) {
                                 <label>Announcer ID</label>
                               </div>
                               <div class="col-md-8 form-group">
-                                <input type="text" class="form-control" readonly value="<?= $an['headID'] ?>" />
+                                <input type="text" class="form-control" readonly value="<?= $an['upperID'] ?>" />
                               </div>
 
                               <div class="col-md-4">
