@@ -97,36 +97,62 @@ if (!isset($_SESSION['username'])) {
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <dl class="row mt-2">
-                            <dt class="col-sm-4">Announcement ID</dt>
-                            <dd class="col-sm-8"><?= $an['announceID'] ?></dd>
+                          <form class="form form-horizontal">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <label>Announcement ID</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" readonly value="<?= $an['announceID'] ?>" />
+                              </div>
 
-                            <dt class="col-sm-4">Title</dt>
-                            <dd class="col-sm-8"><?= $an['title'] ?></dd>
+                              <div class="col-md-4">
+                                <label>Title</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" readonly value="<?= $an['title'] ?>" />
+                              </div>
 
-                            <dt class="col-sm-4">Description</dt>
-                            <dd class="col-sm-8"><?= $an['description'] ?></dd>
+                              <div class="col-md-4">
+                                <label>Description</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" readonly value="<?= $an['description'] ?>" />
+                              </div>
 
-                            <dt class="col-sm-4">Announcer ID</dt>
-                            <dd class="col-sm-8"><?= $an['upperID'] ?></dd>
+                              <div class="col-md-4">
+                                <label>Announcer ID</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" readonly value="<?= $an['upperID'] ?>" />
+                              </div>
 
-                            <dt class="col-sm-4">Announcer name</dt>
-                            <dd class="col-sm-8"><?= $an['name'] ?></dd>
+                              <div class="col-md-4">
+                                <label>Announcer name</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" readonly value="<?= $an['name'] ?>" />
+                              </div>
 
-                            <dt class="col-sm-4">Announce date</dt>
-                            <dd class="col-sm-8"><?= $an['announceDate'] ?></dd>
+                              <div class="col-md-4">
+                                <label>Annonuce date</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" readonly value="<?= date_format(date_create($an['announceDate']), "d/m/Y") ?>" />
+                              </div>
 
-                            <dt class="col-sm-4">Announce file</dt>
-                            <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $an['announceFile'] ?>"><?= str_replace("../files_announce/", "", $an['announceFile']) ?></a></dd>
-
-
-                          </dl>
+                              <div class="col-md-4">
+                                <label>Announce file</label>
+                              </div>
+                              <div class="col-md-8 form-group">
+                                <a href="./processing/file-download-processing.php?file=<?= $an['announceFile'] ?>"><input type="text" class="form-control" readonly value="<?= str_replace("../files_announce/", "", $an['announceFile']) ?>" style="cursor:pointer; color:blue;" /></a>
+                              </div>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
                   </div>
-
-
                 <?php } ?>
               </tbody>
             </table>
@@ -150,16 +176,46 @@ if (!isset($_SESSION['username'])) {
           <h1 class="modal-title fs-5">Create announce</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="./index.php?page=announce-create-processing" method="POST" enctype="multipart/form-data">
+        <form action="./index.php?page=announce-create-processing" method="POST" enctype="multipart/form-data" class="form form-horizontal">
           <div class="modal-body">
-            <label for="title">Title</label>
-            <input id="title" name="title" required>
-            <br>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" required></textarea>
-            <br>
-            <label for="fileToUpload">Announce file</label>
-            <input type="file" name="fileToUpload" id="fileToUpload" required>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Title</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="title" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-card-list"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Description</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group has-icon-left">
+                  <div class="position-relative">
+                    <input type="text" name="description" class="form-control" required />
+                    <div class="form-control-icon">
+                      <i class="bi bi-list-columns-reverse"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label>Announce file</label>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <input type="file" name="fileToUpload" class="form-control" required />
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Create</button>
