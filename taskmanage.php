@@ -9,15 +9,25 @@ if (!isset($_SESSION['username'])) {
     $deid = $_SESSION['departID'];
     $sql = "UPDATE task SET status = 'overdue' WHERE deadline<NOW()";
     $conn->query($sql);
-    $sql = "SELECT * FROM employee
-        INNER JOIN account ON employee.username = account.username WHERE departID = '$deid'";
-    $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+    $emArray = array();
+    if ($_SESSION['role'] == 'head'){
+        $sql = "SELECT * FROM employee
+                INNER JOIN account ON employee.username = account.username 
+                WHERE departID = '$deid'";
+        $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+    }
+    if ($_SESSION['role'] == 'ceo'){
+        $sql = "SELECT * FROM employee
+            INNER JOIN account ON employee.username = account.username 
+            WHERE account.role = 'head'";
+        $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+    }
 ?>
     <div id="main-content">
         <div class="page-heading">
             <div class="page-title mb-2">
                 <h1 style="display:inline" class="me-4">Task Assignment Section</h1>
-                <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary rounded-pill mb-4" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary rounded-pill mb-4">
                     Assign task
                 </button>
             </div>
@@ -30,14 +40,12 @@ if (!isset($_SESSION['username'])) {
                             </div>
                             <div class="card-body">
                                 <?php
-
                                 $amountAssigned = 0;
                                 $amountInProgress = 0;
                                 $amountPending = 0;
                                 $amountCompleted = 0;
                                 $amountOverdue = 0;
-                                if ($_SESSION['role'] == 'officer') {
-                                    $emid = $_SESSION['employeeID'];
+                                if ($_SESSION['role'] == 'ceo') {
                                     $amountAssigned = $conn->query("SELECT * FROM task WHERE status = 'assigned' AND lowerID = '$emid'")->num_rows;
                                     $amountInProgress = $conn->query("SELECT * FROM task WHERE status = 'in progress' AND lowerID = '$emid'")->num_rows;
                                     $amountPending = $conn->query("SELECT * FROM task WHERE status = 'pending' AND lowerID = '$emid'")->num_rows;

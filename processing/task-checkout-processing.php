@@ -32,6 +32,6 @@ $conn->query($sql);
 $path = "../files_submit/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
 $sql = "UPDATE task SET submitFile = '$path' WHERE taskID='$tid'";
 $conn->query($sql);
-header("location: ./index.php?page=task");
+header("location: ./index.php?page=taskme");
 
 ?>

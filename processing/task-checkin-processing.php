@@ -13,5 +13,5 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $conn->query($sql);
     $sql="UPDATE task SET checkinDate = NOW() WHERE taskID='$tid'";
     $conn->query($sql);
-    header("location: ./index.php?page=task");
+    header("location: ./index.php?page=taskme");
 }

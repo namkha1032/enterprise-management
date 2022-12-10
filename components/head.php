@@ -73,9 +73,9 @@
             </li>
 
             <li class="sidebar-item <?php if ($_GET['page'] == 'task') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin') echo "hidden" ?>>
-              <a href="./index.php?page=task" class="sidebar-link">
+              <a href="./index.php?page=taskmanage" class="sidebar-link">
                 <i class="bi bi-clipboard-check-fill"></i>
-                <span>Tasks</span>
+                <span>Task Management</span>
               </a>
             </li>
 
