@@ -36,5 +36,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->query($sql);
     $sql = "UPDATE task SET deadline = '$deadline' WHERE taskID='$tid'";
     $conn->query($sql);
-    header("location: ./index.php?page=task");
+    header("location: ./index.php?page=taskmanage");
 }

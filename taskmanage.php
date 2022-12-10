@@ -10,17 +10,87 @@ if (!isset($_SESSION['username'])) {
     $sql = "UPDATE task SET status = 'overdue' WHERE deadline<NOW()";
     $conn->query($sql);
     $emArray = array();
-    if ($_SESSION['role'] == 'head'){
+    $amountAssigned = 0;
+    $amountInProgress = 0;
+    $amountPending = 0;
+    $amountCompleted = 0;
+    $amountOverdue = 0;
+    $arrayAssigned = array();
+    $arrayInProgress = array();
+    $arrayPending = array();
+    $arrayCompleted = array();
+    $arrayOverdue = array();
+    if ($_SESSION['role'] == 'head') {
         $sql = "SELECT * FROM employee
                 INNER JOIN account ON employee.username = account.username 
-                WHERE departID = '$deid'";
+                WHERE departID = '$deid' AND account.role = 'officer'";
         $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'assigned' AND account.role = 'officer' AND employee.departID = '$deid'");
+        $amountAssigned = $result->num_rows;
+        $arrayAssigned = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'in progress' AND account.role = 'officer' AND employee.departID = '$deid'");
+        $amountInProgress = $result->num_rows;
+        $arrayInProgress = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'pending' AND account.role = 'officer' AND employee.departID = '$deid'");
+        $amountPending = $result->num_rows;
+        $arrayPending = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'completed' AND account.role = 'officer' AND employee.departID = '$deid'");
+        $amountCompleted = $result->num_rows;
+        $arrayCompleted = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'overdue' AND account.role = 'officer' AND employee.departID = '$deid'");
+        $amountOverdue = $result->num_rows;
+        $arrayOverdue = $result->fetch_all(MYSQLI_ASSOC);
     }
-    if ($_SESSION['role'] == 'ceo'){
+    if ($_SESSION['role'] == 'ceo') {
         $sql = "SELECT * FROM employee
             INNER JOIN account ON employee.username = account.username 
             WHERE account.role = 'head'";
         $emArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'assigned' AND account.role = 'head'");
+        $amountAssigned = $result->num_rows;
+        $arrayAssigned = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'in progress' AND account.role = 'head'");
+        $amountInProgress = $result->num_rows;
+        $arrayInProgress = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'pending' AND account.role = 'head'");
+        $amountPending = $result->num_rows;
+        $arrayPending = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'completed' AND account.role = 'head'");
+        $amountCompleted = $result->num_rows;
+        $arrayCompleted = $result->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query("SELECT * FROM task
+                                    INNER JOIN employee ON task.lowerID = employee.employeeID
+                                    INNER JOIN account ON account.username = employee.username
+                                    WHERE task.status = 'overdue' AND account.role = 'head'");
+        $amountOverdue = $result->num_rows;
+        $arrayOverdue = $result->fetch_all(MYSQLI_ASSOC);
     }
 ?>
     <div id="main-content">
@@ -39,26 +109,6 @@ if (!isset($_SESSION['username'])) {
                                 <h3 class="card-title">Chart</h3>
                             </div>
                             <div class="card-body">
-                                <?php
-                                $amountAssigned = 0;
-                                $amountInProgress = 0;
-                                $amountPending = 0;
-                                $amountCompleted = 0;
-                                $amountOverdue = 0;
-                                if ($_SESSION['role'] == 'ceo') {
-                                    $amountAssigned = $conn->query("SELECT * FROM task WHERE status = 'assigned' AND lowerID = '$emid'")->num_rows;
-                                    $amountInProgress = $conn->query("SELECT * FROM task WHERE status = 'in progress' AND lowerID = '$emid'")->num_rows;
-                                    $amountPending = $conn->query("SELECT * FROM task WHERE status = 'pending' AND lowerID = '$emid'")->num_rows;
-                                    $amountCompleted = $conn->query("SELECT * FROM task WHERE status = 'completed' AND lowerID = '$emid'")->num_rows;
-                                    $amountOverdue = $conn->query("SELECT * FROM task WHERE status = 'overdue' AND lowerID = '$emid'")->num_rows;
-                                } else {
-                                    $amountAssigned = $conn->query("SELECT * FROM task WHERE status = 'assigned'")->num_rows;
-                                    $amountInProgress = $conn->query("SELECT * FROM task WHERE status = 'in progress'")->num_rows;
-                                    $amountPending = $conn->query("SELECT * FROM task WHERE status = 'pending'")->num_rows;
-                                    $amountCompleted = $conn->query("SELECT * FROM task WHERE status = 'completed'")->num_rows;
-                                    $amountOverdue = $conn->query("SELECT * FROM task WHERE status = 'overdue'")->num_rows;
-                                }
-                                ?>
                                 <div id="chart-visitors-profile"></div>
                             </div>
                         </div>
@@ -83,11 +133,7 @@ if (!isset($_SESSION['username'])) {
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="assignTab" role="tabpanel" aria-labelledby="home-tab">
-                                        <?php
-                                        $sql = "SELECT * FROM task 
-                                                    INNER JOIN employee ON task.lowerID = employee.employeeID WHERE employee.departID = '$deid' AND task.status = 'assigned'";
-                                        $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                        ?>
+
                                         <table class="table table-hover datatable">
                                             <thead>
                                                 <tr>
@@ -99,10 +145,8 @@ if (!isset($_SESSION['username'])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($taskArray as $task) {
+                                                foreach ($arrayAssigned as $task) {
                                                     $emID = $task['lowerID'];
-                                                    if ($_SESSION['username'] != $task['username'] && $_SESSION['role'] == "officer")
-                                                        continue;
                                                 ?>
                                                     <?php $tid = $task['taskID'] ?>
                                                     <tr>
@@ -113,10 +157,10 @@ if (!isset($_SESSION['username'])) {
                                                             <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                                                                 View
                                                             </button>
-                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
+                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
                                                                 Update
                                                             </button>
-                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger">
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -167,17 +211,10 @@ if (!isset($_SESSION['username'])) {
 
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
-                                                                    </form>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Reject
                                                                     </a>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Approve
                                                                     </a>
                                                                 </div>
@@ -205,8 +242,6 @@ if (!isset($_SESSION['username'])) {
                                                                         <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
                                                                             <?php
                                                                             foreach ($emArray as $em) {
-                                                                                if ($em['role'] == 'head')
-                                                                                    continue;
                                                                             ?>
                                                                                 <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
                                                                             <?php
@@ -230,11 +265,6 @@ if (!isset($_SESSION['username'])) {
                                         </table>
                                     </div>
                                     <div class="tab-pane fade" id="progressTab" role="tabpanel" aria-labelledby="profile-tab">
-                                        <?php
-                                        $sql = "SELECT * FROM task 
-                                                    INNER JOIN employee ON task.lowerID = employee.employeeID WHERE employee.departID = '$deid' AND task.status = 'in progress'";
-                                        $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                        ?>
                                         <table class="table table-hover datatable">
                                             <thead>
                                                 <tr>
@@ -246,10 +276,8 @@ if (!isset($_SESSION['username'])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($taskArray as $task) {
+                                                foreach ($arrayInProgress as $task) {
                                                     $emID = $task['lowerID'];
-                                                    if ($_SESSION['username'] != $task['username'] && $_SESSION['role'] == "officer")
-                                                        continue;
                                                 ?>
                                                     <?php $tid = $task['taskID'] ?>
                                                     <tr>
@@ -260,10 +288,10 @@ if (!isset($_SESSION['username'])) {
                                                             <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                                                                 View
                                                             </button>
-                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
+                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
                                                                 Update
                                                             </button>
-                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger">
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -314,17 +342,11 @@ if (!isset($_SESSION['username'])) {
 
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
-                                                                    </form>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Reject
                                                                     </a>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Approve
                                                                     </a>
                                                                 </div>
@@ -352,8 +374,6 @@ if (!isset($_SESSION['username'])) {
                                                                         <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
                                                                             <?php
                                                                             foreach ($emArray as $em) {
-                                                                                if ($em['role'] == 'head')
-                                                                                    continue;
                                                                             ?>
                                                                                 <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
                                                                             <?php
@@ -386,11 +406,6 @@ if (!isset($_SESSION['username'])) {
                                 <h3 class="card-title">Pending Tasks</h3>
                             </div>
                             <div class="card-body">
-                                <?php
-                                $sql = "SELECT * FROM task 
-                                                    INNER JOIN employee ON task.lowerID = employee.employeeID WHERE employee.departID = '$deid' AND task.status = 'pending'";
-                                $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                ?>
                                 <table class="table table-hover datatable">
                                     <thead>
                                         <tr>
@@ -402,10 +417,8 @@ if (!isset($_SESSION['username'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        foreach ($taskArray as $task) {
+                                        foreach ($arrayPending as $task) {
                                             $emID = $task['lowerID'];
-                                            if ($_SESSION['username'] != $task['username'] && $_SESSION['role'] == "officer")
-                                                continue;
                                         ?>
                                             <?php $tid = $task['taskID'] ?>
                                             <tr>
@@ -416,10 +429,10 @@ if (!isset($_SESSION['username'])) {
                                                     <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                                                         View
                                                     </button>
-                                                    <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
+                                                    <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
                                                         Update
                                                     </button>
-                                                    <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                                                    <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger">
                                                         Delete
                                                     </a>
                                                 </td>
@@ -470,17 +483,10 @@ if (!isset($_SESSION['username'])) {
 
                                                         </div>
                                                         <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                            <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
-                                                                Check in
-                                                            </a>
-                                                            <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
-                                                                <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
-                                                            </form>
-                                                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                 Reject
                                                             </a>
-                                                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                 Approve
                                                             </a>
                                                         </div>
@@ -508,8 +514,6 @@ if (!isset($_SESSION['username'])) {
                                                                 <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
                                                                     <?php
                                                                     foreach ($emArray as $em) {
-                                                                        if ($em['role'] == 'head')
-                                                                            continue;
                                                                     ?>
                                                                         <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
                                                                     <?php
@@ -554,11 +558,6 @@ if (!isset($_SESSION['username'])) {
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="completeTab" role="tabpanel" aria-labelledby="home-tab">
-                                        <?php
-                                        $sql = "SELECT * FROM task 
-                                                    INNER JOIN employee ON task.lowerID = employee.employeeID WHERE employee.departID = '$deid' AND task.status = 'completed'";
-                                        $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                        ?>
                                         <table class="table table-hover datatable">
                                             <thead>
                                                 <tr>
@@ -570,12 +569,8 @@ if (!isset($_SESSION['username'])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($taskArray as $task) {
-                                                    $emID = $task['lowerID'];
-                                                    if ($_SESSION['username'] != $task['username'] && $_SESSION['role'] == "officer")
-                                                        continue;
+                                                foreach ($arrayCompleted as $task) {
                                                 ?>
-                                                    <?php $tid = $task['taskID'] ?>
                                                     <tr>
                                                         <td><?= $task['taskID'] ?></td>
                                                         <td><?= $task['title'] ?></td>
@@ -584,10 +579,10 @@ if (!isset($_SESSION['username'])) {
                                                             <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                                                                 View
                                                             </button>
-                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
+                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
                                                                 Update
                                                             </button>
-                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger">
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -638,17 +633,10 @@ if (!isset($_SESSION['username'])) {
 
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
-                                                                    </form>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Reject
                                                                     </a>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Approve
                                                                     </a>
                                                                 </div>
@@ -676,8 +664,6 @@ if (!isset($_SESSION['username'])) {
                                                                         <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
                                                                             <?php
                                                                             foreach ($emArray as $em) {
-                                                                                if ($em['role'] == 'head')
-                                                                                    continue;
                                                                             ?>
                                                                                 <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
                                                                             <?php
@@ -701,11 +687,6 @@ if (!isset($_SESSION['username'])) {
                                         </table>
                                     </div>
                                     <div class="tab-pane fade" id="overdueTab" role="tabpanel" aria-labelledby="profile-tab">
-                                        <?php
-                                        $sql = "SELECT * FROM task 
-                                                    INNER JOIN employee ON task.lowerID = employee.employeeID WHERE employee.departID = '$deid' AND task.status = 'overdue'";
-                                        $taskArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
-                                        ?>
                                         <table class="table table-hover datatable">
                                             <thead>
                                                 <tr>
@@ -717,10 +698,7 @@ if (!isset($_SESSION['username'])) {
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($taskArray as $task) {
-                                                    $emID = $task['lowerID'];
-                                                    if ($_SESSION['username'] != $task['username'] && $_SESSION['role'] == "officer")
-                                                        continue;
+                                                foreach ($arrayOverdue as $task) {
                                                 ?>
                                                     <?php $tid = $task['taskID'] ?>
                                                     <tr>
@@ -731,10 +709,10 @@ if (!isset($_SESSION['username'])) {
                                                             <button class="btn btn-sm rounded-pill btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewTask<?= $task['taskID'] ?>">
                                                                 View
                                                             </button>
-                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($_SESSION['role'] != 'head' || $task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
+                                                            <button data-bs-toggle="modal" data-bs-target="#updateTask<?= $task['taskID'] ?>" class=" btn btn-sm rounded-pill btn-outline-warning" <?php if ($task['status'] == "completed" || $task['status'] == "overdue" || $task['status'] == "pending") echo "hidden" ?>>
                                                                 Update
                                                             </button>
-                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger" <?php if ($_SESSION['role'] != 'head') echo "hidden" ?>>
+                                                            <a href="./index.php?page=task-delete-processing&tid=<?= $task['taskID'] ?>" class="btn btn-sm rounded-pill btn-outline-danger">
                                                                 Delete
                                                             </a>
                                                         </td>
@@ -785,17 +763,10 @@ if (!isset($_SESSION['username'])) {
 
                                                                 </div>
                                                                 <div class="modal-footer" <?php if ($task['status'] == "completed" || $task['status'] == "overdue") echo "hidden" ?>>
-                                                                    <a href="./index.php?page=task-checkin-processing&tid=<?= $task['taskID'] ?>" class="btn btn-primary" <?php if ($task['status'] != "assigned" || $_SESSION['role'] == "head") echo "hidden" ?>>
-                                                                        Check in
-                                                                    </a>
-                                                                    <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
-                                                                        <input type="file" name="fileToUpload" id="fileToUpload" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress" || $_SESSION['role'] == "head") echo "hidden" ?>>Check out</button>
-                                                                    </form>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=reject" class="btn btn-danger" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Reject
                                                                     </a>
-                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending" || $_SESSION['role'] == "officer") echo "hidden" ?>>
+                                                                    <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=approve" class="btn btn-primary" <?php if ($task['status'] != "pending") echo "hidden" ?>>
                                                                         Approve
                                                                     </a>
                                                                 </div>
@@ -823,8 +794,6 @@ if (!isset($_SESSION['username'])) {
                                                                         <select name="lowerID" id="lowerID" value="<?= $task['name'] ?>">
                                                                             <?php
                                                                             foreach ($emArray as $em) {
-                                                                                if ($em['role'] == 'head')
-                                                                                    continue;
                                                                             ?>
                                                                                 <option value="<?= $em['employeeID'] ?>"> <?= $em['employeeID'] ?> <?= $em['name'] ?></option>
                                                                             <?php
@@ -851,7 +820,7 @@ if (!isset($_SESSION['username'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mb-4" <?php if ($_SESSION['role'] == 'officer') echo 'hidden' ?>>
+                    <div class="col-12 mb-4">
                         <div class="card h-100">
                             <div class="card-header">
                                 <h3 class="card-title">Chart</h3>
@@ -862,8 +831,6 @@ if (!isset($_SESSION['username'])) {
                             $completedArray = array();
                             $overdueArray = array();
                             foreach ($emArray as $em) {
-                                if ($em['role'] == 'head')
-                                    continue;
                                 $emid = $em['employeeID'];
                                 $assignAmount = $conn->query("SELECT * FROM task WHERE status = 'assigned' AND lowerID = '$emid'")->num_rows;
                                 $progressAmount = $conn->query("SELECT * FROM task WHERE status = 'in progress' AND lowerID = '$emid'")->num_rows;
@@ -941,8 +908,6 @@ if (!isset($_SESSION['username'])) {
                                             <option disabled selected hidden value="">This task is assigned to...</option>
                                             <?php
                                             foreach ($emArray as $em) {
-                                                if ($em['role'] == 'head')
-                                                    continue;
                                             ?>
                                                 <option value="<?= $em['employeeID'] ?>"><?= $em['name'] ?></option>
                                             <?php

@@ -45,5 +45,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO task (title, description, lowerID, upperID, deadline)
                 VALUES ('$title', '$description', '$lowerID','$upperID', '$deadline')";
     $conn->query($sql);
-    header("location: ./index.php?page=task");
+    header("location: ./index.php?page=taskmanage");
 }
