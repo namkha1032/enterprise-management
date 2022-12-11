@@ -81,7 +81,7 @@
 
             <li class="sidebar-item <?php if ($_GET['page'] == 'taskmanage') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'officer') echo "hidden" ?>>
               <a href="./index.php?page=taskmanage" class="sidebar-link">
-                <i class="bi bi-clipboard-check-fill"></i>
+                <i class="fa-solid fa-list-check"></i>
                 <span>Task Management</span>
               </a>
             </li>
@@ -89,7 +89,7 @@
 
             <li class="sidebar-item <?php if ($_GET['page'] == 'requestme') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'ceo') echo "hidden" ?>>
               <a href="./index.php?page=requestme" class="sidebar-link">
-                <i class="bi bi-pencil-fill"></i>
+                <i class="fa-solid fa-pen-to-square"></i>
                 <span>My Requests</span>
               </a>
             </li>
@@ -97,7 +97,7 @@
 
             <li class="sidebar-item <?php if ($_GET['page'] == 'requestmanage') echo "active" ?>" <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'officer') echo "hidden" ?>>
               <a href="./index.php?page=requestmanage" class="sidebar-link">
-                <i class="bi bi-pencil-fill"></i>
+                <i class="fa-solid fa-scroll"></i>
                 <span>Requests Management</span>
               </a>
             </li>

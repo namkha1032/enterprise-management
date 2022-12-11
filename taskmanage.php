@@ -197,7 +197,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
@@ -410,7 +410,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
@@ -633,7 +633,7 @@ if (!isset($_SESSION['username'])) {
                                                                         <label>Description</label>
                                                                     </div>
                                                                     <div class="col-md-8 form-group">
-                                                                        <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                        <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-4">
@@ -795,7 +795,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
@@ -929,7 +929,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">

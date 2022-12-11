@@ -115,7 +115,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
@@ -261,7 +261,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
@@ -331,7 +331,7 @@ if (!isset($_SESSION['username'])) {
                                                                     </a>
                                                                     <form action="./index.php?page=task-checkout-processing&tid=<?= $task['taskID'] ?>" method="post" enctype="multipart/form-data">
                                                                         <input type="file" name="fileToUpload" id="fileToUpload formFile" class="form-control" <?php if ($task['status'] != "in progress") echo "hidden" ?> required>
-                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
+                                                                        <button type="submit" value="Upload Image" class="btn btn-primary" style="margin-top:15px;" <?php if ($task['status'] != "in progress") echo "hidden" ?>>
                                                                             Check out
                                                                         </button>
                                                                     </form>
@@ -422,7 +422,7 @@ if (!isset($_SESSION['username'])) {
                                                                         <label>Description</label>
                                                                     </div>
                                                                     <div class="col-md-8 form-group">
-                                                                        <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                        <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                     </div>
 
                                                                     <div class="col-md-4">
@@ -589,7 +589,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
@@ -733,7 +733,7 @@ if (!isset($_SESSION['username'])) {
                                                                                 <label>Description</label>
                                                                             </div>
                                                                             <div class="col-md-8 form-group">
-                                                                                <input type="text" class="form-control" readonly value="<?= $task['description'] ?>" />
+                                                                                <textarea cols="30" rows="5" class="form-control" readonly style="resize:none;"><?= $task['description'] ?></textarea>
                                                                             </div>
 
                                                                             <div class="col-md-4">
