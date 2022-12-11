@@ -22,7 +22,7 @@ session_start();
           <div class="auth-logo">
             <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" style="width:100px; height:100px;" /></a>
           </div>
-          <h1 class="auth-title" style="margin-top: -80px;">Log in.</h1>
+          <h1 class="auth-title" style="margin-top: -80px;">Log in</h1>
 
           <form action="./processing/login-processing.php" method="POST">
             <div class="form-group position-relative has-icon-left mb-4">
