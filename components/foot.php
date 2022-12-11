@@ -15,7 +15,7 @@
                     "autoWidth": false
                 });
                 var reqTable = $('.reqTable').DataTable({
-                    scrollY: '550px',
+                    scrollY: '650px',
                     scrollCollapse: true,
                     paging: false,
                     info: false,
@@ -30,7 +30,7 @@
                 let taskDonutConfig = {
                     series: [<?= $amountAssigned ?>, <?= $amountInProgress ?>, <?= $amountPending ?>, <?= $amountCompleted ?>, <?= $amountOverdue ?>],
                     labels: ["Assigned", "In Progress", "Pending", "Completed", "Overdue", ],
-                    colors: ["#435ebe", "#55c6e8", "#00c6e8", "#0077e8", "#0010e8"],
+                    colors: ["#ffce54", "#ac92eb", "#4fc1e8", "#a0d568", "#ed5564"],
                     chart: {
                         type: "donut",
                         width: "100%",
@@ -57,7 +57,7 @@
                     },
                 }
                 var taskDonutChart = new ApexCharts(
-                    document.getElementById("chart-visitors-profile"),
+                    document.getElementById("task-donut-chart"),
                     taskDonutConfig
                 )
                 // Task bar chart
@@ -76,7 +76,7 @@
                         name: ['Overdue'],
                         data: dataOverdueArray
                     }],
-                    colors: ["#FAD501", "#13E000", "#F05800"],
+                    colors: ["#4fc1e8", "#a0d568", "#ed5564"],
                     chart: {
                         type: 'bar',
                         height: 430
@@ -130,14 +130,22 @@
                 let requestPieConfig = {
                     series: [<?=$pendingAmount?>,<?=$acceptedAmount?>, <?=$rejectedAmount?>],
                     labels: ["Pending", "Accepted", "Rejected"],
-                    colors: ["#435ebe", "#55c6e8", "#00c6e8"],
+                    colors: ["#57cbeb", "#5ddab4", "#ff7876"],
                     chart: {
                         type: "pie",
                         width: "100%",
                         height: "400px",
                     },
                     legend: {
+                        fontSize:"20px",
                         position: "bottom",
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '20px',
+                            colors: ['#fff']
+                        }
                     },
                 }
                 var requestPieChart = new ApexCharts(document.querySelector(".request-pie-chart"), requestPieConfig)

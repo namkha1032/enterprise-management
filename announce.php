@@ -28,16 +28,23 @@ if (!isset($_SESSION['username'])) {
       </div>
       <section class="section">
         <?php
+        $anArray = array();
+        $departName = '';
+        if ($_SESSION['role'] == 'ceo'){
+          $anArray = $conn->query('SELECT * FROM announce INNER JOIN employee ON announce.upperID = employee.employeeID ORDER BY announce.announceID DESC')->fetch_all(MYSQLI_ASSOC);
+          $departName = 'all';
+        }
         $sql = "SELECT * FROM announce
         JOIN employee ON announce.upperID = employee.employeeID
-        WHERE announce.departID='$deid'";
+        WHERE announce.departID='$deid' OR  announce.departID = 'DE0001'
+        ORDER BY announce.announceID DESC";
         $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
         $sql = "SELECT * FROM department WHERE departID='$deid'";
         $departName = $conn->query($sql)->fetch_all(MYSQLI_ASSOC)[0]['name'];
         ?>
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Announcements from department <?= $departName ?></h4>
+            <h3 class="card-title">Announcements from department <?= $departName ?></h3>
           </div>
           <div class="card-body">
             <table class="table table-hover datatable">
@@ -79,6 +86,9 @@ if (!isset($_SESSION['username'])) {
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                          <div class="avatar mb-4 d-flex justify-content-center">
+                            <img src="<?= $an['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
+                          </div>
                           <form class="form form-horizontal">
                             <div class="row">
                               <div class="col-md-4">
@@ -99,7 +109,7 @@ if (!isset($_SESSION['username'])) {
                                 <label>Description</label>
                               </div>
                               <div class="col-md-8 form-group">
-                                <input type="text" class="form-control" readonly value="<?= $an['description'] ?>" />
+                                <textarea style="height:300px" class="form-control" readonly><?= $an['description'] ?></textarea>
                               </div>
 
                               <div class="col-md-4">

@@ -171,7 +171,7 @@ if (!isset($_SESSION['username'])) {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-hover" id="reqTable">
+                                        <table class="table table-hover reqTable">
                                             <thead>
                                                 <tr>
                                                     <th>Request ID</th>

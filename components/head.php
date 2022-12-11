@@ -130,16 +130,25 @@
                   <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                     <i class="bi bi-bell bi-sub fs-4"></i>
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="dropdownMenuButton">
+                  <ul class="dropdown-menu dropdown-menu-end notification-dropdown border border-dark" aria-labelledby="dropdownMenuButton">
                     <li class="dropdown-header">
                       <h6>Notifications</h6>
                     </li>
                     <?php
                     $deid = $_SESSION['departID'];
-                    $sql = "SELECT * FROM announce
+                    $anArray = array();
+                    if ($_SESSION['role'] == 'ceo') {
+                      $sql = "SELECT * FROM announce
                             JOIN employee ON announce.upperID = employee.employeeID
-                            WHERE announce.departID='$deid'";
-                    $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+                            ORDER BY announce.announceID DESC";
+                      $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+                    } else {
+                      $sql = "SELECT * FROM announce
+                              JOIN employee ON announce.upperID = employee.employeeID
+                              WHERE announce.departID='$deid' OR announce.departID='DE0001'
+                              ORDER BY announce.announceID DESC";
+                      $anArray = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+                    }
                     $sql = "SELECT * FROM department WHERE departID='$deid'";
                     $departName = $conn->query($sql)->fetch_all(MYSQLI_ASSOC)[0]['name'];
                     ?>
@@ -150,8 +159,10 @@
 
                         <li class="dropdown-item notification-item">
                           <a class="d-flex align-items-center" role="button">
-                            <div class="notification-icon bg-primary">
-                              <i class="bi bi-info-circle-fill" style="font-size: 24.5px;"></i>
+                            <div class="notification-icon">
+                              <div class="avatar me-3">
+                                <img src="<?= $an['avatar'] ?>" style="object-fit: cover;width:50px; height:50px" alt="" srcset="" />
+                              </div><?= $an['name'] ?>
                             </div>
                             <div class=" notification-text ms-4">
                               <p class="notification-title font-bold">
@@ -164,39 +175,6 @@
                           </a>
                         </li>
 
-                        <!-- <div class="modal fade" id="viewAn<?= $an['announceID'] ?>" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h1 class="modal-title fs-5">Announcement info</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <dl class="row mt-2">
-                                  <dt class="col-sm-4">Announcement ID</dt>
-                                  <dd class="col-sm-8"><?= $an['announceID'] ?></dd>
-
-                                  <dt class="col-sm-4">Title</dt>
-                                  <dd class="col-sm-8"><?= $an['title'] ?></dd>
-
-                                  <dt class="col-sm-4">Description</dt>
-                                  <dd class="col-sm-8"><?= $an['description'] ?></dd>
-
-                                  <dt class="col-sm-4">Officer ID</dt>
-                                  <dd class="col-sm-8"><?= $an['upperID'] ?></dd>
-
-                                  <dt class="col-sm-4">Announce date</dt>
-                                  <dd class="col-sm-8"><?= $an['announceDate'] ?></dd>
-
-                                  <dt class="col-sm-4">Announce file</dt>
-                                  <dd class="col-sm-8"><a href="./processing/file-download-processing.php?file=<?= $an['announceFile'] ?>"><?= str_replace("../files_announce/", "", $an['announceFile']) ?></a></dd>
-
-
-                                </dl>
-                              </div>
-                            </div>
-                          </div>
-                        </div> -->
                       <?php } ?>
                     </div>
                     <li>
@@ -216,7 +194,11 @@
                     </div>
                     <div class="user-img d-flex align-items-center">
                       <div class="avatar avatar-md">
-                        <img src="<?= $_SESSION['avatar'] ?>" style="object-fit: cover;" />
+                        <?php
+                        $emid = $_SESSION['employeeID'];
+                        $avasrc = $conn->query("SELECT * FROM employee WHERE employeeID = '$emid'")->fetch_all(MYSQLI_ASSOC)[0]['avatar'];
+                        ?>
+                        <img src="<?= $avasrc ?>" style="object-fit: cover;" />
                       </div>
                     </div>
                   </div>

@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'])) {
             <div class="avatar me-3">
               <img src="<?= $em['avatar'] ?>" style="object-fit: cover; height:130px; width:130px" alt="" srcset="" />
             </div>
-            <form action="./index.php?page=avatar-upload-processing&emid=<?= $em['employeeID'] ?>" method="post" enctype="multipart/form-data">
+            <form action="./index.php?page=avatar-upload-processing&emid=<?= $em['employeeID'] ?>" method="post" enctype="multipart/form-data" <?php if ($_SESSION['employeeID'] != $employeeID) echo "hidden"; ?>>
               <div class="col-md-6 mb-1" style="margin-top:20px;">
                 <fieldset>
                   <div class="input-group">
@@ -110,7 +110,8 @@ if (!isset($_SESSION['username'])) {
                   <div class="form-group has-icon-left">
                     <label for="first-name-column">Password</label>
                     <div class="position-relative">
-                      <input type="text" id="first-name-column" class="form-control" value="<?= $em['password'] ?>" readonly />
+                      <?php $pass = $_SESSION['role'] == 'admin' ? 'text' : 'password'; ?>
+                      <input type="<?=$pass?>" id="first-name-column" class="form-control" value="<?= $em['password'] ?>" readonly />
                       <div class="form-control-icon">
                         <i class="fa-solid fa-lock"></i>
                       </div>

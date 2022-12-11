@@ -96,7 +96,7 @@ if (!isset($_SESSION['username'])) {
     <div id="main-content">
         <div class="page-heading">
             <div class="page-title mb-2">
-                <h1 style="display:inline" class="me-4">Task Assignment Section</h1>
+                <h1 style="display:inline" class="me-4">Task Management</h1>
                 <button style="display:inline" data-bs-toggle="modal" data-bs-target="#assignTask" class="btn btn-primary rounded-pill mb-4">
                     Assign task
                 </button>
@@ -106,10 +106,10 @@ if (!isset($_SESSION['username'])) {
                     <div class="col-4 mb-4">
                         <div class="card h-100">
                             <div class="card-header">
-                                <h3 class="card-title">Chart</h3>
+                                <h3 class="card-title">Donut Chart</h3>
                             </div>
                             <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
+                                <div id="task-donut-chart"></div>
                             </div>
                         </div>
                     </div>
@@ -1007,7 +1007,7 @@ if (!isset($_SESSION['username'])) {
                     <div class="col-12 mb-4">
                         <div class="card h-100">
                             <div class="card-header">
-                                <h3 class="card-title">Chart</h3>
+                                <h3 class="card-title">Bar Chart</h3>
                             </div>
                             <?php
                             $nameArray = array();

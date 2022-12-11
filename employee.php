@@ -35,7 +35,9 @@ if (!isset($_SESSION['username'])) {
         ?>
           <div class="card h-100 mb-4">
             <div class="card-header">
-              <h4 class="card-title">Department: <?= $department['name'] ?></h4>
+              <h3 class="card-title">
+                <img class="me-3" src="<?=$department['departAva']?>" style="width:30px;">Department: <?= $department['name'] ?>
+              </h3>
             </div>
             <div class="card-body" style="width:100%">
               <table class="table table-hover datatable">
