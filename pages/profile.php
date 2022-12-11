@@ -287,7 +287,7 @@ if (!isset($_SESSION['username'])) {
                           <select name="departID" value="<?= $em['departID'] ?>" <?php if ($em['role'] == "head") echo "hidden" ?>>
                             <?php
                             foreach ($departmentArray as $depart) {
-                              if ($depart['name'] == 'Admin')
+                              if ($depart['name'] == 'Admin' || $depart['departID'] == 'DE0001')
                                 continue;
                             ?>
                               <option value="<?= $depart['departID'] ?>"><?= $depart['name'] ?></option>
