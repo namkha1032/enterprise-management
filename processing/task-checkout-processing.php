@@ -8,7 +8,7 @@ function validate($data)
     return $data;
 }
 
-$target_dir = "./files_submit/";
+$target_dir = "./files/submitFiles/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 
@@ -29,7 +29,7 @@ $sql = "UPDATE task SET status = 'pending' WHERE taskID='$tid'";
 $conn->query($sql);
 $sql = "UPDATE task SET checkoutDate = NOW() WHERE taskID='$tid'";
 $conn->query($sql);
-$path = "../files_submit/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
+$path = "../files/submitFiles/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
 $sql = "UPDATE task SET submitFile = '$path' WHERE taskID='$tid'";
 $conn->query($sql);
 header("location: ./index.php?page=taskme");

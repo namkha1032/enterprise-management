@@ -1,6 +1,6 @@
 <?php
 require_once "./database.php";
-$target_dir = "./avatar/";
+$target_dir = "./files/employeeAvatars/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -34,7 +34,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-        $path = "./avatar/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
+        $path = "./files/employeeAvatars/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
         $sql = "UPDATE employee SET avatar = '$path' WHERE employeeID='$emid'";
         $conn->query($sql);
         header("location: ./index.php?page=profile&employeeID=$emid");

@@ -209,11 +209,11 @@ INSERT INTO `department` (`name`) VALUES
 ('Admin');
 -- Insert department
 INSERT INTO `department` (`name`, `departAva`) VALUES
-('Konoha', './departAva/konoha.svg'),
-('Suna', './departAva/suna.svg'),
-('Kumo', './departAva/kumo.svg'),
-('Kiri', './departAva/kiri.svg'),
-('Iwa', './departAva/iwa.svg');
+('Konoha', './files/departmentAvatars/konoha.svg'),
+('Suna', './files/departmentAvatars/suna.svg'),
+('Kumo', './files/departmentAvatars/kumo.svg'),
+('Kiri', './files/departmentAvatars/kiri.svg'),
+('Iwa', './files/departmentAvatars/iwa.svg');
 -- -- --------------------------------------------------------
 -- Insert admin and head account
 INSERT INTO `account` (`username`, `password`, `role`) VALUES
@@ -675,17 +675,17 @@ INSERT INTO `request` (`type`,`title`, `description`, `status`, `lowerID`, `uppe
 
 
 INSERT INTO `announce` (`title`, `description`, `upperID`, `departID`, `announceFile`) VALUES
-('[HAPPY NEW YEAR]', 'Happy new year everyone. Wish you good health', 'EM0001', 'DE0001','./files_announce/announce.txt'),
-('[HAPPY VALENTINE]', 'Happy valentine everyone. Wish you could find someone you love', 'EM0003', 'DE0003','./files_announce/announce.txt'),
-('[NEW PROJECT]', 'This is new project for department Konoha. Please view your work', 'EM0001', 'DE0001','./files_announce/announce.txt'),
-('[MERRY CHIRSTMAS]', 'Merry christmas everyone. Wish you happy with your family', 'EM0001', 'DE0001','./files_announce/announce.txt'),
-('[TEAM BUILDING]', 'This sunday we will go team building at Phan thiet. Please prepare', 'EM0004', 'DE0004','./files_announce/announce.txt'),
-('[WORK ABROAD]', 'Want to work abroad at USA? View this file', 'EM0005', 'DE0005','./files_announce/announce.txt'),
-('[TET HOLIDAY]', 'This is our plan fot Tet holiday. please prepare', 'EM0003', 'DE0003','./files_announce/announce.txt'),
-('[SUMMER VACATION]', 'This summer we will go team building in Nha Trang. Please prepare', 'EM0003', 'DE0003','./files_announce/announce.txt'),
-('[PROJECT PHOENIX]', 'Our department gonna conduct a new project. All officers please view this file', 'EM0006', 'DE0006','./files_announce/announce.txt'),
-('[WORK ABROAD]', 'Next month our department will work abroad in Singapore. Please fill this form if you want to participate.', 'EM0007', 'DE0007','./files_announce/announce.txt'),
-('[INDEPENDENCE DAY]', 'This is the schedule for Independence Day. Please have a fun holiday', 'EM0003', 'DE0003','./files_announce/announce.txt');
+('[HAPPY NEW YEAR]', 'Happy new year everyone. Wish you good health', 'EM0001', 'DE0001','../files/announceFiles/announce.txt'),
+('[HAPPY VALENTINE]', 'Happy valentine everyone. Wish you could find someone you love', 'EM0003', 'DE0003','../files/announceFiles/announce.txt'),
+('[NEW PROJECT]', 'This is new project for department Konoha. Please view your work', 'EM0001', 'DE0001','../files/announceFiles/announce.txt'),
+('[MERRY CHIRSTMAS]', 'Merry christmas everyone. Wish you happy with your family', 'EM0001', 'DE0001','../files/announceFiles/announce.txt'),
+('[TEAM BUILDING]', 'This sunday we will go team building at Phan thiet. Please prepare', 'EM0004', 'DE0004','../files/announceFiles/announce.txt'),
+('[WORK ABROAD]', 'Want to work abroad at USA? View this file', 'EM0005', 'DE0005','../files/announceFiles/announce.txt'),
+('[TET HOLIDAY]', 'This is our plan fot Tet holiday. please prepare', 'EM0003', 'DE0003','../files/announceFiles/announce.txt'),
+('[SUMMER VACATION]', 'This summer we will go team building in Nha Trang. Please prepare', 'EM0003', 'DE0003','../files/announceFiles/announce.txt'),
+('[PROJECT PHOENIX]', 'Our department gonna conduct a new project. All officers please view this file', 'EM0006', 'DE0006','../files/announceFiles/announce.txt'),
+('[WORK ABROAD]', 'Next month our department will work abroad in Singapore. Please fill this form if you want to participate.', 'EM0007', 'DE0007','../files/announceFiles/announce.txt'),
+('[INDEPENDENCE DAY]', 'This is the schedule for Independence Day. Please have a fun holiday', 'EM0003', 'DE0003','../files/announceFiles/announce.txt');
 
 -- /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 -- /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -8,7 +8,7 @@ function validate($data)
     return $data;
 }
 
-$target_dir = "./files_announce/";
+$target_dir = "./files/announceFiles/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 
@@ -30,7 +30,7 @@ $title = validate($_POST['title']);
 $description = validate($_POST['description']);
 $hid = $_SESSION['employeeID'];
 $deid = $_SESSION['departID'];
-$path = "../files_announce/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
+$path = "../files/announceFiles/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
 
 $sql = "INSERT INTO announce (title, description, upperID, departID, announceFile)
 VALUES ('$title', '$description', '$hid','$deid', '$path')";

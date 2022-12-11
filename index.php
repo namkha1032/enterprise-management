@@ -8,26 +8,11 @@ if (!isset($_SESSION['username'])){
 else{
     if (isset($_GET['page'])){
         $pageName = strtolower($_GET['page']);
-        if ($pageName=="task-assign-processing" || $pageName=="task-check-processing" || $pageName=="task-checkin-processing" || $pageName=="task-checkout-processing" || $pageName=="task-delete-processing" || $pageName=="task-update-processing"){
-            require "./processing/${pageName}.php";
-        }
-        elseif ($pageName=="request-send-processing" || $pageName=="request-rep-processing" || $pageName=="request-delete-processing" || $pageName=="request-update-processing"){
-            require "./processing/${pageName}.php";
-        }
-        elseif ($pageName=="employee-insert-processing" || $pageName=="employee-sethead-processing" || $pageName=="employee-delete-processing" || $pageName=="employee-update-processing" ){
-            require "./processing/${pageName}.php";
-        }
-        elseif ($pageName=="announce-create-processing" ){
-            require "./processing/${pageName}.php";
-        }
-        elseif ($pageName=="avatar-upload-processing" ){
-            require "./processing/${pageName}.php";
-        }
-        elseif ($pageName=="logout-processing" ){
+        if (strpos($pageName, 'processing')){
             require "./processing/${pageName}.php";
         }
         else{
-            require "./${pageName}.php";
+            require "./pages/${pageName}.php";
         }
     }
     else{

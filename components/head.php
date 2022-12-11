@@ -4,7 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enterprise internal website</title>
+  <title>
+    <?php
+      if ($_GET['page'] == 'announce') echo "Announcement";
+      if ($_GET['page'] == 'employee') echo "Human Resources";
+      if ($_GET['page'] == 'profile') echo "Profile";
+      if ($_GET['page'] == 'requestmanage') echo "Request Management";
+      if ($_GET['page'] == 'requestme') echo "My Requests";
+      if ($_GET['page'] == 'taskmanage') echo "Task Management";
+      if ($_GET['page'] == 'taskme') echo "My Tasks";
+    ?>
+
+  </title>
 
   <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon" />
   <!-- <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/png" /> -->
