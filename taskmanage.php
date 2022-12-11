@@ -698,10 +698,10 @@ if (!isset($_SESSION['username'])) {
                                                             </form>
                                                         </div>
                                                         <div class="modal-footer" <?php if ($task['status'] != "pending") echo "hidden" ?>>
-                                                            <a href="./index.php?page=request-rep-processing&rid=<?= $request['requestID'] ?>&rep=accepted&type=<?= $request['type'] ?>" class="btn btn-primary">
+                                                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=accepted" class="btn btn-primary">
                                                                 Accept
                                                             </a>
-                                                            <a href="./index.php?page=request-rep-processing&rid=<?= $request['requestID'] ?>&rep=rejected" class="btn btn-warning">
+                                                            <a href="./index.php?page=task-check-processing&tid=<?= $task['taskID'] ?>&check=rejected" class="btn btn-warning">
                                                                 Reject
                                                             </a>
                                                         </div>
