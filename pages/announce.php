@@ -110,7 +110,7 @@ if (!isset($_SESSION['username'])) {
                                 <label>Description</label>
                               </div>
                               <div class="col-md-8 form-group">
-                                <textarea style="height:300px" class="form-control" readonly><?= $an['description'] ?></textarea>
+                                <textarea class="form-control" readonly rows="5" cols="30" style="resize:none;"><?= $an['description'] ?></textarea>
                               </div>
 
                               <div class="col-md-4">

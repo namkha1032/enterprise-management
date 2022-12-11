@@ -238,7 +238,7 @@ if (!isset($_SESSION['username'])) {
                       <div class="col-md-8">
                         <div class="form-group has-icon-left">
                           <div class="position-relative">
-                            <textarea placeholder="Address..." name="address" class="form-control" id="first-name-icon" autocomplete="off"><?= $em['address'] ?></textarea>
+                            <textarea placeholder="Address..." name="address" class="form-control" id="first-name-icon" autocomplete="off" style="resize:none;" rows="5" cols="30"><?= $em['address'] ?></textarea>
                             <div class="form-control-icon">
                               <i class="bi bi-house"></i>
                             </div>
